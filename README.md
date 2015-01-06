@@ -13,4 +13,4 @@ Project Manager
 Jose Ma. Angelo Villaroman
 
 
-Copyright 2015 Collective Solution Internation.
+Copyright 2015 Collective Solution International.
