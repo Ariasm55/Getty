@@ -188,7 +188,7 @@ namespace Collective.AgentClient.ViewModel
 
         private void Login(Window window)
         {
-            
+            bool ok = false;
             
             _dataService.Login(Username, Password,
                 (agent, error) =>
@@ -198,12 +198,21 @@ namespace Collective.AgentClient.ViewModel
                         MessageBox.Show(error.Message);
                         return;
                     }
+                    ok = true;
                     Messenger.Default.Send(new LoginMessage { Agent = agent });
                     Cleanup();
                     window.Close();
                     CloseAction();
+                    
+                                      
                 });
-            OnRequesteClose(this, new EventArgs());
+            if (ok == true)
+            {
+                Library.StartExplorer.StartWindows();
+                OnRequesteClose(this, new EventArgs());
+                
+            }
+            
         }
 
         private bool CanLogin(Window window)
