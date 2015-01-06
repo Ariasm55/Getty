@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<ProjectGuidesConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectItemGuides>
+    <ProjectItemGuide TargetFile="Main2View.xaml">
+      <GuideModels>
+        <GuideModel>
+          <Guides>
+            <Guide Alignment="Top" Position="758" />
+            <Guide Alignment="Left" Position="1093" />
+            <Guide Alignment="Left" Position="892" />
+            <Guide Alignment="Top" Position="498" />
+            <Guide Alignment="Top" Position="512" />
+            <Guide Alignment="Left" Position="266" />
+            <Guide Alignment="Top" Position="180" />
+            <Guide Alignment="Left" Position="65" />
+            <Guide Alignment="Left" Position="70" />
+          </Guides>
+        </GuideModel>
+      </GuideModels>
+    </ProjectItemGuide>
+  </ProjectItemGuides>
+</ProjectGuidesConfiguration>

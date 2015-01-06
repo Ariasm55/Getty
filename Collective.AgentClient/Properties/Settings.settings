@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Collective.AgentClient.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ConnectionTest" Type="System.String" Scope="User">
+      <Value Profile="(Default)">206.190.36.45</Value>
+    </Setting>
+    <Setting Name="ThisSite" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Honduras</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
