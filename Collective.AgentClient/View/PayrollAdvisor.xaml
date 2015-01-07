@@ -6,7 +6,7 @@
         xmlns:ignore="http://www.ignore.com"
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
         mc:Ignorable="d ignore"
-        DataContext="{Binding PayrollAdvisorModel, Source={StaticResource Locator}}">
+        DataContext="{Binding PayrollAdvisorModel, Source={StaticResource Locator}}" Topmost="True" Title="Personal Attendance Assistance">
 
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>

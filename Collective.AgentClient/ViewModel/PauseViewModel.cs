@@ -384,10 +384,12 @@ namespace Collective.AgentClient.ViewModel
                         return;
                     }
                 PauseId = resumeBreak;
+                window.Close();
+                CloseAction();
                 
             });
-            //window.Close();
-            //CloseAction();
+            window.Close();
+            CloseAction();
             //OnRequesteClose(this, new EventArgs());
                         
         }

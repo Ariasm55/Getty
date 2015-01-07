@@ -6,7 +6,7 @@
         xmlns:ignore="http://www.ignore.com"
         mc:Ignorable="d ignore" WindowStyle="SingleBorderWindow" ResizeMode="NoResize" 
         SizeToContent="WidthAndHeight"
-        DataContext="{Binding PauseViewModel, Source={StaticResource Locator}}">
+        DataContext="{Binding PauseViewModel, Source={StaticResource Locator}}" Topmost="True">
 
     <Grid x:Name="Pause" VerticalAlignment="Top" Margin="5">
         <Grid.RowDefinitions>
