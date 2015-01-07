@@ -69,7 +69,7 @@
     <Compile Include="PausesModel.cs" />
     <Compile Include="ProfileModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Recipient.cs" />
+    <Compile Include="RecipientModel.cs" />
     <Compile Include="RecordLogModel.cs" />
     <Compile Include="TeamModel.cs" />
     <Compile Include="TeamScheduleAgent.cs" />
