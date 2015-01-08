@@ -118,6 +118,9 @@ namespace Collective.AgentClient.Model
             throw new NotImplementedException();
         }
 
-            
+        public void GetRecordSummary(string agent, DateTime initial, DateTime final, Action<List<RecordReasonSummary>, Exception> callback)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

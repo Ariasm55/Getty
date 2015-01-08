@@ -31,5 +31,10 @@ namespace Collective.AgentClient.Model
 
         void Logout(string username, string pause, long camp, Action<long, Exception> callback);
 
+        void GetRecordSummary(string agent, DateTime initial, DateTime final,
+            Action<List<RecordReasonSummary>, Exception> callback);
+
+
+
     }
 }

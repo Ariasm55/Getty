@@ -89,13 +89,13 @@ namespace Collective.AgentClient.ViewModel
         /// </summary>
         public const string LogListPropertyName = "LogList";
 
-        private ObservableCollection<RecordLogModel> _logList;
+        private ObservableCollection<RecordReasonSummary> _logList;
 
         /// <summary>
         /// Sets and gets the LogList property.
         /// Changes to that property's value raise the PropertyChanged event. 
         /// </summary>
-        public ObservableCollection<RecordLogModel> LogList
+        public ObservableCollection<RecordReasonSummary> LogList
         {
             get
             {
@@ -177,7 +177,7 @@ namespace Collective.AgentClient.ViewModel
         private void Refresh()
         {
             //var finalDate = new DateTime(FinalDate.Year, FinalDate.Month, FinalDate.Day, 23, 59, 59);
-            _dataService.GetAgentLogPayroll(Agent, InitialDate,FinalDate,
+            _dataService.GetRecordSummary(Agent, InitialDate,FinalDate,
                 (lista, error) =>
                 {
                     if (error != null)
@@ -185,7 +185,7 @@ namespace Collective.AgentClient.ViewModel
                         MessageBox.Show(error.Message);
                         return;
                     }
-                    LogList = new ObservableCollection<RecordLogModel>(lista);
+                    LogList = new ObservableCollection<RecordReasonSummary>(lista);
                 });
         }
 

@@ -22,13 +22,13 @@
         <telerik:RadGridView Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True"
                              ItemsSource="{Binding Path=LogList}">
             <telerik:RadGridView.Columns>
-                <telerik:GridViewDataColumn Width="2*" Header="Username" DataMemberBinding="{Binding User}"/>
-                <telerik:GridViewDataColumn Width="2*" Header="Log Reason" DataMemberBinding="{Binding LogReason}"/>
-                <telerik:GridViewDataColumn Width="1*" Header="Date" DataMemberBinding="{Binding InitialDate, StringFormat=d}"/>
-                <telerik:GridViewDataColumn Width="1*" Header="Start" DataMemberBinding="{Binding InitialTime}"/>
-                <telerik:GridViewDataColumn Width="1*" Header="End" DataMemberBinding="{Binding FinalTime}"/>
-                <telerik:GridViewDataColumn Width="1*" Header="Total Time" DataMemberBinding="{Binding TimeSpan, StringFormat=hh\\:mm\\:ss}"/>
-                <telerik:GridViewDataColumn Width="2*" Header="Status" DataMemberBinding="{Binding Status}"/>
+                <telerik:GridViewDataColumn Width="0.5*" Header="Date"/> <!--DataMemberBinding="{Binding InitialDate, StringFormat=d}-->
+                <!--<telerik:GridViewDataColumn Width="2*" Header="Username" DataMemberBinding="{Binding User}"/>-->
+                <telerik:GridViewDataColumn Width="0.5*" Header="Log Reason" DataMemberBinding="{Binding Reason}"/>
+                <!--<telerik:GridViewDataColumn Width="1*" Header="Start" DataMemberBinding="{Binding InitialTime}"/>
+                <telerik:GridViewDataColumn Width="1*" Header="End" DataMemberBinding="{Binding FinalTime}"/>-->
+                <telerik:GridViewDataColumn Width="0.5*" Header="Total Time" DataMemberBinding="{Binding Time,StringFormat=hh\\:mm\\:ss}"/> <!--,StringFormat=hh\\:mm\\:ss}"/>--> 
+                <!--<telerik:GridViewDataColumn Width="2*" Header="Status" DataMemberBinding="{Binding Status}"/>-->
             </telerik:RadGridView.Columns>
         </telerik:RadGridView>
     </Grid>

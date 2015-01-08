@@ -166,6 +166,17 @@ namespace Collective.AgentClient.Model
 
         }
 
-
+        public void GetRecordSummary(string agent, DateTime initial, DateTime final, Action<List<RecordReasonSummary>, Exception> callback)
+        {
+            try
+            {
+                var summary = RecordLogModel.GetPayrollAssistance2(agent, initial, final);
+                callback(summary, null);
+            }
+            catch (Exception exception)
+            {
+                callback(null, exception);
+            }
+        }
     }
 }
