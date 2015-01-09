@@ -593,7 +593,7 @@ namespace Collective.Model
                     var initial = new DateTime(dateI.Year, dateI.Month, dateI.Day, 0, 0, 0);
                     var final = new DateTime(dateF.Year, dateF.Month, dateF.Day, 23, 59, 59);
                     var lista = (from r in _context.tbl_record_logs
-                                 where r.username == "jose.amaya" &&
+                                 where r.username == agentName &&
                                        r.dt_stamp >= initial && r.dt_stamp <= final
                                  orderby r.username,r.log_reason
                                  select r).ToList();
@@ -605,6 +605,12 @@ namespace Collective.Model
                     {
                         var time = new TimeSpan();
                         DateTime tick = new DateTime();
+                        /*foreach (var Date in lista)
+                        {
+                            DateTime search = Date.dt_stamp.Date;
+                            time = lista.Where(item => item.log_reason == motive.pause_reason)
+                               .Aggregate(time, (current, item) => current + (item.dt_stamp_end - item.dt_stamp));
+                        }*/
                         time = lista.Where(item => item.log_reason == motive.pause_reason)
                                .Aggregate(time, (current, item) => current + ( item.dt_stamp_end - item.dt_stamp));
 
