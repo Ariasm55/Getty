@@ -12,7 +12,7 @@ namespace Collective.AgentClient.Model
             try
             {
                 var ip = Properties.Settings.Default.ConnectionTest;
-
+                
                 var ping = new Ping();
                 var result = ping.Send(ip);
                 if (result != null && result.Status.ToString() == "Success")
@@ -38,7 +38,7 @@ namespace Collective.AgentClient.Model
                 
                 if (agent != null)
                 {
-                    var login = PausesModel.RegisterLogin(userName, agent.Campaign.CampaignId);
+                    PausesModel.RegisterLogin(userName, agent.Campaign.CampaignId);
                     callback(agent, null);
                     
                 }
@@ -80,7 +80,16 @@ namespace Collective.AgentClient.Model
 
         public void GetMessages(string agent, Action<List<MessageModel>, Exception> callback)
         {
-
+            try
+            {
+                var msg = RecipientModel.GetAllUserMessagesID(agent);
+                callback(msg, null);
+            }
+            catch (Exception exception)
+            {
+                
+                callback(null,exception);
+            }
         }
 
         public void GetReasons(Action<List<PausesModel>, Exception> callback)
@@ -176,6 +185,35 @@ namespace Collective.AgentClient.Model
             catch (Exception exception)
             {
                 callback(null, exception);
+            }
+        }
+
+        public void GetWeeklySchedule(string agent, DateTime daytime, Action<List<TeamScheduleModel>, Exception> callback)
+        {
+            try
+            {
+                var weeklySchedule = TeamScheduleModel.GetWeeklySchedule(agent, daytime);
+                callback(weeklySchedule, null);
+            }
+            catch (Exception exception)
+            {
+                
+                callback(null, exception);
+            }
+        }
+
+        public void Logout(string username, long recordID, Action< bool,Exception> callback)
+        {
+            try
+            {
+                PausesModel.Logout(username, recordID);
+                callback(true, null);
+
+            }
+            catch (Exception exception)
+            {
+                
+                callback(false,exception);
             }
         }
     }

@@ -452,6 +452,38 @@ namespace Collective.Model
 
        #endregion
 
+       #region ProfilePicture
+       /// <summary>
+       /// The <see cref="ProfilePicture" /> property's name.
+       /// </summary>
+       public const string ProfilePicturePropertyName = "ProfilePicture";
+
+       private string _profilepicture;
+
+       /// <summary>
+       /// Sets and gets the ProfilePicture property.
+       /// Changes to that property's value raise the PropertyChanged event. 
+       /// </summary>
+       public string ProfilePicture
+       {
+           get
+           {
+               return _profilepicture;
+           }
+
+           set
+           {
+               if (_profilepicture == value)
+               {
+                   return;
+               }
+
+               _profilepicture = value;
+               RaisePropertyChanged(ProfilePicturePropertyName);
+           }
+       }
+       #endregion
+
 
 
        #endregion

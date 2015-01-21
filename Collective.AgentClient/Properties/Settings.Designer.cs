@@ -25,18 +25,6 @@ namespace Collective.AgentClient.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("206.190.36.45")]
-        public string ConnectionTest {
-            get {
-                return ((string)(this["ConnectionTest"]));
-            }
-            set {
-                this["ConnectionTest"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Honduras")]
         public string ThisSite {
             get {
@@ -44,6 +32,18 @@ namespace Collective.AgentClient.Properties {
             }
             set {
                 this["ThisSite"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10.54.0.76")]
+        public string ConnectionTest {
+            get {
+                return ((string)(this["ConnectionTest"]));
+            }
+            set {
+                this["ConnectionTest"] = value;
             }
         }
     }

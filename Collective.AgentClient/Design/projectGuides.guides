@@ -8,12 +8,12 @@
             <Guide Alignment="Top" Position="758" />
             <Guide Alignment="Left" Position="1093" />
             <Guide Alignment="Left" Position="892" />
-            <Guide Alignment="Top" Position="498" />
-            <Guide Alignment="Top" Position="512" />
             <Guide Alignment="Left" Position="266" />
             <Guide Alignment="Top" Position="180" />
             <Guide Alignment="Left" Position="65" />
             <Guide Alignment="Left" Position="70" />
+            <Guide Alignment="Top" Position="498" />
+            <Guide Alignment="Top" Position="512" />
           </Guides>
         </GuideModel>
       </GuideModels>

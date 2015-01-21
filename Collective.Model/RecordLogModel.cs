@@ -418,6 +418,7 @@ namespace Collective.Model
         }
         
         #endregion
+
         
         #endregion
             
@@ -631,33 +632,7 @@ namespace Collective.Model
             }
         }
                 
-        public static long InsertLogin(string username, RecordLogModel rec)
-        {
-            try
-            {
-                using (_context = new CollectiveEntities())
-                {
-                    var login = new tbl_record_log
-                    {
-                        dt_stamp = DateTime.Now,
-                        username = username,
-                        campaign = rec.Campaign,
-                        station = Environment.MachineName,
-                        ip = Library.NetworkIp.LocalIPAddress(),
-                        status = "logged",
-                        dt_stamp_day = DateTime.Today.Day.ToString(CultureInfo.InvariantCulture),
-                        this_site = "Honduras"
-                    };
-                    _context.tbl_record_logs.Add(login);
-                    _context.SaveChanges();
-                    return login.rec_id;
-                }
-            }
-            catch (Exception exception)
-            {
-                throw new Exception(exception.Message);
-            }
-        }
+        
 
         #endregion
 

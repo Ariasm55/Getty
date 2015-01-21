@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -457,14 +456,80 @@ namespace Collective.AgentClient.ViewModel
         }
         #endregion
 
-        
+        #region WeeklySchedule
+        /// <summary>
+        /// The <see cref="Weekly" /> property's name.
+        /// </summary>
+        public const string WeeklyPropertyName = "Weekly";
 
-        
+        private ObservableCollection<TeamScheduleModel> _weekly;
+
+        /// <summary>
+        /// Sets and gets the Weekly property.
+        /// Changes to that property's value raise the PropertyChanged event. 
+        /// </summary>
+        public ObservableCollection<TeamScheduleModel> Weekly
+        {
+            get
+            {
+                return _weekly;
+            }
+
+            set
+            {
+                if (_weekly == value)
+                {
+                    return;
+                }
+
+                _weekly = value;
+                RaisePropertyChanged(WeeklyPropertyName);
+            }
+        }
+        #endregion
+
+
+        #region PauseView
+        /// <summary>
+        /// The <see cref="PauseViewOption" /> property's name.
+        /// </summary>
+        public const string PauseViewOptionPropertyName = "PauseViewOption";
+
+        private PauseView _pauseViewOptionView ;
+
+        /// <summary>
+        /// Sets and gets the PauseViewOption property.
+        /// Changes to that property's value raise the PropertyChanged event. 
+        /// </summary>
+        public PauseView PauseViewOption
+        {
+            get
+            {
+                return _pauseViewOptionView;
+            }
+
+            set
+            {
+                if (_pauseViewOptionView == value)
+                {
+                    return;
+                }
+
+                _pauseViewOptionView = value;
+                RaisePropertyChanged(PauseViewOptionPropertyName);
+            }
+        }
+        #endregion
+
+
+
+
         #endregion
 
         #region Commands
         public RelayCommand PauseLogoutCommand { get; set; }
         public RelayCommand PayrollAdvisorCommand { get; set; }
+        public RelayCommand ShowMsgCommand { get; set; }
         #endregion
 
         #region Constructor
@@ -479,6 +544,8 @@ namespace Collective.AgentClient.ViewModel
                     Agent = message.Agent;
                     GetSchedule();
                     LoadLog();
+                    GetMsg();
+                    GetweeklySchedule();
                 });
 
             RegisterCommand();
@@ -489,7 +556,7 @@ namespace Collective.AgentClient.ViewModel
             }
             else
             {
-                LoadLog();
+                //LoadLog();
             }
             //var thread = new Thread(Timer);
             //thread.Start();
@@ -503,6 +570,7 @@ namespace Collective.AgentClient.ViewModel
         {
             PauseLogoutCommand = new RelayCommand(PauseLogout);
             PayrollAdvisorCommand = new RelayCommand(PayrollAdvisor);
+            ShowMsgCommand = new RelayCommand(OpenMsg);
         }
         
         private void Login()
@@ -511,6 +579,60 @@ namespace Collective.AgentClient.ViewModel
             var login = new LoginView {DataContext = vm};
             vm.OnRequesteClose += (s, e) => login.Close();
             login.ShowDialog();
+        }
+
+        private void OpenMsg()
+        {
+            if (Agent != null)
+            {
+                MessageViewModel vm;
+                vm = IsInDesignModeStatic
+                    ? new MessageViewModel(new DesignDataService())
+                    : new MessageViewModel(new DataService());
+                vm.MessageID = SelectedMessage.Recepiant.MessageID;
+                vm.FromUser = SelectedMessage.UserName.UserName;
+                vm.Date = SelectedMessage.TimeStamp;
+                vm.MessageContent = SelectedMessage.MessageContent;
+                vm.Tittle = SelectedMessage.MessageTitle;
+                vm.MsgRead = SelectedMessage.Recepiant.ReadMessage;
+                var msg = new MessagesView {DataContext = vm};
+                msg.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Error: NO Agent Login");
+            }
+        }
+
+        private void PauseLogout()
+        {
+            if (Agent != null)
+            {
+                //var vm = new PauseViewModel(_dataService);
+                //var pause = new PauseView {DataContext = vm};
+                //vm = IsInDesignModeStatic
+                //   ? new PauseViewModel(new DesignDataService())
+                //    : new PauseViewModel(new DataService());
+                //vm.CampaignId = Agent.Campaign.CampaignId;
+                //vm.UserName = Agent.Name;
+                
+                PauseViewModel vm;
+                vm = IsInDesignModeStatic
+                    ? new PauseViewModel(new DesignDataService())
+                    : new PauseViewModel(new DataService());
+
+                vm.CampaignId = Agent.Campaign.CampaignId;
+                vm.UserName = Agent.Name;
+                //var pause = new PauseView();
+                var pause = new PauseView {DataContext = vm};
+                pause.ShowDialog();
+                vm.OnRequesteClose += (s, e) => pause.Close();
+                pause.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Error: No Agent Login");
+            }
         }
 
         private void GetSchedule()
@@ -568,7 +690,7 @@ namespace Collective.AgentClient.ViewModel
         //{
             
         //}
-
+        
         private void LoadLog()
         {
             _dataService.GetRecordLog(Agent.Name, DateTime.Now,
@@ -582,10 +704,40 @@ namespace Collective.AgentClient.ViewModel
                     LogList = new ObservableCollection<RecordLogModel>(log);
                     if (LogList != null) SelectedLog = LogList.FirstOrDefault();
                 });
-            LogList = new ObservableCollection<RecordLogModel>(Lista());
+            //LogList = new ObservableCollection<RecordLogModel>(Lista());
         }
 
-        private List<RecordLogModel> Lista()
+        private void GetMsg()
+        {
+            _dataService.GetMessages(Agent.Name,
+                (msg, error) =>
+                {
+                    if (error != null)
+                    {
+                        MessageBox.Show(error.Message);
+                        return;
+                    }
+                    Messages = new ObservableCollection<MessageModel>(msg);
+                    if (Messages != null) SelectedMessage = Messages.FirstOrDefault();
+                });
+        }
+
+        private void GetweeklySchedule()
+        {
+            _dataService.GetWeeklySchedule(Agent.Name,DateTime.Now,
+                (weekly, error) =>
+                {
+                    if (error != null)
+                    {
+                        MessageBox.Show(error.Message);
+                        return;
+                    }
+                    Weekly = new ObservableCollection<TeamScheduleModel>(weekly);
+                });
+        }
+
+
+       /* private List<RecordLogModel> Lista()
         {
            /* var logs = new List<RecordLogModel>();
             for (var i = 1; i < 26; i++)
@@ -603,7 +755,7 @@ namespace Collective.AgentClient.ViewModel
                     User = string.Format("user_{0}", i.ToString("000"))
                 });
             }
-            return logs;*/
+            return logs;
            _dataService.GetRecordLog(Agent.Name,DateTime.Now,
                 (log, error) =>
                 {
@@ -616,27 +768,8 @@ namespace Collective.AgentClient.ViewModel
                     if (LogList != null) SelectedLog = LogList.FirstOrDefault();
                 });
              return null;
-        }
-        private void PauseLogout()
-        {
-            if (Agent != null)
-            {
-                PauseViewModel vm;
-                vm = IsInDesignModeStatic
-                    ? new PauseViewModel(new DesignDataService())
-                    : new PauseViewModel(new DataService());
-
-                vm.CampaignId = Agent.Campaign.CampaignId;
-                vm.UserName = Agent.Name;
-                var pause = new PauseView();
-                pause.DataContext = vm;
-                pause.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("Error: No Agent Login");
-            }
-        }
+        }*/
+        
 
         private void PayrollAdvisor()
         {

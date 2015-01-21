@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using Collective.Data;
 using GalaSoft.MvvmLight;
 using System;
@@ -55,13 +56,13 @@ namespace Collective.Model
         /// </summary>
         public const string TeamScheduleTimeFromPropertyName = "TeamSchedule_TimeFrom";
 
-        private DateTime _teamscheduleTimefrom;
+        private TimeSpan _teamscheduleTimefrom;
 
         /// <summary>
         /// Sets and gets the TeamSchedule_TimeFrom property.
         /// Changes to that property's value raise the PropertyChanged event. 
         /// </summary>
-        public DateTime TeamScheduleTimeFrom
+        public TimeSpan TeamScheduleTimeFrom
         {
             get
             {
@@ -86,13 +87,13 @@ namespace Collective.Model
         /// 
         public const string TeamscheduleTimetoPropertyName = "teamschedule_timeto";
 
-        private DateTime _teamscheduleTimeto;
+        private TimeSpan _teamscheduleTimeto;
 
         /// <summary>
         /// Sets and gets the teamschedule_timeto property.
         /// Changes to that property's value raise the PropertyChanged event. 
         /// </summary>
-        public DateTime TeamscheduleTimeto
+        public TimeSpan TeamscheduleTimeto
         {
             get
             {
@@ -114,39 +115,39 @@ namespace Collective.Model
         #endregion.
 
         #region "teamschedule_datebegin"
-        /// The <see cref="teamschedule_datebegin" /> property's name.
-        /// </summary>
-        public const string teamschedule_datebeginPropertyName = "teamschedule_datebegin";
+        /// The <see cref="TeamscheduleDatebegin" /> property's name.
+        
+        public const string TeamscheduleDatebeginPropertyName = "teamschedule_datebegin";
 
-        private DateTime _teamschedule_datebegin ;
+        private DateTime _teamscheduleDatebegin ;
 
         /// <summary>
         /// Sets and gets the teamschedule_datebegin property.
         /// Changes to that property's value raise the PropertyChanged event. 
         /// </summary>
-        public DateTime teamschedule_datebegin
+        public DateTime TeamscheduleDatebegin
         {
             get
             {
-                return _teamschedule_datebegin;
+                return _teamscheduleDatebegin;
             }
 
             set
             {
-                if (_teamschedule_datebegin == value)
+                if (_teamscheduleDatebegin == value)
                 {
                     return;
                 }
 
-                _teamschedule_datebegin = value;
-                RaisePropertyChanged(teamschedule_datebeginPropertyName);
+                _teamscheduleDatebegin = value;
+                RaisePropertyChanged(TeamscheduleDatebeginPropertyName);
             }
         }
         #endregion
                 
         #region "Graveyard"
         /// The <see cref="Graveyard" /> property's name.
-        /// </summary>
+        
         public const string GraveyardPropertyName = "Graveyard";
 
         private long _graveyard;
@@ -177,7 +178,7 @@ namespace Collective.Model
                 
         #region "Archived"
         /// The <see cref="Archived" /> property's name.
-        /// </summary>
+        
         public const string ArchivedPropertyName = "Archived";
 
         private long _archived;
@@ -208,7 +209,7 @@ namespace Collective.Model
 
         #region "DateArchived"
         /// The <see cref="DateArchived" /> property's name.
-        /// </summary>
+        
         public const string DateArchivedPropertyName = "DateArchived";
 
         private DateTime _datearchived;
@@ -239,7 +240,7 @@ namespace Collective.Model
                 
         #region "TeamLabel"
         /// The <see cref="TeamLabel" /> property's name.
-        /// </summary>
+        
         public const string TeamLabelPropertyName = "TeamLabel";
 
         private string _teamlabel = "";
@@ -270,7 +271,7 @@ namespace Collective.Model
                 
         #region "TeamAgents"
         /// The <see cref="TeamAgents" /> property's name.
-        /// </summary>
+        
         public const string TeamAgentsPropertyName = "TeamAgents";
 
         private string _teamagents = "";
@@ -301,7 +302,7 @@ namespace Collective.Model
                         
         #region "DateAssigned"
         /// The <see cref="DateAssigned" /> property's name.
-        /// </summary>
+        
         public const string DateAssignedPropertyName = "DateAssigned";
 
         private DateTime _dateassigned  ;
@@ -332,7 +333,7 @@ namespace Collective.Model
         
         #region "TeamScheduleRestDayLabel"
         /// The <see cref="TeamScheduleRestDayLabel" /> property's name.
-        /// </summary>
+        
         public const string TeamScheduleRestDayLabelPropertyName = "TeamScheduleRestDayLabel";
 
         private long _teamschedulerestdaylabel;
@@ -363,7 +364,7 @@ namespace Collective.Model
         
         #region "TeamSchedulePreOtFrom"
         /// The <see cref="TeamSchedulePreOtFrom" /> property's name.
-        /// </summary>
+        
         public const string TeamSchedulePreOtFromPropertyName = "TeamSchedulePreOtFrom";
 
         private string _teamschedulepreotfrom = "";
@@ -394,7 +395,7 @@ namespace Collective.Model
         
         #region "TeamSchedulePreOtTo"
         /// The <see cref="TeamSchedulePreOtTo" /> property's name.
-        /// </summary>
+        
         public const string TeamSchedulePreOtToPropertyName = "TeamSchedulePreOtTo";
 
         private string _teamschedulepreotto = "";
@@ -425,7 +426,7 @@ namespace Collective.Model
         
         #region "TeamSchedulePostOtFrom"
         /// The <see cref="TeamSchedulePostOtFrom" /> property's name.
-        /// </summary>
+        
         public const string TeamSchedulePostOtFromPropertyName = "TeamSchedulePostOtFrom";
 
         private string _teamschedulepostotfrom = "";
@@ -456,7 +457,7 @@ namespace Collective.Model
         
         #region "TeamSchedulePostOtTo"
         /// The <see cref="TeamSchedulePostOtTo" /> property's name.
-        /// </summary>
+        
         public const string TeamSchedulePostOtToPropertyName = "TeamSchedulePostOtTo";
 
         private string _teamschedulepostotto = "";
@@ -487,7 +488,7 @@ namespace Collective.Model
         
         #region "TeamSchedulePreOtMax"
         /// The <see cref="TeamSchedulePreOtMax" /> property's name.
-        /// </summary>
+        
         public const string TeamSchedulePreOtMaxPropertyName = "TeamSchedulePreOtMax";
 
         private long _teamschedulepreotmax   ;
@@ -518,7 +519,7 @@ namespace Collective.Model
                 
         #region "TeamSchedulePostOtMax"
         /// The <see cref="TeamSchedulePostOtMax" /> property's name.
-        /// </summary>
+        
         public const string TeamSchedulePostOtMaxPropertyName = "TeamSchedulePostOtMax";
 
         private long _teamschedulepostotmax ;
@@ -549,7 +550,7 @@ namespace Collective.Model
                 
         #region "ScheduleIsVerified"
         /// The <see cref="ScheduleIsVerified" /> property's name.
-        /// </summary>
+        
         public const string ScheduleIsVerifiedPropertyName = "ScheduleIsVerified";
 
         private long _scheduleisverified ;
@@ -580,7 +581,7 @@ namespace Collective.Model
         
         #region "SchedRate"
         /// The <see cref="SchedRate" /> property's name.
-        /// </summary>
+        
         public const string SchedRatePropertyName = "SchedRate";
 
         private decimal _schedrate  ;
@@ -611,7 +612,7 @@ namespace Collective.Model
         
         #region "SchedOtRate"
         /// The <see cref="SchedOtRate" /> property's name.
-        /// </summary>
+        
         public const string SchedOtRatePropertyName = "SchedOtRate";
 
         private decimal _schedotrate;
@@ -642,10 +643,10 @@ namespace Collective.Model
                
         #region "SchedGracePeriod"
         /// The <see cref="SchedGracePeriod" /> property's name.
-        /// </summary>
+        
         public const string SchedGracePeriodPropertyName = "SchedGracePeriod";
 
-        private long schedgraceperiod;
+        private long _schedgraceperiod;
 
         /// <summary>
         /// Sets and gets the SchedGracePeriod property.
@@ -655,17 +656,17 @@ namespace Collective.Model
         {
             get
             {
-                return schedgraceperiod;
+                return _schedgraceperiod;
             }
 
             set
             {
-                if (schedgraceperiod == value)
+                if (_schedgraceperiod == value)
                 {
                     return;
                 }
 
-                schedgraceperiod = value;
+                _schedgraceperiod = value;
                 RaisePropertyChanged(SchedGracePeriodPropertyName);
             }
         }
@@ -673,7 +674,7 @@ namespace Collective.Model
         
         #region "ScheduleLeave"
         /// The <see cref="ScheduleLeave" /> property's name.
-        /// </summary>
+        
         public const string ScheduleLeavePropertyName = "ScheduleLeave";
 
         private long _scheduleleave  ;
@@ -704,7 +705,7 @@ namespace Collective.Model
                 
         #region "DoubleShift"
         /// The <see cref="DoubleShift" /> property's name.
-        /// </summary>
+        
         public const string DoubleShiftPropertyName = "DoubleShift";
 
         private long _doubleshift ;
@@ -735,7 +736,7 @@ namespace Collective.Model
         
         #region "IsUnderTime"
         /// The <see cref="IsUnderTime" /> property's name.
-        /// </summary>
+        
         public const string IsUnderTimePropertyName = "IsUnderTime";
 
         private long _isundertime ;
@@ -766,7 +767,7 @@ namespace Collective.Model
         
         #region "AssignedToTeam"
         /// The <see cref="AssignedToTeam" /> property's name.
-        /// </summary>
+        
         public const string AssignedToTeamPropertyName = "AssignedToTeam";
 
         private long _assignedtoteam;
@@ -794,15 +795,112 @@ namespace Collective.Model
             }
         }
         #endregion
-		
-		
-		
-	
 
-		
-			
+        #region TimeSpanString
+        /// <summary>
+        /// The <see cref="TimeSpanString" /> property's name.
+        /// </summary>
+        public const string TimeSpanStringPropertyName = "TimeSpanString";
 
-		
+        private string _timespanstring = "";
+
+        /// <summary>
+        /// Sets and gets the TimeSpanString property.
+        /// Changes to that property's value raise the PropertyChanged event. 
+        /// </summary>
+        public string TimeSpanString
+        {
+            get
+            {
+                return _timespanstring;
+            }
+
+            set
+            {
+                if (_timespanstring == value)
+                {
+                    return;
+                }
+
+                _timespanstring = value;
+                RaisePropertyChanged(TimeSpanStringPropertyName);
+            }
+        }
+        #endregion
+
+        #region TimeFrom
+        /// <summary>
+        /// The <see cref="TimeFrom" /> property's name.
+        /// </summary>
+        public const string TimeFromPropertyName = "TimeFrom";
+
+        private string _timefrom = "";
+
+        /// <summary>
+        /// Sets and gets the TimeFrom property.
+        /// Changes to that property's value raise the PropertyChanged event. 
+        /// </summary>
+        public string TimeFrom
+        {
+            get
+            {
+                return _timefrom;
+            }
+
+            set
+            {
+                if (_timefrom == value)
+                {
+                    return;
+                }
+
+                _timefrom = value;
+                RaisePropertyChanged(TimeFromPropertyName);
+            }
+        }
+        #endregion
+
+        #region TimeTo
+
+        /// <summary>
+        /// The <see cref="TimeTo" /> property's name.
+        /// </summary>
+        public const string TimeToPropertyName = "TimeTo";
+
+        private string _timeto = "";
+
+        /// <summary>
+        /// Sets and gets the TimeTo property.
+        /// Changes to that property's value raise the PropertyChanged event. 
+        /// </summary>
+        public string TimeTo
+        {
+            get
+            {
+                return _timeto;
+            }
+
+            set
+            {
+                if (_timeto == value)
+                {
+                    return;
+                }
+
+                _timeto = value;
+                RaisePropertyChanged(TimeToPropertyName);
+            }
+        }
+        #endregion
+
+
+
+
+
+
+
+
+
 
         #endregion
 
@@ -820,7 +918,7 @@ namespace Collective.Model
                         where r.agent == agentName && r.date_assigned == today2
                         select r.team_label).FirstOrDefault();
                     if (teamLabel == null) 
-                        throw  new Exception("Error:There is no Schedule for Today please contact your TL");
+                        throw  new Exception("There is no Schedule for Today please contact your TL");
                     //var dateBegin = new DateTime(date.Year, date.Month, date.Day);
                     var schedule = (from r in _context.tbl_teamschedules
                         where r.team_label == teamLabel &&
@@ -828,10 +926,10 @@ namespace Collective.Model
                         select r).FirstOrDefault();
                     if (schedule == null)
                         throw new Exception("Error: There is no Schedule for Today please contact your TL");
-                    DateTime timeIN = DateTime.Today.Add(schedule.teamschedule_timefrom);
+                    DateTime timeIn = DateTime.Today.Add(schedule.teamschedule_timefrom);
                     DateTime timeOut = DateTime.Today.Add(schedule.teamschedule_timeto);
                     var response = string.Format("{0} To: {1}",
-                    timeIN.ToString("hh:mm tt", CultureInfo.InvariantCulture),
+                    timeIn.ToString("hh:mm tt", CultureInfo.InvariantCulture),
                     timeOut.ToString("hh:mm tt", CultureInfo.InvariantCulture));
                     
                     return response;
@@ -842,6 +940,37 @@ namespace Collective.Model
                 throw new Exception(exception.Message);
             }
         }
+
+        public static List<TeamScheduleModel> GetWeeklySchedule(string agent, DateTime datetoday)
+        {
+            try
+            {
+                using (_context = new CollectiveEntities())
+                {
+                    var weekly = (from p in _context.tbl_teamschedules
+                        join tsa in _context.tbl_teamscheduleagents on
+                            p.team_label equals tsa.team_label
+                        where tsa.agent == agent
+                        select new TeamScheduleModel
+                        {
+                            TeamDays = p.team_days,
+                            TeamLabel = p.team_label,
+                            TeamScheduleTimeFrom = p.teamschedule_timefrom,
+                            TeamscheduleTimeto = p.teamschedule_timeto,
+
+                            
+
+                        }).ToList();
+                    return weekly;
+                } 
+            }
+            catch (Exception exception)
+            {
+                
+                throw new Exception(exception.Message);
+            }
+            
+        } 
 		 
 	    #endregion
         

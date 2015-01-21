@@ -201,7 +201,7 @@ namespace Collective.AgentClient.ViewModel
                     ok = true;
                     Messenger.Default.Send(new LoginMessage { Agent = agent });
                     Cleanup();
-                    window.Close();
+                    //window.Close();
                     CloseAction();
                     
                                       

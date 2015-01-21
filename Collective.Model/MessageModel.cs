@@ -359,6 +359,9 @@ namespace Collective.Model
         }
         #endregion
 
+        public UserModel UserName { get; set; }
+        public RecipientModel Recepiant { get; set; }
+
 		
         #endregion
 
@@ -402,6 +405,11 @@ namespace Collective.Model
                 
                 throw new Exception(excetion.Message);
             }
+        }
+
+        public static void GetMsg()
+        {
+            
         }
          
         #endregion

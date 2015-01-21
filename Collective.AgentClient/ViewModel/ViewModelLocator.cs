@@ -22,8 +22,9 @@ namespace Collective.AgentClient.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<LoginViewModel>();
-            SimpleIoc.Default.Register<PauseViewModel>();
+            //SimpleIoc.Default.Register<PauseViewModel>();
             SimpleIoc.Default.Register<PayrollAdvisorModel>();
+            SimpleIoc.Default.Register<MessageViewModel>();
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
@@ -45,16 +46,24 @@ namespace Collective.AgentClient.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
-        public PauseViewModel PauseViewModel
-        {
-            get { return ServiceLocator.Current.GetInstance<PauseViewModel>(); }
-        }
+        //public PauseViewModel PauseViewModel
+        //{
+        //    get { return ServiceLocator.Current.GetInstance<PauseViewModel>(); }
+        //}
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
         public PayrollAdvisorModel PayrollAdvisorModel
         {
             get { return ServiceLocator.Current.GetInstance<PayrollAdvisorModel>(); }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public MessageViewModel MessageViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<MessageViewModel>(); }
         }
 
         /// <summary>

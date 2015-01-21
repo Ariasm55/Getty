@@ -199,7 +199,7 @@ namespace Collective.Model
                                      {
                                          
                                          DateAssigned = p.date_assigned,
-                                         teamschedule_datebegin = p.teamschedule_datebegin,
+                                         TeamscheduleDatebegin = p.teamschedule_datebegin,
                                          
 
                                      }).FirstOrDefault();

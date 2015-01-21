@@ -122,5 +122,15 @@ namespace Collective.AgentClient.Model
         {
             throw new NotImplementedException();
         }
+
+        public void GetWeeklySchedule(string agent, DateTime daytime, Action<List<TeamScheduleModel>, Exception> callback)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Logout(string username, long recordID, Action<bool,Exception> callback)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

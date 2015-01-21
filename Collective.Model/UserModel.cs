@@ -215,7 +215,9 @@ namespace Collective.Model
                                 Department=p.profile_department,
                                 Nationality=p.profile_nationality,
                                 Position=p.profile_position,
-                                UserName=p.user_username
+                                UserName=p.user_username,
+                                ProfilePicture = p.profile_picture
+                                
                             },
                             #endregion
                             //TO Obtain the Schedule of the Agent in that Day

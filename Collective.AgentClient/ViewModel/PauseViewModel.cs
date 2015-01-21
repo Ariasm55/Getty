@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows;
 using Collective.Model;
 using GalaSoft.MvvmLight;
@@ -188,10 +187,10 @@ namespace Collective.AgentClient.ViewModel
         
         #region "ComboEnable"
         /// The <see cref="ComboEnable" /> property's name.
-        /// </summary>
+       
         public const string ComboEnablePropertyName = "ComboEnable";
 
-        private bool _comboEnable = false;
+        private bool _comboEnable;
 
         /// <summary>
         /// Sets and gets the ComboEnable property.
@@ -219,7 +218,7 @@ namespace Collective.AgentClient.ViewModel
 
         #region "PauseId"
         /// The <see cref="PauseId" /> property's name.
-        /// </summary>
+        
         public const string PauseIdPropertyName = "PauseId";
 
         private long _pauseId;
@@ -250,7 +249,7 @@ namespace Collective.AgentClient.ViewModel
 
         #region "UserName"
         /// The <see cref="UserName" /> property's name.
-        /// </summary>
+        
         public const string UserNamePropertyName = "UserName";
 
         private string _userName = "";
@@ -281,7 +280,7 @@ namespace Collective.AgentClient.ViewModel
 
         #region "CampaignId"
         /// The <see cref="CampaignId" /> property's name.
-        /// </summary>
+        
         public const string CampaignIdPropertyName = "CampaignId";
 
         private long _campainId;
@@ -314,6 +313,38 @@ namespace Collective.AgentClient.ViewModel
 
         public Action CloseAction { get; set; }
 
+        #endregion
+
+        #region RecordID
+        /// <summary>
+        /// The <see cref="RecordID" /> property's name.
+        /// </summary>
+        public const string RecordIDPropertyName = "RecordID";
+
+        private long _recordid ;
+
+        /// <summary>
+        /// Sets and gets the RecordID property.
+        /// Changes to that property's value raise the PropertyChanged event. 
+        /// </summary>
+        public long RecordID
+        {
+            get
+            {
+                return _recordid;
+            }
+
+            set
+            {
+                if (_recordid == value)
+                {
+                    return;
+                }
+
+                _recordid = value;
+                RaisePropertyChanged(RecordIDPropertyName);
+            }
+        }
         #endregion
 
         public RelayCommand PauseCommand { get; set; }
@@ -384,19 +415,24 @@ namespace Collective.AgentClient.ViewModel
                         return;
                     }
                 PauseId = resumeBreak;
-                window.Close();
-                CloseAction();
                 
             });
-            window.Close();
             CloseAction();
-            //OnRequesteClose(this, new EventArgs());
+            OnRequesteClose(this, new EventArgs());
                         
         }
 
         private void Logout()
         {
-            
+            _dataService.Logout(UserName,RecordID,
+                (logout2,error) =>
+            {
+                if (error != null)
+                {
+                    MessageBox.Show(error.Message);
+                    
+                }
+            });
         }
 
         private void LoadReasons()

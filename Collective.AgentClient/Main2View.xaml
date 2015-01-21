@@ -12,9 +12,10 @@
 		mc:Ignorable="d ignore"
         d:DesignHeight="768" d:DesignWidth="1024" Height="700" Width="1024"
 		Foreground="Transparent" Title="{Binding Agent.Campaign.Name}"  
-        Topmost="True" WindowState="Normal" HorizontalAlignment="Center"
-        VerticalAlignment="Center" FontFamily="Century Gothic" FontSize="13.333"
-        ResizeMode="CanMinimize"  WindowStartupLocation="CenterScreen" AllowsTransparency="True"
+        Topmost="False" WindowState="Normal" HorizontalAlignment="Center"
+        VerticalAlignment="Center" FontFamily="Century Gothic" FontSize="10"
+        ResizeMode="CanMinimize"  WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True"
         WindowStyle="None" Background="Transparent">
 
 
@@ -50,14 +51,14 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Height="auto" Margin="50,43,0,0" Orientation="Horizontal" HorizontalAlignment="Left" Width="1032">
-                    <telerik:RadButton Height="80" Width="151" FontSize="21" BorderBrush="Black" BorderThickness="2" FontFamily="flat-ui-pro-icons" AllowDrop="True" Background="#FFF9F6F4">
+                <StackPanel Grid.Row="0" Height="auto" Margin="50,43,0,0" Orientation="Horizontal" HorizontalAlignment="Left" Width="auto">
+                    <telerik:RadButton Height="80" Width="151" FontSize="21" BorderBrush="Black" BorderThickness="2" FontFamily="flat-ui-pro-icons" AllowDrop="True" Background="#FFF9F6F4" Visibility="Collapsed">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="Images/MainView/Help.png" Width="41" Stretch="Fill" Height="46"/>
                             <Label  Padding="0" Content="KBQA" VerticalContentAlignment="Center"/>
                         </StackPanel>
                     </telerik:RadButton>
-                    <telerik:RadButton Height="80" Width="239" FontSize="21" Background="#FFF9F6F4" BorderBrush="Black" BorderThickness="2" FontFamily="flat-ui-pro-icons">
+                    <telerik:RadButton Height="80" Width="239" FontSize="21" Background="#FFF9F6F4" BorderBrush="Black" BorderThickness="2" FontFamily="flat-ui-pro-icons" Visibility="Collapsed">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="Images/MainView/TIMEOFF.png" Width="41" Stretch="Fill" Height="46"/>
                             <Label  Padding="0" Content="Time Off Request" VerticalContentAlignment="Center"/>
@@ -90,7 +91,7 @@
                 <Grid x:Name="GridIzq" Grid.Column="0" Background="Transparent" 
 				  HorizontalAlignment="Left" VerticalAlignment="Stretch" >
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="2.85*"/>
+                        <RowDefinition Height="2.99*"/>
                         <RowDefinition Height="3*"/>
                     </Grid.RowDefinitions>
                     <Grid x:Name="GridPhotoInfo" Grid.Row="0" Margin="5" Background="#FFF9F6F4" Width="190">
@@ -101,7 +102,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Image Grid.Row="0" Source="/Images/Jain.png" Margin="0,10,0,0" Stretch="UniformToFill" Width="100" Height="100" 
+                        <Image Grid.Row="0" Source="{Binding Agent.Profile.ProfilePicture}" Margin="0,10,0,0" Stretch="UniformToFill" Width="100" Height="100" 
 					Clip="M99.5,50 C99.5,77.338095 77.338095,99.5 50,99.5 C22.661905,99.5 0.5,77.338095 0.5,50 C0.5,22.661905 22.661905,0.5 50,0.5 C77.338095,0.5 99.5,22.661905 99.5,50 z"/>
                         <Ellipse x:Name="Halo" Grid.Row="0" Fill="Transparent" Height="110"  Stroke="#FF1C5EEA" VerticalAlignment="Center" Width="110" Margin="0,12,0,0"/>
                         <Label x:Name="WelcomeAgentName" HorizontalAlignment="Center" VerticalAlignment="Top" 
@@ -212,11 +213,17 @@
                         <telerik:RadGridView x:Name="Mesages" Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,5,0" VerticalAlignment="Stretch" 
                                          ShowGroupPanel="False"  AutoGenerateColumns="False" IsReadOnly="True" 
                                          ItemsSource="{Binding Messages, UpdateSourceTrigger=PropertyChanged}"
-                                         SelectedItem="{Binding SelectedMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                         SelectedItem="{Binding SelectedMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsFilteringAllowed="False">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseLeftButtonDown">
+                                    <custom:EventToCommand Command="{Binding ShowMsgCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                             <telerik:RadGridView.Columns>
-                                <telerik:GridViewDataColumn Header="From" Width="1*" DataMemberBinding="{Binding User.UserName}"/>
+                                <telerik:GridViewDataColumn Header="From" Width="1*" DataMemberBinding="{Binding UserName.UserName}"/>
                                 <telerik:GridViewDataColumn Header="Subject" Width="3*" DataMemberBinding="{Binding MessageTitle}"/>
-                                <telerik:GridViewDataColumn Header="Date" Width="1*" DataMemberBinding="{Binding DateCreated}"/>
+                                    
+                                <telerik:GridViewDataColumn Header="Date" Width="1*" DataMemberBinding="{Binding TimeStamp}"/>
                             </telerik:RadGridView.Columns>
                         </telerik:RadGridView>
                     </Grid>
@@ -245,7 +252,25 @@
                             </ListView.ItemTemplate>
                         </ListView>
                     </Grid>
-                    <Grid x:Name="GridDerDown" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="200" Background="White"/>
+                    <Grid x:Name="GridDerDown" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="200" Background="White">
+                    <ListView ItemsSource="{Binding Weekly}" HorizontalAlignment="Left" 
+                              VerticalAlignment="Stretch" Width="201">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Width="155" Margin="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding TeamDays}" TextAlignment="Left"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding TeamScheduleTimeFrom, StringFormat=hh\\:mm}" TextAlignment="Right"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding TeamscheduleTimeto, StringFormat=hh\\:mm}" TextAlignment="Right"/>
+                                    </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                        </Grid>
                 </Grid>
             </Grid>
 

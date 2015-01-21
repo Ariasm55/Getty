@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.ignore.com"
         mc:Ignorable="d ignore" WindowStyle="SingleBorderWindow" ResizeMode="NoResize" 
-        SizeToContent="WidthAndHeight"
-        DataContext="{Binding PauseViewModel, Source={StaticResource Locator}}" Topmost="True">
+        SizeToContent="WidthAndHeight" Topmost="True">
+        <!--DataContext="{Binding PauseViewModel, Source={StaticResource Locator}}"-->
+    
 
     <Grid x:Name="Pause" VerticalAlignment="Top" Margin="5">
         <Grid.RowDefinitions>

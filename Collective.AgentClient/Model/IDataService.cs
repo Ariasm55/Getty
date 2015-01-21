@@ -34,6 +34,11 @@ namespace Collective.AgentClient.Model
         void GetRecordSummary(string agent, DateTime initial, DateTime final,
             Action<List<RecordReasonSummary>, Exception> callback);
 
+        void GetWeeklySchedule(string agent, DateTime daytime,
+            Action<List<TeamScheduleModel>, Exception> callback);
+
+        void Logout(string username, long recordID, Action<bool,Exception> callback);
+
 
 
     }

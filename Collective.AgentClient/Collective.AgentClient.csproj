@@ -125,14 +125,15 @@
     <Compile Include="Model\IDataService.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MessageViewModel.cs" />
     <Compile Include="ViewModel\PauseViewModel.cs" />
     <Compile Include="ViewModel\PayrollAdvisorModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MainWindows2.xaml.cs">
-      <DependentUpon>MainWindows2.xaml</DependentUpon>
+    <Compile Include="View\MessagesView.xaml.cs">
+      <DependentUpon>MessagesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PauseView.xaml.cs">
       <DependentUpon>PauseView.xaml</DependentUpon>
@@ -167,8 +168,8 @@
       <SubType>Form</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainWindows2.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="View\MessagesView.xaml">
+      <SubType>Form</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PauseView.xaml">

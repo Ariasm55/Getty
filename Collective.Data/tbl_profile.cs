@@ -28,5 +28,6 @@ namespace Collective.Data
         public string profile_address { get; set; }
         public string profile_department { get; set; }
         public string profile_position { get; set; }
+        public string profile_picture { get; set; }
     }
 }

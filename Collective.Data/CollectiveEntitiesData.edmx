@@ -88,6 +88,7 @@
           <Property Name="profile_address" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="profile_department" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="profile_position" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="profile_picture" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_recipients">
           <Key>
@@ -293,6 +294,7 @@
           <Property Name="profile_address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="profile_department" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="profile_position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="profile_picture" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tbl_recipient">
           <Key>
@@ -489,6 +491,7 @@
           <EntitySetMapping Name="tbl_profiles">
             <EntityTypeMapping TypeName="gettyModel.tbl_profile">
               <MappingFragment StoreEntitySet="tbl_profiles">
+                <ScalarProperty Name="profile_picture" ColumnName="profile_picture" />
                 <ScalarProperty Name="profile_id" ColumnName="profile_id" />
                 <ScalarProperty Name="profile_empid" ColumnName="profile_empid" />
                 <ScalarProperty Name="user_username" ColumnName="user_username" />

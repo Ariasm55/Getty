@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+
 namespace Collective.Model
 {
    public class PausesModel : ObservableObject
@@ -269,15 +270,17 @@ namespace Collective.Model
                    string today = DateTime.Today.ToString("yyyy/MM/dd");
                    DateTime today2 = DateTime.Parse(today);
                    
-                   var Checklogin = (from p in _context.tbl_record_logs
+                   var checklogin = (from p in _context.tbl_record_logs
                                      where  p.status == "Loged" &&
                                             p.username == username &&
                                             p.dt_stamp.Year == today2.Year &&
                                             p.dt_stamp.Month == today2.Month &&
-                                            p.dt_stamp.Day == today2.Day
+                                            p.dt_stamp.Day == today2.Day &&
+                                            p.log_reason != "Staffed Time"
                                      select p).FirstOrDefault();
-                   if (Checklogin == null)
+                   if (checklogin == null)
                    {
+                       var site = Properties.Settings.Default.ThisSite;
                        DateTime time = new DateTime();
                        var login = new tbl_record_log
                        {
@@ -288,7 +291,7 @@ namespace Collective.Model
                            ip = Library.NetworkIp.LocalIPAddress(),
                            status = "Loged",
                            dt_stamp_day = DateTime.Now.DayOfWeek.ToString(),
-                           this_site = "Honduras",
+                           this_site = site, 
                            log_reason = "Current Staffed Time",
                            dt_stamp_end = time
                        };
@@ -297,7 +300,7 @@ namespace Collective.Model
                        return login.rec_id;
                    }
                    else
-                       return Checklogin.rec_id;
+                       return checklogin.rec_id;
                }
            }
            catch (Exception exception)
@@ -307,12 +310,44 @@ namespace Collective.Model
            }
        }
 
+       public static bool Logout(string username, long recordLogin)
+       {
+           try
+           {
+               using (_context = new CollectiveEntities())
+               {
+                   var logout = (from p in _context.tbl_record_logs
+                       where p.username == username &&
+                             p.rec_id == recordLogin
+                       select p).FirstOrDefault();
+                   if (logout != null)
+                   {
+                       logout.log_reason = "Staffed Time";
+                       logout.dt_stamp_end = DateTime.Now;
+                       _context.SaveChanges();
+                       return true;
+                   }
+                   else
+                   {
+                       return false;
+                       
+                   }
+               }
+           }
+           catch (Exception exception)
+           {
+               
+               throw new Exception(exception.Message);
+           } 
+       }
+
+
 
        #endregion
 
        #region Private
        #endregion
 
-      
+
    }
 }
