@@ -1,16 +1,17 @@
 Getty
 =====
 
-Getty Collective Solution Internation
 
 Programmed by CSI IT Team:
-Crisanto Atienza
+Crisanto Atienza,
+Raphael Alcid,
 Jeriel Formento,
 Jonell Bonecillo,
-Juan Arias
+Juan Angel Arias
 
-Project Manager
+Project Manager:
 Jose Ma. Angelo Villaroman
 
 
 Copyright 2015 Collective Solution International.
+=====
