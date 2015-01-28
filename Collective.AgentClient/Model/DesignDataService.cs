@@ -36,7 +36,7 @@ namespace Collective.AgentClient.Model
             throw new NotImplementedException();
         }
 
-        public void GetSchedule(string agent, DateTime date, Action<string, Exception> callback)
+        public void GetSchedule(string agent, DateTime date, bool checklate, Action<string, Exception> callback)
         {
            // callback("From: 07:00 To: 17:00", null);
             throw new NotImplementedException();

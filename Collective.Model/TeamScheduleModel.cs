@@ -962,7 +962,7 @@ namespace Collective.Model
 
         #region Public Methods
 
-        public static string GetSchedule(string agentName, DateTime date)
+        public static string GetSchedule(string agentName, DateTime date, bool checklate)
         {
             try
             {
@@ -987,7 +987,15 @@ namespace Collective.Model
                     var response = string.Format("{0} To: {1}",
                     timeIn.ToString("hh:mm tt", CultureInfo.InvariantCulture),
                     timeOut.ToString("hh:mm tt", CultureInfo.InvariantCulture));
-                    
+                    DateTime t1 = DateTime.Parse(timeIn.ToString("hh:mm tt", CultureInfo.InvariantCulture));
+                    DateTime t2 = DateTime.Parse(today.ToString("hh:mm tt", CultureInfo.InvariantCulture));
+                    if (checklate == true)
+                    {
+                        if (t1.TimeOfDay < t2.TimeOfDay)
+                        {
+                            ToastModel.RegisterToast(agentName,1);
+                        }
+                    }
                     return response;
                 }
             }

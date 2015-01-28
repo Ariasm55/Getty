@@ -52,11 +52,11 @@ namespace Collective.AgentClient.Model
             }
         }
 
-        public void GetSchedule(string agent, DateTime date, Action<string, Exception> callback)
+        public void GetSchedule(string agent, DateTime date, bool checklate, Action<string, Exception> callback)
         {
             try
             {
-                var response = TeamScheduleModel.GetSchedule(agent, date);
+                var response = TeamScheduleModel.GetSchedule(agent, date, checklate);
                 callback(response, null);
             }
             catch (Exception exception)

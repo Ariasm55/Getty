@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.ignore.com"
         mc:Ignorable="d ignore" WindowStyle="SingleBorderWindow" ResizeMode="NoResize" 
-        SizeToContent="WidthAndHeight" Topmost="True">
+        SizeToContent="WidthAndHeight" Topmost="True" WindowStartupLocation="CenterScreen">
         <!--DataContext="{Binding PauseViewModel, Source={StaticResource Locator}}"-->
     
 

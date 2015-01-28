@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="gettyModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="gettyModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbl_agents">
           <Key>
             <PropertyRef Name="agent_id" />
@@ -185,6 +185,18 @@
           <Property Name="isundertime" Type="uint" Nullable="false" />
           <Property Name="assignedtoteam" Type="uint" Nullable="false" />
         </EntityType>
+        <EntityType Name="tbl_toast">
+          <Key>
+            <PropertyRef Name="toast_id" />
+          </Key>
+          <Property Name="toast_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="toast_username" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="toast_datetime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="toast_message" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="toast_read" Type="bit" Nullable="false" />
+          <Property Name="toast_read_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="toast_type" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="tbl_users">
           <Key>
             <PropertyRef Name="user_id" />
@@ -217,10 +229,10 @@
           <EntitySet Name="tbl_teams" EntityType="Self.tbl_teams" Schema="getty" store:Type="Tables" />
           <EntitySet Name="tbl_teamscheduleagents" EntityType="Self.tbl_teamscheduleagents" Schema="getty" store:Type="Tables" />
           <EntitySet Name="tbl_teamschedules" EntityType="Self.tbl_teamschedules" Schema="getty" store:Type="Tables" />
+          <EntitySet Name="tbl_toast" EntityType="Self.tbl_toast" Schema="getty" store:Type="Tables" />
           <EntitySet Name="tbl_users" EntityType="Self.tbl_users" Schema="getty" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="gettyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -437,7 +449,20 @@
           <EntitySet Name="tbl_teamscheduleagents" EntityType="gettyModel.tbl_teamscheduleagent" />
           <EntitySet Name="tbl_teamschedules" EntityType="gettyModel.tbl_teamschedule" />
           <EntitySet Name="tbl_users" EntityType="gettyModel.tbl_user" />
+          <EntitySet Name="tbl_toasts" EntityType="gettyModel.tbl_toast" />
         </EntityContainer>
+        <EntityType Name="tbl_toast">
+          <Key>
+            <PropertyRef Name="toast_id" />
+          </Key>
+          <Property Name="toast_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="toast_username" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="toast_datetime" Type="DateTime" Nullable="false" />
+          <Property Name="toast_message" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="toast_read" Type="Boolean" Nullable="false" />
+          <Property Name="toast_read_date" Type="DateTime" Nullable="false" />
+          <Property Name="toast_type" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -653,6 +678,19 @@
                 <ScalarProperty Name="Data4" ColumnName="Data4" />
                 <ScalarProperty Name="Data5" ColumnName="Data5" />
                 <ScalarProperty Name="this_site" ColumnName="this_site" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_toasts">
+            <EntityTypeMapping TypeName="gettyModel.tbl_toast">
+              <MappingFragment StoreEntitySet="tbl_toast">
+                <ScalarProperty Name="toast_type" ColumnName="toast_type" />
+                <ScalarProperty Name="toast_read_date" ColumnName="toast_read_date" />
+                <ScalarProperty Name="toast_read" ColumnName="toast_read" />
+                <ScalarProperty Name="toast_message" ColumnName="toast_message" />
+                <ScalarProperty Name="toast_datetime" ColumnName="toast_datetime" />
+                <ScalarProperty Name="toast_username" ColumnName="toast_username" />
+                <ScalarProperty Name="toast_id" ColumnName="toast_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

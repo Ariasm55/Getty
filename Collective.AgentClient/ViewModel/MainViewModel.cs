@@ -657,6 +657,8 @@ namespace Collective.AgentClient.ViewModel
             public static string AgentGlobal { get; set; }
             public static int CampidGlobal { get; set; }
 
+            public static bool Checklate { get; set; }
+
             
         }
 
@@ -683,9 +685,9 @@ namespace Collective.AgentClient.ViewModel
                 message =>
                 {
                     Agent = message.Agent;
-                    //GetSchedule();
+                    GetSchedule();
                     LoadLog();
-                    //GetMsg();
+                    GetMsg();
                     GetweeklySchedule();
                     //GetNewsfeed();
                     Globals.GlobalInt = 1;
@@ -831,7 +833,8 @@ namespace Collective.AgentClient.ViewModel
 
         private void GetSchedule()
         {
-             _dataService.GetSchedule(Agent.Name,DateTime.Now,
+            bool check = Globals.Checklate;
+             _dataService.GetSchedule(Agent.Name,DateTime.Now,check,
                  (response, error) =>
                  {
                      if (error != null)
@@ -856,7 +859,7 @@ namespace Collective.AgentClient.ViewModel
             // ReSharper disable once FunctionNeverReturns
         }*/
 
-        private void IsConnected()
+        private void elfos0IsConnected()
         {
             _dataService.Connected(
                 (conn, error) =>

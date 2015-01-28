@@ -37,5 +37,6 @@ namespace Collective.Data
         public DbSet<tbl_teamscheduleagent> tbl_teamscheduleagents { get; set; }
         public DbSet<tbl_teamschedule> tbl_teamschedules { get; set; }
         public DbSet<tbl_user> tbl_users { get; set; }
+        public DbSet<tbl_toast> tbl_toasts { get; set; }
     }
 }

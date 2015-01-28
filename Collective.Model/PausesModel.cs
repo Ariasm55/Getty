@@ -297,6 +297,7 @@ namespace Collective.Model
                        };
                        _context.tbl_record_logs.Add(login);
                        _context.SaveChanges();
+
                        return login.rec_id;
                    }
                    else

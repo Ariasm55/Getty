@@ -13,7 +13,7 @@ namespace Collective.AgentClient.Model
 
         void Login(string userName, string password, Action<AgentModel, Exception> callback);
 
-        void GetSchedule(string agent, DateTime date, Action<string, Exception> callback);
+        void GetSchedule(string agent, DateTime date, bool checklate, Action<string, Exception> callback);
 
         void GetRecordLog(string agentname, DateTime initial, Action<List<RecordLogModel>, Exception> callback);
         
