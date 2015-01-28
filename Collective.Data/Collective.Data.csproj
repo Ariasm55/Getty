@@ -75,6 +75,9 @@
     <Compile Include="tbl_message.cs">
       <DependentUpon>CollectiveEntitiesData.tt</DependentUpon>
     </Compile>
+    <Compile Include="tbl_new.cs">
+      <DependentUpon>CollectiveEntitiesData.tt</DependentUpon>
+    </Compile>
     <Compile Include="tbl_pause.cs">
       <DependentUpon>CollectiveEntitiesData.tt</DependentUpon>
     </Compile>
@@ -101,11 +104,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <EntityDeploy Include="CollectiveEntitiesData.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CollectiveEntitiesData.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="App.Config" />
     <None Include="CollectiveEntitiesData.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CollectiveEntitiesData.edmx</DependentUpon>

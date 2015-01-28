@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using System.Runtime.Remoting.Messaging;
 using Collective.Model;
 
 namespace Collective.AgentClient.Model
@@ -214,6 +215,34 @@ namespace Collective.AgentClient.Model
             {
                 
                 callback(false,exception);
+            }
+        }
+
+        public void GetNews(Action<List<NewsModel>, Exception> callback)
+        {
+            try
+            {
+                var news = NewsModel.GetAll();
+                callback(news, null);
+            }
+            catch (Exception exception)
+            {
+                
+                callback(null,exception);
+            }
+        }
+
+        public void Lockpause(string username, long camp, Action<long, Exception> callback)
+        {
+            try
+            {
+                var lockuser = PausesModel.InsertLockPause(username, camp);
+                callback(lockuser, null);
+            }
+            catch (Exception exception)
+            {
+
+                callback(0, exception);
             }
         }
     }

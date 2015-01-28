@@ -10,7 +10,7 @@ namespace Collective.Model
     {
         #region Properties
 
-        private static CollectiveEntities _context;
+        private static CollectiveEntities2 _context;
 
         public int AgentId { get; set; }
 
@@ -340,7 +340,7 @@ namespace Collective.Model
         {
             try
             {
-                using (_context = new CollectiveEntities())
+                using (_context = new CollectiveEntities2())
                 {
                     return (from r in _context.tbl_agents
                         join c in _context.tbl_campaigns on r.campaign_id equals c.campaign_id
@@ -404,7 +404,7 @@ namespace Collective.Model
         {
             try
             {
-                using (_context = new CollectiveEntities())
+                using (_context = new CollectiveEntities2())
                 {
                     return (from r in _context.tbl_agents
                             join c in _context.tbl_campaigns on r.campaign_id equals c.campaign_id

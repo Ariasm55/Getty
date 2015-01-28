@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using System.Diagnostics;
-using System.Windows.Navigation;
+using Collective.AgentClient.ViewModel;
 using Microsoft.Win32;
+using MessageBox = System.Windows.MessageBox;
 
 namespace Collective.AgentClient
 {
@@ -33,8 +33,40 @@ namespace Collective.AgentClient
 
         private void OnSessionSwitch(object sender, SessionSwitchEventArgs e)
         {
-            MessageBox.Show("SessionSwitch");
+            if (e.Reason == SessionSwitchReason.SessionLock)
+            {
+                if (MainViewModel.Globals.IsPaused == false)
+                {
+                    MainViewModel.Globals.GlobalInt = 0;
+                    
+                    MainViewModel.UserlockPause();
+                }
+                
+                MainViewModel.Globals.GlobalInt = 0;
+            }
+            else if (e.Reason == SessionSwitchReason.SessionUnlock)
+            {
+                if (MainViewModel.Globals.IsPaused == false)
+                {
+                    const string message = "You lelt your Computer and did not Set a Pause";
+                    const string caption = "No Pause Alert";
+                    var result = MessageBox.Show(message, caption, MessageBoxButton.OK);
+                    MainViewModel.UserlockUnPause();
+                    MainViewModel.Globals.GlobalInt = 1;
+                }
+            }
+
+            else if (e.Reason == SessionSwitchReason.SessionLogoff)
+            {
+                MessageBox.Show("LOGOFF");
+            }
+            else if (e.Reason == SessionSwitchReason.RemoteConnect)
+            {
+                MessageBox.Show("REMOTECONTROL");
+            }
+            
         }
+
         }
 		
 		

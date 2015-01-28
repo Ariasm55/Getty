@@ -11,7 +11,7 @@ namespace Collective.Model
     {
        
         #region Properties
-        private static CollectiveEntities _context;
+        private static CollectiveEntities2 _context;
 
         public long ID { get; set; }
         
@@ -371,7 +371,7 @@ namespace Collective.Model
         {
             try
             {
-                using (_context = new CollectiveEntities())
+                using (_context = new CollectiveEntities2())
                 {
                     var Result = new List<MessageModel>();
                     var lista = (from r in _context.tbl_messages

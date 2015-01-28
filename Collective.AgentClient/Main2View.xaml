@@ -152,78 +152,88 @@
 
                 <Grid x:Name="Infogridmain" Grid.Column="1" Margin="30,0,30,0" VerticalAlignment="Stretch">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="258"/>
                         <RowDefinition Height="5"/>
                         <RowDefinition Height="2*"/>
                     </Grid.RowDefinitions>
                     <Grid x:Name="Infogrid" HorizontalAlignment="Stretch" Grid.Row="0" VerticalAlignment="Top" Background="#FFFBFBFB">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="245"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Image Source="Images/Mainview/News.png" Stretch="Fill" Margin="0,0,0,5" Grid.Row="0" Width="450">
+                        <ListView Name="ListViewNewsFeed" ItemsSource="{Binding NewsFeed}"
+                                  SelectedItem="{Binding SelectedNews, Mode=TwoWay,
+                                  UpdateSourceTrigger=PropertyChanged}"
+                                  Grid.Row="0">
+                        	<ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Orientation="Vertical" Width="250" Height="250"></VirtualizingStackPanel>
+                                </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    
+                                        <StackPanel Width="250" Height="250">
+                                            <ContentControl>
+                                                <Image Source="{Binding PictureLocation}"  Width="250" Height="250" Stretch="Fill">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseRightButtonDown">
+                                                        <custom:EventToCommand Command="{Binding Main.OpenNews, Source={StaticResource Locator}}"/>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Image>
+                                                </ContentControl>
+                                        </StackPanel>
+                                    
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <!--<Image  Source="Images/Mainview/Avengers.jpg" Stretch="Fill" Margin="0,0,0,5" Grid.Row="0" Width="450">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseLeftButtonDown">
                                     <custom:EventToCommand Command="{Binding PauseLogoutCommand}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
-                        </Image>
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Height="27">
-                            <ed:BlockArrow  HorizontalAlignment="Left" Height="22" Orientation="Left" Stroke="Black" VerticalAlignment="Center" Width="35.5"
-                                         Margin="0,0,40,0"/>
-                            <Ellipse Fill="White" HorizontalAlignment="Left" Height="18" Stroke="#FF1C5EEA" VerticalAlignment="Center" Width="18"
-                                  Margin="0,0,10,0"/>
-                            <Ellipse Fill="#FF1C5EEA" HorizontalAlignment="Left" Height="18" Stroke="#FF1C5EEA" VerticalAlignment="Center" Width="18"
-                                  Margin="0,0,10,0"/>
-                            <Ellipse Fill="#FF1C5EEA" HorizontalAlignment="Left" Height="18" Stroke="#FF1C5EEA" VerticalAlignment="Center" Width="18"
-                                  Margin="0,0,40,0"/>
-                            <ed:BlockArrow  HorizontalAlignment="Left" Height="22" Orientation="Left" Stroke="Black" VerticalAlignment="Center" 
-                                        Width="35.5" RenderTransformOrigin="0.5,0.5">
-                                <ed:BlockArrow.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform Angle="179.838"/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </ed:BlockArrow.RenderTransform>
-                            </ed:BlockArrow>
-                        </StackPanel>
+                        </Image>-->
+
                         <!--<TextBlock x:Name="TestingHyperLink" HorizontalAlignment="Left" Margin="8.333,10,0,0" TextWrapping="Wrap"  
                                VerticalAlignment="Top" Height="237.833" Width="536.334"/>-->
                     </Grid>
                     <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" Background="LightGray" Cursor="SizeNS"/>
                     <Grid x:Name="GridInfo" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch" Background="White">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="37"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
-                        <StackPanel x:Name="StackIcons" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,3,0" VerticalAlignment="Stretch">
-                            <Image Source="/Images/Mainview/Team.png" Width="30" Margin="0,5,0,0"/>
-                            <Image Source="/Images/Mainview/Calendar.png" Width="30" Margin="0,5,0,0"/>
-                            <Image Source="/Images/Mainview/schedule.png" Width="30" Margin="0,5,0,0"/>
-                        </StackPanel>
-                        <StackPanel x:Name="StackInfo" Grid.Column="1" HorizontalAlignment="Left" Margin="10,3,0,3" VerticalAlignment="Stretch">
-                            <Label Content="{Binding Agent.Team.TeamName}" Margin="0,5,0,0" FontFamily="flat-ui-pro-icons" FontSize="13" Foreground="Black"/>
-                            <Label Content="{Binding Schedule}" Margin="0,5,0,0" FontFamily="flat-ui-pro-icons" FontSize="13" Foreground="Black"/>
-                            <Label Content="{Binding Source={x:Static system:DateTime.Now}, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,0" 
-                               FontFamily="flat-ui-pro-icons" FontSize="13" Foreground="Black" />
-                        </StackPanel>
-                        <telerik:RadGridView x:Name="Mesages" Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,5,0" VerticalAlignment="Stretch" 
+                                               
+                        <telerik:RadGridView x:Name="Mesages" Grid.Column="0" HorizontalAlignment="Left" Margin="5,3,3,3" VerticalAlignment="Stretch" 
                                          ShowGroupPanel="False"  AutoGenerateColumns="False" IsReadOnly="True" 
                                          ItemsSource="{Binding Messages, UpdateSourceTrigger=PropertyChanged}"
-                                         SelectedItem="{Binding SelectedMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsFilteringAllowed="False">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="MouseLeftButtonDown">
-                                    <custom:EventToCommand Command="{Binding ShowMsgCommand}"/>
+                                         SelectedItem="{Binding SelectedMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsFilteringAllowed="False" d:IsHidden="True">
+                        	<telerik:StyleManager.Theme>
+                        		<telerik:Office_BlueTheme/>
+                        	</telerik:StyleManager.Theme>
+                              <telerik:RadGridView.Columns>
+                                <telerik:GridViewDataColumn Header="From" Width="1*" DataMemberBinding="{Binding UserName.UserName}">
+									<i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseRightButtonDown">
+                                	<custom:EventToCommand Command="{Binding ShowMsgCommand}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
-                            <telerik:RadGridView.Columns>
-                                <telerik:GridViewDataColumn Header="From" Width="1*" DataMemberBinding="{Binding UserName.UserName}"/>
-                                <telerik:GridViewDataColumn Header="Subject" Width="3*" DataMemberBinding="{Binding MessageTitle}"/>
-                                    
-                                <telerik:GridViewDataColumn Header="Date" Width="1*" DataMemberBinding="{Binding TimeStamp}"/>
+							</telerik:GridViewDataColumn>
+                                <telerik:GridViewDataColumn Header="Subject" Width="3*" DataMemberBinding="{Binding MessageTitle}">
+                                    <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseRightButtonDown">
+                                	<custom:EventToCommand Command="{Binding ShowMsgCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+							</telerik:GridViewDataColumn>
+                                <telerik:GridViewDataColumn Header="Date" Width="1*" DataMemberBinding="{Binding TimeStamp}">
+									<i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseRightButtonDown">
+                                	<custom:EventToCommand Command="{Binding ShowMsgCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+							</telerik:GridViewDataColumn>
                             </telerik:RadGridView.Columns>
                         </telerik:RadGridView>
                     </Grid>
@@ -231,26 +241,30 @@
                 <Grid Grid.Column="2" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch"
                   Background="Transparent">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="250"/>
+						<RowDefinition Height="250"/>
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="250"/>
                     </Grid.RowDefinitions>
                     <Grid x:Name="GridDerUp" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="200">
-                        <ListView ItemsSource="{Binding LogList}" SelectedItem="{Binding SelectedLog}" HorizontalAlignment="Left" 
-                              VerticalAlignment="Stretch" Width="201">
-                            <ListView.ItemTemplate>
+                        <ListBox ItemsSource="{Binding LogList}"  HorizontalAlignment="Left" 
+                              VerticalAlignment="Stretch" Width="201" Margin="0,2,-1,-2.4" Background="Transparent" BorderThickness="0" IsHitTestVisible="False">
+                            <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Width="155" Margin="5">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{Binding LogReason}" TextAlignment="Left"/>
-                                        <TextBlock Grid.Column="1" Text="{Binding TimeSpan, StringFormat=hh\\:mm\\:ss}" TextAlignment="Right"/>
+                                        <TextBlock Grid.Column="0" Text="{Binding LogReason}" TextAlignment="Left" FontFamily="Segoe UI" FontSize="9"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding InitialTime, StringFormat=hh\\:mm}" TextAlignment="Center" FontFamily="Segoe UI" FontSize="9"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding FinalTime, StringFormat=hh\\:mm}" TextAlignment="Center" FontFamily="Segoe UI" FontSize="9"/>
+                                        <TextBlock Grid.Column="3" Text="{Binding TimeSpan, StringFormat=hh\\:mm\\:ss}" TextAlignment="Right" FontFamily="Segoe UI" FontSize="9"/>
                                     </Grid>
                                 </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                     </Grid>
                     <Grid x:Name="GridDerDown" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="200" Background="White">
                     <ListView ItemsSource="{Binding Weekly}" HorizontalAlignment="Left" 
@@ -264,15 +278,17 @@
                                         <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                     <TextBlock Grid.Column="0" Text="{Binding TeamDays}" TextAlignment="Left"/>
-                                        <TextBlock Grid.Column="1" Text="{Binding TeamScheduleTimeFrom, StringFormat=hh\\:mm}" TextAlignment="Right"/>
-                                        <TextBlock Grid.Column="2" Text="{Binding TeamscheduleTimeto, StringFormat=hh\\:mm}" TextAlignment="Right"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding TimeIn, StringFormat=hh\\:mm}" TextAlignment="Right" FontFamily="Segoe UI"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding TimeOff, StringFormat=hh\\:mm}" TextAlignment="Right"/>
                                     </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
                         </Grid>
                 </Grid>
+               <!-- <telerik:RadFluidContentControl Content="RadFluidContentControl" Grid.Column="1" HorizontalAlignment="Left" Height="300" Margin="33,290,0,0" State="Normal" VerticalAlignment="Top" Width="300"/> -->
             </Grid>
+            <Label Content="Today's Activities" VerticalAlignment="Top" FontFamily="Ebrima" FontWeight="Bold" Margin="823.808,121,97.808,0" Grid.RowSpan="2" HorizontalAlignment="Center"/>
 
         </Grid>
 

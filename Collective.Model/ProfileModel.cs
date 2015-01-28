@@ -8,7 +8,7 @@ namespace Collective.Model
    {
        #region Propiedades
 
-       private static CollectiveEntities _context;
+       private static CollectiveEntities2 _context;
 
        public int ProfileID { get; set; }
 

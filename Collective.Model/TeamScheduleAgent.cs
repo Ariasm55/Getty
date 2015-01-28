@@ -9,7 +9,7 @@ namespace Collective.Model
     public class TeamScheduleAgent : ObservableObject
     {
         #region Properties
-        private static CollectiveEntities _context;
+        private static CollectiveEntities2 _context;
         public long Teamscheduleagentid { get; set;}
         public long TeamID { get; set; }
         
@@ -176,7 +176,7 @@ namespace Collective.Model
         {
             try
             {
-                using (_context = new CollectiveEntities())
+                using (_context = new CollectiveEntities2())
                 {
                     var getSchedule = (from p in _context.tbl_teamscheduleagents
                         where p.agent == username && p.date_assigned == DateTime.Now

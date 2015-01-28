@@ -13,10 +13,10 @@ namespace Collective.Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CollectiveEntities : DbContext
+    public partial class CollectiveEntities2 : DbContext
     {
-        public CollectiveEntities()
-            : base("name=CollectiveEntities")
+        public CollectiveEntities2()
+            : base("name=CollectiveEntities2")
         {
         }
     
@@ -28,13 +28,14 @@ namespace Collective.Data
         public DbSet<tbl_agent> tbl_agents { get; set; }
         public DbSet<tbl_campaign> tbl_campaigns { get; set; }
         public DbSet<tbl_message> tbl_messages { get; set; }
+        public DbSet<tbl_new> tbl_news { get; set; }
         public DbSet<tbl_pause> tbl_pauses { get; set; }
         public DbSet<tbl_profile> tbl_profiles { get; set; }
         public DbSet<tbl_recipient> tbl_recipients { get; set; }
         public DbSet<tbl_record_log> tbl_record_logs { get; set; }
+        public DbSet<tbl_team> tbl_teams { get; set; }
         public DbSet<tbl_teamscheduleagent> tbl_teamscheduleagents { get; set; }
         public DbSet<tbl_teamschedule> tbl_teamschedules { get; set; }
         public DbSet<tbl_user> tbl_users { get; set; }
-        public DbSet<tbl_team> tbl_teams { get; set; }
     }
 }

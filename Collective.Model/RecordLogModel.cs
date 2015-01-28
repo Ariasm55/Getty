@@ -10,8 +10,8 @@ namespace Collective.Model
     public class RecordLogModel : ObservableObject
     {
         #region Properties
-        
-        private static CollectiveEntities _context;
+
+        private static CollectiveEntities2 _context;
         
         public int RecordId { get; set; }
         
@@ -428,7 +428,7 @@ namespace Collective.Model
         {
             try
             {
-                using (_context = new CollectiveEntities())
+                using (_context = new CollectiveEntities2())
                 {
                     var result = new List<RecordLogModel>();
                     var id = campaignId.ToString(CultureInfo.InvariantCulture).Trim();
@@ -481,12 +481,12 @@ namespace Collective.Model
         {
             try
             {
-                using (_context = new CollectiveEntities())
+                using (_context = new CollectiveEntities2())
                 {
                     var initial = new DateTime(date.Year,date.Month,date.Day,0,0,0);
                     var final = new DateTime(date.Year, date.Month, date.Day, 23, 59, 59);
                     var result = new List<RecordLogModel>();
-                    var lista = from r in _context.tbl_record_logs
+                    var lista = from r in _context.tbl_record_logs orderby r.rec_id
                                 where r.username == agentName &&
                                       r.dt_stamp >= initial && r.dt_stamp <= final
                                 select r;
@@ -535,7 +535,7 @@ namespace Collective.Model
         {
             try
             {
-                using (_context = new CollectiveEntities())
+                using (_context = new CollectiveEntities2())
                 {
                     var initial = new DateTime(dateI.Year, dateI.Month, dateI.Day, 0, 0, 0);
                     var final = new DateTime(dateF.Year, dateF.Month, dateF.Day, 23, 59, 59);
@@ -589,7 +589,7 @@ namespace Collective.Model
         {
             try
             {
-                using (_context = new CollectiveEntities())
+                using (_context = new CollectiveEntities2())
                 {
                     var initial = new DateTime(dateI.Year, dateI.Month, dateI.Day, 0, 0, 0);
                     var final = new DateTime(dateF.Year, dateF.Month, dateF.Day, 23, 59, 59);
@@ -605,7 +605,7 @@ namespace Collective.Model
                     foreach (var motive in motives)
                     {
                         var time = new TimeSpan();
-                        DateTime tick = new DateTime();
+                       
                         /*foreach (var Date in lista)
                         {
                             DateTime search = Date.dt_stamp.Date;

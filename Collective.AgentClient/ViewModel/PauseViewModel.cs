@@ -383,6 +383,7 @@ namespace Collective.AgentClient.ViewModel
 
         private void Pause()
         {
+            MainViewModel.Globals.IsPaused = true;
             PauseVisibility = Visibility.Collapsed;
             LogoutVisibility = Visibility.Collapsed;
             ResumeVisibility = Visibility.Visible;
@@ -406,6 +407,7 @@ namespace Collective.AgentClient.ViewModel
 
         private void Resume(Window window)
         {
+
             _dataService.Resume(PauseId,
                 (resumeBreak, error) =>
             {
@@ -417,9 +419,11 @@ namespace Collective.AgentClient.ViewModel
                 PauseId = resumeBreak;
                 
             });
-            CloseAction();
-            OnRequesteClose(this, new EventArgs());
-                        
+            MainViewModel.Globals.IsPaused = false;
+            //CloseAction();
+            //OnRequesteClose(this, new EventArgs());
+            
+
         }
 
         private void Logout()

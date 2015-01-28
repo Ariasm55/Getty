@@ -132,5 +132,15 @@ namespace Collective.AgentClient.Model
         {
             throw new NotImplementedException();
         }
+
+        public void GetNews(Action<List<NewsModel>, Exception> callback)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Lockpause(string username, long camp, Action<long, Exception> callback)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

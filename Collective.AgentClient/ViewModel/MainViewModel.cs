@@ -18,7 +18,7 @@ namespace Collective.AgentClient.ViewModel
     {
         #region Properties
 
-        private readonly IDataService _dataService;
+        private static IDataService _dataService;
 
         #region Title
 
@@ -487,8 +487,7 @@ namespace Collective.AgentClient.ViewModel
             }
         }
         #endregion
-
-
+        
         #region PauseView
         /// <summary>
         /// The <see cref="PauseViewOption" /> property's name.
@@ -521,6 +520,146 @@ namespace Collective.AgentClient.ViewModel
         }
         #endregion
 
+        #region News
+        /// <summary>
+        /// The <see cref="NewsFeed" /> property's name.
+        /// </summary>
+        public const string NewsFeedPropertyName = "NewsFeed";
+
+        private ObservableCollection<NewsModel> _newsFeed;
+
+        /// <summary>
+        /// Sets and gets the NewsFeed property.
+        /// Changes to that property's value raise the PropertyChanged event. 
+        /// </summary>
+        public ObservableCollection<NewsModel> NewsFeed
+        {
+            get
+            {
+                return _newsFeed;
+            }
+
+            set
+            {
+                if (_newsFeed == value)
+                {
+                    return;
+                }
+
+                _newsFeed = value;
+                RaisePropertyChanged(NewsFeedPropertyName);
+            }
+        }
+        #endregion
+
+        #region SelectedNews
+        /// <summary>
+        /// The <see cref="SelectedNews" /> property's name.
+        /// </summary>
+        public const string SelectedNewsPropertyName = "SelectedNews";
+
+        private NewsModel _selectedNews;
+
+        /// <summary>
+        /// Sets and gets the SelectedNews property.
+        /// Changes to that property's value raise the PropertyChanged event. 
+        /// </summary>
+        public NewsModel SelectedNews
+        {
+            get
+            {
+                return _selectedNews;
+            }
+
+            set
+            {
+                if (_selectedNews == value)
+                {
+                    return;
+                }
+
+                _selectedNews = value;
+                RaisePropertyChanged(SelectedNewsPropertyName);
+            }
+        }
+        #endregion
+
+        #region NewsImage
+        /// <summary>
+        /// The <see cref="NewsImage" /> property's name.
+        /// </summary>
+        public const string NewsImagePropertyName = "NewsImage";
+
+        private string _newsImage = "";
+
+        /// <summary>
+        /// Sets and gets the NewsImage property.
+        /// Changes to that property's value raise the PropertyChanged event. 
+        /// </summary>
+        public string NewsImage
+        {
+            get
+            {
+                return _newsImage;
+            }
+
+            set
+            {
+                if (_newsImage == value)
+                {
+                    return;
+                }
+
+                _newsImage = value;
+                RaisePropertyChanged(NewsImagePropertyName);
+            }
+        }
+        #endregion
+
+        #region NewsURL
+        /// <summary>
+        /// The <see cref="NewsUrl" /> property's name.
+        /// </summary>
+        public const string NewsUrlPropertyName = "NewsURL";
+
+        private string _newsUrl = "";
+
+        /// <summary>
+        /// Sets and gets the NewsURL property.
+        /// Changes to that property's value raise the PropertyChanged event. 
+        /// </summary>
+        public string NewsUrl
+        {
+            get
+            {
+                return _newsUrl;
+            }
+
+            set
+            {
+                if (_newsUrl == value)
+                {
+                    return;
+                }
+
+                _newsUrl = value;
+                RaisePropertyChanged(NewsUrlPropertyName);
+            }
+        }
+        #endregion
+
+        public static class Globals
+        {
+            public static int GlobalInt { get; set; }
+            public static bool IsPaused { get; set; }
+            public static long Recordpause { get; set; }
+
+            public static string AgentGlobal { get; set; }
+            public static int CampidGlobal { get; set; }
+
+            
+        }
+
 
 
 
@@ -530,6 +669,7 @@ namespace Collective.AgentClient.ViewModel
         public RelayCommand PauseLogoutCommand { get; set; }
         public RelayCommand PayrollAdvisorCommand { get; set; }
         public RelayCommand ShowMsgCommand { get; set; }
+        public RelayCommand OpenNews { get; set; }
         #endregion
 
         #region Constructor
@@ -537,15 +677,20 @@ namespace Collective.AgentClient.ViewModel
         public MainViewModel(IDataService dataService)
         {
             _dataService = dataService;
+            
 
             Messenger.Default.Register<LoginMessage>(this,
                 message =>
                 {
                     Agent = message.Agent;
-                    GetSchedule();
+                    //GetSchedule();
                     LoadLog();
-                    GetMsg();
+                    //GetMsg();
                     GetweeklySchedule();
+                    //GetNewsfeed();
+                    Globals.GlobalInt = 1;
+
+
                 });
 
             RegisterCommand();
@@ -558,19 +703,51 @@ namespace Collective.AgentClient.ViewModel
             {
                 //LoadLog();
             }
-            //var thread = new Thread(Timer);
-            //thread.Start();
+            var dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            dispatcherTimer.Tick += dispatcherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0,0,0,45);
+            dispatcherTimer.Start();
+            Globals.AgentGlobal = Agent.Name;
+            Globals.CampidGlobal = Agent.Campaign.CampaignId;
+
+
         }
+
+        //public string AgentGlobal { get; set; }
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            if (Globals.GlobalInt == 1)
+            {
+                MessageBox.Show("1 Minute has passed loading new Data!");
+                GetweeklySchedule();
+                LoadLog();
+            }
+        }
+        
 
         #endregion
 
         #region Private Methods
 
+        private void OpenLinks()
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(_selectedNews.Link);
+            }
+            catch (Exception exception)
+            {
+                
+                throw new Exception(exception.Message);
+            }
+        }
         private void RegisterCommand()
         {
             PauseLogoutCommand = new RelayCommand(PauseLogout);
             PayrollAdvisorCommand = new RelayCommand(PayrollAdvisor);
             ShowMsgCommand = new RelayCommand(OpenMsg);
+            OpenNews = new RelayCommand(OpenLinks);
         }
         
         private void Login()
@@ -581,6 +758,23 @@ namespace Collective.AgentClient.ViewModel
             login.ShowDialog();
         }
 
+        private void GetNewsfeed()
+        {
+            if (Agent != null)
+            {
+                _dataService.GetNews(
+                    (news, error) =>
+                    {
+                        if (error != null)
+                        {
+                            MessageBox.Show(error.Message);
+                        }
+                        NewsFeed = new ObservableCollection<NewsModel>(news);
+                        if (NewsFeed != null) SelectedNews = NewsFeed.FirstOrDefault();
+
+                    }); 
+            }
+        }
         private void OpenMsg()
         {
             if (Agent != null)
@@ -662,34 +856,31 @@ namespace Collective.AgentClient.ViewModel
             // ReSharper disable once FunctionNeverReturns
         }*/
 
-        //private void IsConnected()
-        //{
-        //    _dataService.Connected(
-        //        (conn, error) =>
-        //        {
-        //            if (error != null)
-        //            {
-        //                ConnectionStatus = "Not Connected";
-        //                ConnectionColor = new SolidColorBrush(Colors.Red);
-        //                return;
-        //            }
-        //            if (conn)
-        //            {
-        //                ConnectionStatus = "Connected";
-        //                ConnectionColor = new SolidColorBrush(Colors.Green);
-        //            }
-        //            else
-        //            {
-        //                ConnectionStatus = "Not Connected";
-        //                ConnectionColor = new SolidColorBrush(Colors.Red);
-        //            }
-        //        });
-        //}
+        private void IsConnected()
+        {
+            _dataService.Connected(
+                (conn, error) =>
+                {
+                    if (error != null)
+                    {
+                        ConnectionStatus = "Not Connected";
+                        ConnectionColor = new SolidColorBrush(Colors.Red);
+                        return;
+                    }
+                    if (conn)
+                    {
+                        ConnectionStatus = "Connected";
+                        ConnectionColor = new SolidColorBrush(Colors.Green);
+                    }
+                    else
+                    {
+                        ConnectionStatus = "Not Connected";
+                        ConnectionColor = new SolidColorBrush(Colors.Red);
+                    }
+                });
+        }
 
-        //private void LoadMessages()
-        //{
-            
-        //}
+        
         
         private void LoadLog()
         {
@@ -791,20 +982,48 @@ namespace Collective.AgentClient.ViewModel
             }
         }
 
-        /*private void GetScheduleWeekly()
-        {
-            
-        }*/
-
         
 
-        ////public override void Cleanup()
-        ////{
-        ////    // Clean up if needed
-
-        ////    base.Cleanup();
-        ////}
-
         #endregion
+
+        #region public
+
+        public static long UserlockPause()
+        {
+            var agent = Globals.AgentGlobal;
+            var camp = Globals.CampidGlobal;
+
+            _dataService.Lockpause(agent, camp,
+                (pause, error) =>
+                {
+                    if (error != null)
+                    {
+                        MessageBox.Show(error.Message);
+                        return;
+                    }
+                    Globals.Recordpause=pause ;
+                });
+            return Globals.Recordpause;
+        }
+        
+        public static void UserlockUnPause()
+        {
+            long recordid = Globals.Recordpause;
+            _dataService.Resume(recordid,
+                (resumeBreak, error) =>
+                {
+                    if (error != null)
+                    {
+                        MessageBox.Show(error.Message);
+                        return;
+                    }
+                    recordid = resumeBreak;
+                    recordid = 0;
+
+                });
+        }
+        #endregion
+
+        public int CampidGlobal { get; set; }
     }
 }

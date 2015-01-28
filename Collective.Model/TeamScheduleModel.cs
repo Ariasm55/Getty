@@ -12,7 +12,7 @@ namespace Collective.Model
     {
         #region Properties
 
-        private static CollectiveEntities _context;
+        private static CollectiveEntities2 _context;
         public long TeamId { get; set; }
         public long ShiftID { get; set; }
 
@@ -893,13 +893,69 @@ namespace Collective.Model
         }
         #endregion
 
+        #region TimeIn
+        /// <summary>
+        /// The <see cref="TimeIn" /> property's name.
+        /// </summary>
+        public const string TimeInPropertyName = "TimeIn";
 
+        private DateTime _timeIn;
 
+        /// <summary>
+        /// Sets and gets the TimeIn property.
+        /// Changes to that property's value raise the PropertyChanged event. 
+        /// </summary>
+        public DateTime TimeIn
+        {
+            get
+            {
+                return _timeIn;
+            }
 
+            set
+            {
+                if (_timeIn == value)
+                {
+                    return;
+                }
 
+                _timeIn = value;
+                RaisePropertyChanged(TimeInPropertyName);
+            }
+        }
+        #endregion
 
+        #region TimeOff
+        /// <summary>
+        /// The <see cref="TimeOff" /> property's name.
+        /// </summary>
+        public const string TimeOffPropertyName = "TimeOff";
 
+        private DateTime _dateoff;
 
+        /// <summary>
+        /// Sets and gets the TimeOff property.
+        /// Changes to that property's value raise the PropertyChanged event. 
+        /// </summary>
+        public DateTime TimeOff
+        {
+            get
+            {
+                return _dateoff;
+            }
+
+            set
+            {
+                if (_dateoff == value)
+                {
+                    return;
+                }
+
+                _dateoff = value;
+                RaisePropertyChanged(TimeOffPropertyName);
+            }
+        }
+        #endregion
 
 
         #endregion
@@ -910,7 +966,7 @@ namespace Collective.Model
         {
             try
             {
-                using (_context = new CollectiveEntities())
+                using (_context = new CollectiveEntities2())
                 {
                     var today = DateTime.Now;
                     var today2 = new DateTime(today.Year, today.Month, today.Day);
@@ -945,23 +1001,35 @@ namespace Collective.Model
         {
             try
             {
-                using (_context = new CollectiveEntities())
+                using (_context = new CollectiveEntities2())
                 {
+                    DateTime startOfWeek = DateTime.Today.AddDays(-1 * (int)(DateTime.Today.DayOfWeek));
+                    DateTime endofweek = startOfWeek.AddDays(7);
+                    var result = new List<TeamScheduleModel>();
                     var weekly = (from p in _context.tbl_teamschedules
                         join tsa in _context.tbl_teamscheduleagents on
                             p.team_label equals tsa.team_label
-                        where tsa.agent == agent
-                        select new TeamScheduleModel
+                                  where tsa.agent == agent && p.teamschedule_datebegin >= startOfWeek && p.teamschedule_datebegin <= endofweek
+                        select p);
+                    foreach (var record in weekly)
+                    {
+                        var timeIn = DateTime.Today.Add(record.teamschedule_timefrom);
+                        var timeOut = DateTime.Today.Add(record.teamschedule_timeto);
+                        var hola = DateTime.Now.Date.DayOfWeek.ToString();
+                        if (record.team_days == hola)
                         {
-                            TeamDays = p.team_days,
-                            TeamLabel = p.team_label,
-                            TeamScheduleTimeFrom = p.teamschedule_timefrom,
-                            TeamscheduleTimeto = p.teamschedule_timeto,
+                            record.team_days = "TODAY";
+                        }
+                        result.Add(new TeamScheduleModel
+                        {
+                            TimeIn = timeIn,
+                            TimeOff = timeOut,
+                            DateAssigned = record.date_assigned,
+                            TeamDays = record.team_days
+                        });
 
-                            
-
-                        }).ToList();
-                    return weekly;
+                    }
+                    return result;
                 } 
             }
             catch (Exception exception)

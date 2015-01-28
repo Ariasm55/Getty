@@ -39,7 +39,9 @@ namespace Collective.AgentClient.Model
 
         void Logout(string username, long recordID, Action<bool,Exception> callback);
 
+        void GetNews(Action<List<NewsModel>, Exception> callback);
 
+        void Lockpause(string username, long camp, Action<long, Exception> callback);
 
     }
 }

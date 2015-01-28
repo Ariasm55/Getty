@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="gettyModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="gettyModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbl_agents">
           <Key>
             <PropertyRef Name="agent_id" />
@@ -61,6 +61,17 @@
           <Property Name="message_priority" Type="int" Nullable="false" />
           <Property Name="messages_read" Type="text" Nullable="false" />
           <Property Name="this_site" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_news">
+          <Key>
+            <PropertyRef Name="news_id" />
+          </Key>
+          <Property Name="news_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="news_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="news_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="news_active" Type="bit" Nullable="false" />
+          <Property Name="news_PictureLocation" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="news_Link" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_pauses">
           <Key>
@@ -198,6 +209,7 @@
           <EntitySet Name="tbl_agents" EntityType="Self.tbl_agents" Schema="getty" store:Type="Tables" />
           <EntitySet Name="tbl_campaigns" EntityType="Self.tbl_campaigns" Schema="getty" store:Type="Tables" />
           <EntitySet Name="tbl_messages" EntityType="Self.tbl_messages" Schema="getty" store:Type="Tables" />
+          <EntitySet Name="tbl_news" EntityType="Self.tbl_news" Schema="getty" store:Type="Tables" />
           <EntitySet Name="tbl_pauses" EntityType="Self.tbl_pauses" Schema="getty" store:Type="Tables" />
           <EntitySet Name="tbl_profiles" EntityType="Self.tbl_profiles" Schema="getty" store:Type="Tables" />
           <EntitySet Name="tbl_recipients" EntityType="Self.tbl_recipients" Schema="getty" store:Type="Tables" />
@@ -207,7 +219,8 @@
           <EntitySet Name="tbl_teamschedules" EntityType="Self.tbl_teamschedules" Schema="getty" store:Type="Tables" />
           <EntitySet Name="tbl_users" EntityType="Self.tbl_users" Schema="getty" store:Type="Tables" />
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="gettyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -268,6 +281,17 @@
           <Property Name="messages_read" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="this_site" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
+        <EntityType Name="tbl_new">
+          <Key>
+            <PropertyRef Name="news_id" />
+          </Key>
+          <Property Name="news_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="news_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="news_date" Type="DateTime" Nullable="false" />
+          <Property Name="news_active" Type="Boolean" Nullable="false" />
+          <Property Name="news_PictureLocation" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="news_Link" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
         <EntityType Name="tbl_pause">
           <Key>
             <PropertyRef Name="pause_id" />
@@ -294,7 +318,7 @@
           <Property Name="profile_address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="profile_department" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="profile_position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="profile_picture" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="profile_picture" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_recipient">
           <Key>
@@ -320,6 +344,20 @@
           <Property Name="dt_stamp_day" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="log_reason" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="this_site" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_team">
+          <Key>
+            <PropertyRef Name="team_id" />
+          </Key>
+          <Property Name="team_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="team_leader" Type="Int32" Nullable="false" />
+          <Property Name="team_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="campaign_id" Type="Int32" Nullable="false" />
+          <Property Name="team_manager" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_created" Type="DateTime" Nullable="false" />
+          <Property Name="archived" Type="Int32" Nullable="false" />
+          <Property Name="date_archived" Type="DateTime" Nullable="false" />
+          <Property Name="this_site" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_teamscheduleagent">
           <Key>
@@ -386,39 +424,26 @@
           <Property Name="Data5" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="this_site" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="CollectiveEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CollectiveEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tbl_agents" EntityType="gettyModel.tbl_agent" />
           <EntitySet Name="tbl_campaigns" EntityType="gettyModel.tbl_campaign" />
           <EntitySet Name="tbl_messages" EntityType="gettyModel.tbl_message" />
+          <EntitySet Name="tbl_news" EntityType="gettyModel.tbl_new" />
           <EntitySet Name="tbl_pauses" EntityType="gettyModel.tbl_pause" />
           <EntitySet Name="tbl_profiles" EntityType="gettyModel.tbl_profile" />
           <EntitySet Name="tbl_recipients" EntityType="gettyModel.tbl_recipient" />
           <EntitySet Name="tbl_record_logs" EntityType="Self.tbl_record_log" />
+          <EntitySet Name="tbl_teams" EntityType="gettyModel.tbl_team" />
           <EntitySet Name="tbl_teamscheduleagents" EntityType="gettyModel.tbl_teamscheduleagent" />
           <EntitySet Name="tbl_teamschedules" EntityType="gettyModel.tbl_teamschedule" />
           <EntitySet Name="tbl_users" EntityType="gettyModel.tbl_user" />
-          <EntitySet Name="tbl_teams" EntityType="gettyModel.tbl_team" />
         </EntityContainer>
-        <EntityType Name="tbl_team">
-          <Key>
-            <PropertyRef Name="team_id" />
-          </Key>
-          <Property Name="team_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="team_leader" Type="Int32" Nullable="false" />
-          <Property Name="team_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="campaign_id" Type="Int32" Nullable="false" />
-          <Property Name="team_manager" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="date_created" Type="DateTime" Nullable="false" />
-          <Property Name="archived" Type="Int32" Nullable="false" />
-          <Property Name="date_archived" Type="DateTime" Nullable="false" />
-          <Property Name="this_site" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="gettyModelStoreContainer" CdmEntityContainer="CollectiveEntities">
+        <EntityContainerMapping StorageEntityContainer="gettyModelStoreContainer" CdmEntityContainer="CollectiveEntities2">
           <EntitySetMapping Name="tbl_agents">
             <EntityTypeMapping TypeName="gettyModel.tbl_agent">
               <MappingFragment StoreEntitySet="tbl_agents">
@@ -479,6 +504,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tbl_news">
+            <EntityTypeMapping TypeName="gettyModel.tbl_new">
+              <MappingFragment StoreEntitySet="tbl_news">
+                <ScalarProperty Name="news_id" ColumnName="news_id" />
+                <ScalarProperty Name="news_name" ColumnName="news_name" />
+                <ScalarProperty Name="news_date" ColumnName="news_date" />
+                <ScalarProperty Name="news_active" ColumnName="news_active" />
+                <ScalarProperty Name="news_PictureLocation" ColumnName="news_PictureLocation" />
+                <ScalarProperty Name="news_Link" ColumnName="news_Link" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tbl_pauses">
             <EntityTypeMapping TypeName="gettyModel.tbl_pause">
               <MappingFragment StoreEntitySet="tbl_pauses">
@@ -491,7 +528,6 @@
           <EntitySetMapping Name="tbl_profiles">
             <EntityTypeMapping TypeName="gettyModel.tbl_profile">
               <MappingFragment StoreEntitySet="tbl_profiles">
-                <ScalarProperty Name="profile_picture" ColumnName="profile_picture" />
                 <ScalarProperty Name="profile_id" ColumnName="profile_id" />
                 <ScalarProperty Name="profile_empid" ColumnName="profile_empid" />
                 <ScalarProperty Name="user_username" ColumnName="user_username" />
@@ -506,6 +542,7 @@
                 <ScalarProperty Name="profile_address" ColumnName="profile_address" />
                 <ScalarProperty Name="profile_department" ColumnName="profile_department" />
                 <ScalarProperty Name="profile_position" ColumnName="profile_position" />
+                <ScalarProperty Name="profile_picture" ColumnName="profile_picture" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -532,6 +569,21 @@
                 <ScalarProperty Name="ip" ColumnName="ip" />
                 <ScalarProperty Name="dt_stamp_day" ColumnName="dt_stamp_day" />
                 <ScalarProperty Name="log_reason" ColumnName="log_reason" />
+                <ScalarProperty Name="this_site" ColumnName="this_site" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_teams">
+            <EntityTypeMapping TypeName="gettyModel.tbl_team">
+              <MappingFragment StoreEntitySet="tbl_teams">
+                <ScalarProperty Name="team_id" ColumnName="team_id" />
+                <ScalarProperty Name="team_leader" ColumnName="team_leader" />
+                <ScalarProperty Name="team_name" ColumnName="team_name" />
+                <ScalarProperty Name="campaign_id" ColumnName="campaign_id" />
+                <ScalarProperty Name="team_manager" ColumnName="team_manager" />
+                <ScalarProperty Name="date_created" ColumnName="date_created" />
+                <ScalarProperty Name="archived" ColumnName="archived" />
+                <ScalarProperty Name="date_archived" ColumnName="date_archived" />
                 <ScalarProperty Name="this_site" ColumnName="this_site" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -601,21 +653,6 @@
                 <ScalarProperty Name="Data4" ColumnName="Data4" />
                 <ScalarProperty Name="Data5" ColumnName="Data5" />
                 <ScalarProperty Name="this_site" ColumnName="this_site" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbl_teams">
-            <EntityTypeMapping TypeName="gettyModel.tbl_team">
-              <MappingFragment StoreEntitySet="tbl_teams">
-                <ScalarProperty Name="this_site" ColumnName="this_site" />
-                <ScalarProperty Name="date_archived" ColumnName="date_archived" />
-                <ScalarProperty Name="archived" ColumnName="archived" />
-                <ScalarProperty Name="date_created" ColumnName="date_created" />
-                <ScalarProperty Name="team_manager" ColumnName="team_manager" />
-                <ScalarProperty Name="campaign_id" ColumnName="campaign_id" />
-                <ScalarProperty Name="team_name" ColumnName="team_name" />
-                <ScalarProperty Name="team_leader" ColumnName="team_leader" />
-                <ScalarProperty Name="team_id" ColumnName="team_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

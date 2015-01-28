@@ -12,7 +12,7 @@ namespace Collective.Model
    {
        #region Properties
 
-       private static CollectiveEntities _context;
+       private static CollectiveEntities2 _context;
 
        public long PauseId { get; set; }
 
@@ -126,7 +126,7 @@ namespace Collective.Model
        {
            try
            {
-               using (_context = new CollectiveEntities())
+               using (_context = new CollectiveEntities2())
                {
                    var retorno = new List<PausesModel>();
                    var lista = from p in _context.tbl_pauses
@@ -156,7 +156,7 @@ namespace Collective.Model
        {
            try
            {
-               using (_context = new CollectiveEntities())
+               using (_context = new CollectiveEntities2())
                {
                    var lista = from r in _context.tbl_record_logs
                                where r.rec_id == id
@@ -183,7 +183,7 @@ namespace Collective.Model
        {
            try
            {
-               using (_context = new CollectiveEntities())
+               using (_context = new CollectiveEntities2())
                {
 
                    var login = new tbl_record_log
@@ -214,7 +214,7 @@ namespace Collective.Model
        {
            try
            {
-               using (_context = new CollectiveEntities())
+               using (_context = new CollectiveEntities2())
                {
                    var lista = from r in _context.tbl_record_logs
                                where r.rec_id == id
@@ -239,7 +239,7 @@ namespace Collective.Model
        {
            try
            {
-               using (_context = new CollectiveEntities())
+               using (_context = new CollectiveEntities2())
                {
                    var lista = from r in _context.tbl_record_logs
                                where r.rec_id == id
@@ -265,7 +265,7 @@ namespace Collective.Model
        {
            try
            {
-               using (_context = new CollectiveEntities())
+               using (_context = new CollectiveEntities2())
                {
                    string today = DateTime.Today.ToString("yyyy/MM/dd");
                    DateTime today2 = DateTime.Parse(today);
@@ -314,7 +314,7 @@ namespace Collective.Model
        {
            try
            {
-               using (_context = new CollectiveEntities())
+               using (_context = new CollectiveEntities2())
                {
                    var logout = (from p in _context.tbl_record_logs
                        where p.username == username &&
@@ -341,6 +341,36 @@ namespace Collective.Model
            } 
        }
 
+       public static long InsertLockPause(string username, long camp)
+       {
+           try
+           {
+               using (_context = new CollectiveEntities2())
+               {
+
+                   var login = new tbl_record_log
+                   {
+                       dt_stamp = DateTime.Now,
+                       username = username,
+                       campaign = camp.ToString(CultureInfo.InvariantCulture),
+                       station = Environment.MachineName,
+                       ip = Library.NetworkIp.LocalIPAddress(),
+                       status = "paused",
+                       dt_stamp_day = DateTime.Now.DayOfWeek.ToString(),
+                       this_site = "Honduras",
+                       log_reason = "Automatic Pause"
+                   };
+                   _context.tbl_record_logs.Add(login);
+                   _context.SaveChanges();
+                   return login.rec_id;
+               }
+           }
+           catch (Exception exception)
+           {
+
+               throw new Exception(exception.Message);
+           }
+       }
 
 
        #endregion

@@ -10,7 +10,7 @@ namespace Collective.Model
     {
         #region Properties
 
-        private static CollectiveEntities _context;
+        private static CollectiveEntities2 _context;
 
         public int CampaignId { get; set; }
 
@@ -629,7 +629,7 @@ namespace Collective.Model
         {
             try
             {
-                using (_context = new CollectiveEntities())
+                using (_context = new CollectiveEntities2())
                 {
                     return (from r in _context.tbl_campaigns
                         orderby r.campaign_name
@@ -669,7 +669,7 @@ namespace Collective.Model
         {
             try
             {
-                using (_context = new CollectiveEntities())
+                using (_context = new CollectiveEntities2())
                 {
                     return (from r in _context.tbl_campaigns
                         where r.user_username == userName

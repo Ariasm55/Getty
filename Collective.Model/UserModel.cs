@@ -10,7 +10,7 @@ namespace Collective.Model
 
     #region Propiedades
 
-        private static CollectiveEntities _context;
+        private static CollectiveEntities2 _context;
 
         public int Agentid { get; set; }
 
@@ -126,7 +126,7 @@ namespace Collective.Model
         {
             try
             {
-                using (_context = new CollectiveEntities())
+                using (_context = new CollectiveEntities2())
                 {
                     var user = (from r in _context.tbl_users
                         where r.user_username == userName
