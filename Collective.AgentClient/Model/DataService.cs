@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using System.Runtime.Remoting.Messaging;
+using Collective.AgentClient.ViewModel;
 using Collective.Model;
 
 namespace Collective.AgentClient.Model
@@ -39,7 +40,8 @@ namespace Collective.AgentClient.Model
                 
                 if (agent != null)
                 {
-                    PausesModel.RegisterLogin(userName, agent.Campaign.CampaignId);
+                   var record = PausesModel.RegisterLogin(userName, agent.Campaign.CampaignId);
+                   MainViewModel.Globals.LoginRecord = record;
                     callback(agent, null);
                     
                 }
@@ -56,6 +58,7 @@ namespace Collective.AgentClient.Model
         {
             try
             {
+                
                 var response = TeamScheduleModel.GetSchedule(agent, date, checklate);
                 callback(response, null);
             }
@@ -243,6 +246,20 @@ namespace Collective.AgentClient.Model
             {
 
                 callback(0, exception);
+            }
+        }
+
+        public void Toasty(string username, Action<List<ToastModel>, Exception> callback)
+        {
+            try
+            {
+                var toastycall = ToastModel.GetToast(username);
+                callback(toastycall, null);
+            }
+            catch (Exception exception)
+            {
+                
+                callback(null,exception);
             }
         }
     }

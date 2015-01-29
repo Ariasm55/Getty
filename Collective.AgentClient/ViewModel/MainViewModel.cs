@@ -292,6 +292,70 @@ namespace Collective.AgentClient.ViewModel
 
         #endregion
 
+        #region Toasty
+        /// <summary>
+        /// The <see cref="Toasty" /> property's name.
+        /// </summary>
+        public const string ToastyPropertyName = "Toasty";
+
+        private ObservableCollection<ToastModel> _toasty;
+
+        /// <summary>
+        /// Sets and gets the Toasty property.
+        /// Changes to that property's value raise the PropertyChanged event. 
+        /// </summary>
+        public ObservableCollection<ToastModel> Toasty
+        {
+            get
+            {
+                return _toasty;
+            }
+
+            set
+            {
+                if (_toasty == value)
+                {
+                    return;
+                }
+
+                _toasty = value;
+                RaisePropertyChanged(ToastyPropertyName);
+            }
+        }
+        #endregion
+
+        #region Selected Toasty
+        /// <summary>
+        /// The <see cref="SelectedToast" /> property's name.
+        /// </summary>
+        public const string SelectedToastPropertyName = "SelectedToast";
+
+        private ToastModel _selectedtoast;
+
+        /// <summary>
+        /// Sets and gets the SelectedToast property.
+        /// Changes to that property's value raise the PropertyChanged event. 
+        /// </summary>
+        public ToastModel SelectedToast
+        {
+            get
+            {
+                return _selectedtoast;
+            }
+
+            set
+            {
+                if (_selectedtoast == value)
+                {
+                    return;
+                }
+
+                _selectedtoast = value;
+                RaisePropertyChanged(SelectedToastPropertyName);
+            }
+        }
+        #endregion
+
         #region ConnectionStatus
 
         /// <summary>
@@ -659,6 +723,8 @@ namespace Collective.AgentClient.ViewModel
 
             public static bool Checklate { get; set; }
 
+            public static long LoginRecord { get; set; }
+
             
         }
 
@@ -689,6 +755,7 @@ namespace Collective.AgentClient.ViewModel
                     LoadLog();
                     GetMsg();
                     GetweeklySchedule();
+                    LoadToasty();
                     //GetNewsfeed();
                     Globals.GlobalInt = 1;
 
@@ -833,7 +900,7 @@ namespace Collective.AgentClient.ViewModel
 
         private void GetSchedule()
         {
-            bool check = Globals.Checklate;
+            var check = Library.GlobalVariables.GlobalsLib.CheckLogin;
              _dataService.GetSchedule(Agent.Name,DateTime.Now,check,
                  (response, error) =>
                  {
@@ -846,20 +913,7 @@ namespace Collective.AgentClient.ViewModel
                  });
         }
 
-        /*private void Timer()
-        {
-            while (true)
-            {
-                IsConnected();
-                LoadMessages();
-                var now = DateTime.Now;
-                Date = string.Format("{0}:{1}", now.Hour.ToString("00"), now.Minute.ToString("00"));
-                Thread.Sleep(120000);
-            }
-            // ReSharper disable once FunctionNeverReturns
-        }*/
-
-        private void elfos0IsConnected()
+        private void IsConnected()
         {
             _dataService.Connected(
                 (conn, error) =>
@@ -882,8 +936,6 @@ namespace Collective.AgentClient.ViewModel
                     }
                 });
         }
-
-        
         
         private void LoadLog()
         {
@@ -899,6 +951,25 @@ namespace Collective.AgentClient.ViewModel
                     if (LogList != null) SelectedLog = LogList.FirstOrDefault();
                 });
             //LogList = new ObservableCollection<RecordLogModel>(Lista());
+        }
+
+        private void LoadToasty()
+        {
+            _dataService.Toasty(Agent.Name,
+                (toastym, error) =>
+                {
+                    if (error != null)
+                    {
+                        MessageBox.Show(error.Message);
+                        return;
+                    }
+                    Toasty = new ObservableCollection<ToastModel>(toastym);
+                    if (Toasty != null) SelectedToast = Toasty.FirstOrDefault();
+                })
+            ;
+
+
+
         }
 
         private void GetMsg()

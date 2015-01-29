@@ -142,5 +142,10 @@ namespace Collective.AgentClient.Model
         {
             throw new NotImplementedException();
         }
+
+        public void Toasty(string username, Action<List<ToastModel>, Exception> callback)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

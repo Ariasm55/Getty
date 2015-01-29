@@ -99,6 +99,9 @@
     <Compile Include="tbl_teamscheduleagent.cs">
       <DependentUpon>CollectiveEntitiesData.tt</DependentUpon>
     </Compile>
+    <Compile Include="tbl_toast.cs">
+      <DependentUpon>CollectiveEntitiesData.tt</DependentUpon>
+    </Compile>
     <Compile Include="tbl_user.cs">
       <DependentUpon>CollectiveEntitiesData.tt</DependentUpon>
     </Compile>

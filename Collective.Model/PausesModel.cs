@@ -297,11 +297,14 @@ namespace Collective.Model
                        };
                        _context.tbl_record_logs.Add(login);
                        _context.SaveChanges();
-
+                       Library.GlobalVariables.GlobalsLib.CheckLogin = true;
                        return login.rec_id;
                    }
                    else
+                   {
+                       Library.GlobalVariables.GlobalsLib.CheckLogin = false;
                        return checklogin.rec_id;
+                   }
                }
            }
            catch (Exception exception)

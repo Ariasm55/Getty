@@ -433,8 +433,9 @@ namespace Collective.Model
                     var result = new List<RecordLogModel>();
                     var id = campaignId.ToString(CultureInfo.InvariantCulture).Trim();
                     var lista = from r in _context.tbl_record_logs
-                                where r.campaign == id &&
-                                      r.dt_stamp >= initial && r.dt_stamp <= final
+                                where r.campaign == id 
+                                && r.dt_stamp >= initial
+                                && r.dt_stamp <= final
                                 select r;
                     foreach (var log in lista)
                     {

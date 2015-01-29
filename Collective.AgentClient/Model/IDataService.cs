@@ -43,5 +43,7 @@ namespace Collective.AgentClient.Model
 
         void Lockpause(string username, long camp, Action<long, Exception> callback);
 
+        void Toasty(string username, Action<List<ToastModel>, Exception> callback);
+
     }
 }

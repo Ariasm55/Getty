@@ -84,6 +84,7 @@
     <Compile Include="TeamModel.cs" />
     <Compile Include="TeamScheduleAgent.cs" />
     <Compile Include="TeamScheduleModel.cs" />
+    <Compile Include="ToastModel.cs" />
     <Compile Include="UserModel.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -428,7 +428,8 @@ namespace Collective.AgentClient.ViewModel
 
         private void Logout()
         {
-            _dataService.Logout(UserName,RecordID,
+            var logoutId = MainViewModel.Globals.LoginRecord;
+            _dataService.Logout(UserName,logoutId,
                 (logout2,error) =>
             {
                 if (error != null)

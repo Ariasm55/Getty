@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Collective.Data;
 using GalaSoft.MvvmLight;
 
 namespace Collective.Model
 {
-    class ToastModel : ObservableObject
+    public class ToastModel : ObservableObject
     {
         private static CollectiveEntities2 _context;
 
@@ -270,89 +268,108 @@ namespace Collective.Model
         {
             try
             {
+                DateTime startOfWeek = DateTime.Today.AddDays(-1 * (int)(DateTime.Today.DayOfWeek));
+                DateTime endofweek = startOfWeek.AddDays(7);
+                var today1 = DateTime.Today.Date;
                 using (_context =new CollectiveEntities2())
                 {
                     var checktoast = (from p in _context.tbl_toasts
                         where p.toast_username == username
-                              && p.toast_datetime.Date == DateTime.Today
+                              && p.toast_datetime == today1
                         select p).FirstOrDefault();
-                    if (checktoast != null)
+                    if (checktoast == null)
                     {
                         #region SWITCH
+
+                        var today = DateTime.Today;
                         switch (typeoftoast)
                         {
                             case 1:
                             {
-                                
-                                var toast1 = new tbl_toast
+                                var checklate = (from p in _context.tbl_toasts
+                                    where p.toast_username == username
+                                          && p.toast_datetime >= startOfWeek
+                                          && p.toast_datetime <= endofweek
+                                          && p.toast_type == 1
+                                          && p.toast_type == 2
+                                    select p.toast_type).Count();
+                                if (checklate >= 2)
                                 {
+                                    var toast1 = new tbl_toast
+                                    {
 
-                                    toast_username = username,
-                                    toast_datetime = DateTime.Now,
-                                    toast_read = false,
-                                    toast_message = "You are Late Today",
-                                    toast_type = 1
-                                };
-                                _context.tbl_toasts.Add(toast1);
-                                _context.SaveChanges();
+                                        toast_username = username,
+                                        toast_datetime = DateTime.Now,
+                                        toast_read = false,
+                                        toast_message = "You are Late Today",
+                                        toast_type = 1
+
+                                    };
+                                    _context.tbl_toasts.Add(toast1);
+                                    _context.SaveChanges();
+                                }
+                                else if (checklate <= 3)
+                                {
+                                    var toast1 = new tbl_toast
+                                    {
+
+                                        toast_username = username,
+                                        toast_datetime = DateTime.Now,
+                                        toast_read = false,
+                                        toast_message = "You have been late for the last few day's.",
+                                        toast_type = 3
+
+                                    };
+                                    _context.tbl_toasts.Add(toast1);
+                                    _context.SaveChanges();
+                                }
+
                             }
                                 break;
                             case 2:
-                                var toast2 = new tbl_toast
+                                var checklate2 = (from p in _context.tbl_toasts
+                                    where p.toast_username == username
+                                          && p.toast_datetime >= startOfWeek
+                                          && p.toast_datetime <= endofweek
+                                          && p.toast_type == 1
+                                          && p.toast_type == 2
+                                    select p.toast_type).Count();
+                                if (checklate2 >= 2)
                                 {
+                                    var toast1 = new tbl_toast
+                                    {
 
-                                    toast_username = username,
-                                    toast_datetime = DateTime.Now,
-                                    toast_read = false,
-                                    toast_message = "You are a bit late Today",
-                                    toast_type = 2
-                                };
-                                _context.tbl_toasts.Add(toast2);
-                                _context.SaveChanges();
-                                break;
-                            case 3:
-                                var toast3 = new tbl_toast
+                                        toast_username = username,
+                                        toast_datetime = DateTime.Now,
+                                        toast_read = false,
+                                        toast_message = "Right on Schedule.",
+                                        toast_type = 5
+
+                                    };
+                                    _context.tbl_toasts.Add(toast1);
+                                    _context.SaveChanges();
+
+
+                                }
+                                else if (checklate2 <= 3)
                                 {
+                                    var toast1 = new tbl_toast
+                                    {
 
-                                    toast_username = username,
-                                    toast_datetime = DateTime.Now,
-                                    toast_read = false,
-                                    toast_message = "You have been late for the last few day's.",
-                                    toast_type = 3
-                                };
-                                _context.tbl_toasts.Add(toast3);
-                                _context.SaveChanges();
+                                        toast_username = username,
+                                        toast_datetime = DateTime.Now,
+                                        toast_read = false,
+                                        toast_message = "Congratulation's you are on Time Today.",
+                                        toast_type = 4
+
+                                    };
+                                    _context.tbl_toasts.Add(toast1);
+                                    _context.SaveChanges();
+                                }
+
                                 break;
-
-                            case 4:
-                                var toast4 = new tbl_toast
-                                {
-
-                                    toast_username = username,
-                                    toast_datetime = DateTime.Now,
-                                    toast_read = false,
-                                    toast_message = "Congratulation's you are on Time Today.",
-                                    toast_type = 4
-                                };
-                                _context.tbl_toasts.Add(toast4);
-                                _context.SaveChanges();
-                                break;
-
-                            case 5:
-                                var toast5 = new tbl_toast
-                                {
-
-                                    toast_username = username,
-                                    toast_datetime = DateTime.Now,
-                                    toast_read = false,
-                                    toast_message = "Right on Schedule.",
-                                    toast_type = 5
-                                };
-                                _context.tbl_toasts.Add(toast5);
-                                _context.SaveChanges();
-                                break;
-
                         }
+
                         #endregion
 
                     }

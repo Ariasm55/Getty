@@ -989,11 +989,18 @@ namespace Collective.Model
                     timeOut.ToString("hh:mm tt", CultureInfo.InvariantCulture));
                     DateTime t1 = DateTime.Parse(timeIn.ToString("hh:mm tt", CultureInfo.InvariantCulture));
                     DateTime t2 = DateTime.Parse(today.ToString("hh:mm tt", CultureInfo.InvariantCulture));
+                    checklate = true;
                     if (checklate == true)
                     {
+                        //Late
                         if (t1.TimeOfDay < t2.TimeOfDay)
                         {
                             ToastModel.RegisterToast(agentName,1);
+                        }
+                        //Early
+                        else if (t1.TimeOfDay > t2.TimeOfDay)
+                        {
+                            ToastModel.RegisterToast(agentName, 2);
                         }
                     }
                     return response;
