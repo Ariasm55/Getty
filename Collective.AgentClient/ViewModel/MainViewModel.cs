@@ -756,7 +756,7 @@ namespace Collective.AgentClient.ViewModel
                     GetMsg();
                     GetweeklySchedule();
                     LoadToasty();
-                    //GetNewsfeed();
+                    GetNewsfeed();
                     Globals.GlobalInt = 1;
 
 
@@ -788,7 +788,7 @@ namespace Collective.AgentClient.ViewModel
         {
             if (Globals.GlobalInt == 1)
             {
-                MessageBox.Show("1 Minute has passed loading new Data!");
+               // MessageBox.Show("1 Minute has passed loading new Data!");
                 GetweeklySchedule();
                 LoadLog();
             }
