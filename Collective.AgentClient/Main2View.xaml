@@ -108,7 +108,7 @@
                         <Label x:Name="WelcomeAgentName" HorizontalAlignment="Center" VerticalAlignment="Top" 
 						   Grid.Row="1" FontFamily="flat-ui-pro-icons" FontSize="10" FontWeight="SemiBold" Width="200">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Label Content="Welcome" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <Label Content="Welcome: " HorizontalAlignment="Center" VerticalAlignment="Top"/>
                                 <Label Content="{Binding Agent.Profile.FristName}" Margin="-8,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                                 <Label Content="{Binding Agent.Profile.LastName}" Margin="-8,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                             </StackPanel>
@@ -122,16 +122,16 @@
                         <Label x:Name="Birthday" HorizontalAlignment="Center" VerticalAlignment="Top" 
 						   Grid.Row="3" FontFamily="flat-ui-pro-icons" FontSize="10" FontWeight="SemiBold" Width="200">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Label Content="Birthday" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                                <Label Content="{Binding Agent.Profile.Birthday}" Margin="5,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <Label Content="Birthday: " HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <Label Content="{Binding Agent.Profile.Birthday}" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
                             </StackPanel>
                         </Label>
                         <Label x:Name="Tenure" HorizontalAlignment="Center" VerticalAlignment="Top" 
 						   Grid.Row="4" FontFamily="flat-ui-pro-icons" FontSize="10" FontWeight="SemiBold" Width="200">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Label Content="Tenure" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                                <Label Content="{Binding Agent.DateCreated}" Margin="-8,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <Label Content="Tenure: " HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <Label Content="{Binding Agent.DateCreated.Date, StringFormat=MM\\dd\\yyyy}" Margin="-8,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
                             </StackPanel>
                         </Label>

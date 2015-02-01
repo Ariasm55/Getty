@@ -10,7 +10,8 @@ namespace Collective.Library
     {
         public static class GlobalsLib
         {
-            public static bool CheckLogin { get; set; } 
+            public static bool CheckLogin { get; set; }
+            public static long RecordIdLogout { get; set; }
         }
     }
 }

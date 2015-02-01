@@ -428,7 +428,7 @@ namespace Collective.AgentClient.ViewModel
 
         private void Logout()
         {
-            var logoutId = MainViewModel.Globals.LoginRecord;
+            var logoutId = Library.GlobalVariables.GlobalsLib.RecordIdLogout;
             _dataService.Logout(UserName,logoutId,
                 (logout2,error) =>
             {
@@ -438,6 +438,8 @@ namespace Collective.AgentClient.ViewModel
                     
                 }
             });
+            MessageBox.Show("Thank you for coming to work Today!");
+            Environment.Exit(0);
         }
 
         private void LoadReasons()

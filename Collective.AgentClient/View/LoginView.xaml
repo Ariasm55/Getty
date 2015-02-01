@@ -58,7 +58,7 @@
 		</Grid>
 		<StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
 			<telerik:RadButton Margin="5" Width="100" Content="Forgot password" Command="{Binding ForgetPasswordCommand}"
-				CommandParameter="{Binding ElementName=LoginView}"/>
+				CommandParameter="{Binding ElementName=LoginView}" Visibility="Hidden"/>
 			<telerik:RadButton Margin="5" Width="100" Content="Login" Command="{Binding LoginCommand}" 
 				CommandParameter="{Binding ElementName=LoginView}"/>
             

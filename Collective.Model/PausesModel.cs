@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using Collective.Data;
+using Collective.Library;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
@@ -192,7 +193,7 @@ namespace Collective.Model
                        username = username,
                        campaign = camp.ToString(CultureInfo.InvariantCulture),
                        station = Environment.MachineName,
-                       ip = Library.NetworkIp.LocalIPAddress(),
+                       ip = NetworkIp.LocalIPAddress(),
                        status = "paused",
                        dt_stamp_day = DateTime.Now.DayOfWeek.ToString(),
                        this_site = "Honduras",
@@ -288,7 +289,7 @@ namespace Collective.Model
                            username = username,
                            campaign = camp.ToString(CultureInfo.InvariantCulture),
                            station = Environment.MachineName,
-                           ip = Library.NetworkIp.LocalIPAddress(),
+                           ip = NetworkIp.LocalIPAddress(),
                            status = "Loged",
                            dt_stamp_day = DateTime.Now.DayOfWeek.ToString(),
                            this_site = site, 
@@ -297,12 +298,14 @@ namespace Collective.Model
                        };
                        _context.tbl_record_logs.Add(login);
                        _context.SaveChanges();
-                       Library.GlobalVariables.GlobalsLib.CheckLogin = true;
+                       GlobalVariables.GlobalsLib.CheckLogin = true;
+                       GlobalVariables.GlobalsLib.RecordIdLogout = login.rec_id;
                        return login.rec_id;
                    }
                    else
                    {
-                       Library.GlobalVariables.GlobalsLib.CheckLogin = false;
+                       GlobalVariables.GlobalsLib.CheckLogin = false;
+                       GlobalVariables.GlobalsLib.RecordIdLogout = checklogin.rec_id;
                        return checklogin.rec_id;
                    }
                }
@@ -358,7 +361,7 @@ namespace Collective.Model
                        username = username,
                        campaign = camp.ToString(CultureInfo.InvariantCulture),
                        station = Environment.MachineName,
-                       ip = Library.NetworkIp.LocalIPAddress(),
+                       ip = NetworkIp.LocalIPAddress(),
                        status = "paused",
                        dt_stamp_day = DateTime.Now.DayOfWeek.ToString(),
                        this_site = "Honduras",
