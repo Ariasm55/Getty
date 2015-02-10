@@ -194,7 +194,7 @@ namespace Collective.Model
                        campaign = camp.ToString(CultureInfo.InvariantCulture),
                        station = Environment.MachineName,
                        ip = NetworkIp.LocalIPAddress(),
-                       status = "paused",
+                       status = "pause",
                        dt_stamp_day = DateTime.Now.DayOfWeek.ToString(),
                        this_site = "Honduras",
                        log_reason = pausename
@@ -272,7 +272,7 @@ namespace Collective.Model
                    DateTime today2 = DateTime.Parse(today);
                    
                    var checklogin = (from p in _context.tbl_record_logs
-                                     where  p.status == "Loged" &&
+                                     where p.status == "logged" &&
                                             p.username == username &&
                                             p.dt_stamp.Year == today2.Year &&
                                             p.dt_stamp.Month == today2.Month &&
@@ -290,7 +290,7 @@ namespace Collective.Model
                            campaign = camp.ToString(CultureInfo.InvariantCulture),
                            station = Environment.MachineName,
                            ip = NetworkIp.LocalIPAddress(),
-                           status = "Loged",
+                           status = "logged",
                            dt_stamp_day = DateTime.Now.DayOfWeek.ToString(),
                            this_site = site, 
                            log_reason = "Current Staffed Time",
