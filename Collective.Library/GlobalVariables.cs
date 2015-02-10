@@ -12,6 +12,7 @@ namespace Collective.Library
         {
             public static bool CheckLogin { get; set; }
             public static long RecordIdLogout { get; set; }
+            public static bool CanClose { get; set; }
         }
     }
 }

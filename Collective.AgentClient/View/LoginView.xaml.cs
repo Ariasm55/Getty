@@ -1,4 +1,7 @@
 ﻿using System.Windows;
+using System.Windows.Automation;
+using System.Windows.Forms;
+using Collective.Library;
 
 namespace Collective.AgentClient.View
 {
@@ -13,6 +16,20 @@ namespace Collective.AgentClient.View
         public LoginView()
         {
             InitializeComponent();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            switch (GlobalVariables.GlobalsLib.CanClose)
+            {
+                case false:
+                    e.Cancel = true;
+                    break;
+                case true:
+                    e.Cancel = false;
+                    GlobalVariables.GlobalsLib.CanClose = false;
+                    break;
+            }
         }
     }
 }

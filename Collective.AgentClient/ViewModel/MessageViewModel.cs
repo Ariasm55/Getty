@@ -1,5 +1,6 @@
 ﻿using System;
 using Collective.AgentClient.Model;
+using Collective.Library;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
@@ -253,16 +254,22 @@ namespace Collective.AgentClient.ViewModel
         #endregion
 
         #region Private Methods
-
+        public RelayCommand CanCloseCommand { get; set; }
         private void RegisterCommand()
         {
-            
+            CanCloseCommand = new RelayCommand(CanClose);
         }
 
         #endregion
 
         private void LoadMSG()
         {
+            
+        }
+
+        private void CanClose()
+        {
+            
             
         }
 

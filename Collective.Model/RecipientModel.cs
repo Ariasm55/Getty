@@ -116,6 +116,25 @@ namespace Collective.Model
 
         #region Public Methods
 
+        public static void ReadMsg(long id, string agent)
+        {
+            try
+            {
+                using (_context = new CollectiveEntities2())
+                {
+                    var cheackread = (_context.tbl_recipients.Where(p => p.messages_id == id && p.user_username == agent)).FirstOrDefault();
+
+                    if (cheackread == null || cheackread.recipient_read != 0) return;
+                    cheackread.recipient_read = 1;
+                    _context.SaveChanges();
+                }
+            }
+            catch (Exception exception)
+            {
+                
+                throw new Exception(exception.Message);
+            }
+        }
         public static List<MessageModel> GetAllUserMessagesID(string username)
         {
             try

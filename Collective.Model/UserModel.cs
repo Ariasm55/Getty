@@ -137,18 +137,16 @@ namespace Collective.Model
 
                     if (user.user_password != hash) throw new Exception("Incorrect password");
                             #region LINQ Statement
+
                     var agent =  (from r in _context.tbl_agents
-                        join c in _context.tbl_campaigns on
-                            r.campaign_id equals c.campaign_id
-                        join t in _context.tbl_teams on
-                            r.team_id equals t.team_id
-                            join p in _context.tbl_profiles on
-                            r.agent equals p.user_username
-                            join rec in _context.tbl_record_logs on
-                            r.agent equals rec.username
-                            join sc in _context.tbl_teamscheduleagents on 
-                            r.agent equals sc.agent
-                                  where r.agent == user.user_username && sc.agent == user.user_username
+                                  where r.agent == user.user_username    
+                                   join c in _context.tbl_campaigns on
+                                        r.campaign_id equals c.campaign_id
+                                    join t in _context.tbl_teams on
+                                         r.team_id equals t.team_id
+                                     join p in _context.tbl_profiles on
+                                        r.agent equals p.user_username
+                                    
                     #endregion
                             #region Agent
                                   select new AgentModel
@@ -218,19 +216,19 @@ namespace Collective.Model
                                 UserName=p.user_username,
                                 ProfilePicture = p.profile_picture
                                 
-                            },
+                            }
                             #endregion
                             //TO Obtain the Schedule of the Agent in that Day
-                            #region ScheduleAgent
-                            TeamAgent = new TeamScheduleAgent
-                            {
-                                Agent = sc.agent,
-                                TeamID = sc.team_id,
-                                TeamLabel = sc.team_label,
-                                DateAssigned = sc.date_assigned,
-                                DateArchived = sc.date_archived
-                            }
-                                #endregion
+                           // #region ScheduleAgent
+                            //TeamAgent = new TeamScheduleAgent
+                            //{
+                            //    Agent = sc.agent,
+                            //    TeamID = sc.team_id,
+                            //    TeamLabel = sc.team_label,
+                            //    DateAssigned = sc.date_assigned,
+                            //    DateArchived = sc.date_archived
+                            //}
+                            //    #endregion
 
 
 

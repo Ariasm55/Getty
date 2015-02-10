@@ -4,10 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.ignore.com"
-        mc:Ignorable="d ignore" WindowStyle="SingleBorderWindow" ResizeMode="NoResize" 
-        SizeToContent="WidthAndHeight" Topmost="True" WindowStartupLocation="CenterScreen">
-        <!--DataContext="{Binding PauseViewModel, Source={StaticResource Locator}}"-->
-    
+        mc:Ignorable="d ignore" WindowStyle="None" ResizeMode="NoResize" 
+        SizeToContent="WidthAndHeight" Topmost="True" WindowStartupLocation="CenterScreen" Width="244.8" Background="#4C84C340" AllowsTransparency="True" Closing="Window_Closing">
+    <!--DataContext="{Binding PauseViewModel, Source={StaticResource Locator}}"-->
+
 
     <Grid x:Name="Pause" VerticalAlignment="Top" Margin="5">
         <Grid.RowDefinitions>
@@ -20,9 +20,10 @@
                              SelectedItem="{Binding Path=SelectedPause,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              DisplayMemberPath="Reason" SelectedValuePath="PauseId" IsEnabled="{Binding Path=ComboEnable}"/>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,10">
-            <telerik:RadButton Width="50" Content="Logout" Margin="5,5,50,5" Command="{Binding LogoutCommand}" Visibility="{Binding LogoutVisibility}"/>
+            <telerik:RadButton Width="50" Content="Logout"  Command="{Binding LogoutCommand}" Visibility="{Binding LogoutVisibility}" Height="22.4"/>
             <telerik:RadButton Width="50" Content="Pause" Margin="5" Command="{Binding PauseCommand}" Visibility="{Binding PauseVisibility}"/>
             <telerik:RadButton Width="50" Content="Resume" Margin="5" Command="{Binding ResumeCommand}" Visibility="{Binding ResumeVisibility}"/>
+            <telerik:RadButton Width="50" Content="Close" Margin="5" Command="{Binding CanCloseCommand}" Visibility="{Binding PauseVisibility}"/>
         </StackPanel>
 
     </Grid>

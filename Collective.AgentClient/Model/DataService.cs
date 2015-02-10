@@ -45,8 +45,11 @@ namespace Collective.AgentClient.Model
                     callback(agent, null);
                     
                 }
+                else
+                {
+                    callback(null, new Exception("No Data was obtained from the DB."));    
+                }
                 
-                callback(null,new Exception("Invalid username or password"));
             }
             catch (Exception exception)
             {

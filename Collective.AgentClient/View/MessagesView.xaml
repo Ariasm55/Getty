@@ -9,7 +9,7 @@
         DataContext="{Binding MessageViewModel, Source={StaticResource Locator}}"
         BorderThickness="5" BorderBrush="Transparent" WindowStyle="None"
         AllowsTransparency="True" Visibility="Visible" Margin="5" Width="530"
-        Height="500" AllowDrop="True" Background="Transparent">
+        Height="500" AllowDrop="True" Background="Transparent" Closing="Window_Closing">
     <Grid>
 
         <Grid>
@@ -31,7 +31,7 @@
                             </Grid.RowDefinitions>
                             <StackPanel Grid.Row="0" Orientation="Horizontal">
                                 <Label Content="Message ID: "/>
-                                <Label Content="{Binding MessageID}"/>
+                                <Label x:Name="MsgID" Content="{Binding MessageID}"/>
                             </StackPanel>
                             <StackPanel Grid.Row="1" Orientation="Horizontal">
                                 <Label Content="Date: "/>
@@ -61,7 +61,7 @@
 
                         </Grid>
                         <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,4,5,28" Height="26" Width="80">
-                            <telerik:RadButton Content="Exit" Width="80" Height="25" Click="RadButton_Click" />
+                            <telerik:RadButton Content="Exit" Width="80" Height="25" Click="RadButton_Click"/>
                         </StackPanel>
                     </Grid>
                 </Border>

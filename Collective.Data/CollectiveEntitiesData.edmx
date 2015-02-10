@@ -44,6 +44,7 @@
           <Property Name="date_archived" Type="date" Nullable="false" />
           <Property Name="this_site" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="ot_rate" Type="decimal" Precision="12" Scale="4" />
+          <Property Name="time_max" Type="decimal" Precision="12" Scale="4" />
         </EntityType>
         <EntityType Name="tbl_messages">
           <Key>
@@ -99,6 +100,9 @@
           <Property Name="profile_address" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="profile_department" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="profile_position" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="profile_sss_no" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="profile_tin_no" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="date_hired" Type="date" Nullable="false" />
           <Property Name="profile_picture" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_recipients">
@@ -275,6 +279,7 @@
           <Property Name="date_archived" Type="DateTime" Nullable="false" />
           <Property Name="this_site" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ot_rate" Type="Decimal" />
+          <Property Name="time_max" Type="Decimal" />
         </EntityType>
         <EntityType Name="tbl_message">
           <Key>
@@ -331,6 +336,9 @@
           <Property Name="profile_department" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="profile_position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="profile_picture" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="profile_sss_no" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="profile_tin_no" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="date_hired" Type="DateTime" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_recipient">
           <Key>
@@ -489,6 +497,7 @@
           <EntitySetMapping Name="tbl_campaigns">
             <EntityTypeMapping TypeName="gettyModel.tbl_campaign">
               <MappingFragment StoreEntitySet="tbl_campaigns">
+                <ScalarProperty Name="time_max" ColumnName="time_max" />
                 <ScalarProperty Name="campaign_id" ColumnName="campaign_id" />
                 <ScalarProperty Name="campaign_name" ColumnName="campaign_name" />
                 <ScalarProperty Name="campaign_manager_temp" ColumnName="campaign_manager_temp" />
@@ -553,6 +562,9 @@
           <EntitySetMapping Name="tbl_profiles">
             <EntityTypeMapping TypeName="gettyModel.tbl_profile">
               <MappingFragment StoreEntitySet="tbl_profiles">
+                <ScalarProperty Name="date_hired" ColumnName="date_hired" />
+                <ScalarProperty Name="profile_tin_no" ColumnName="profile_tin_no" />
+                <ScalarProperty Name="profile_sss_no" ColumnName="profile_sss_no" />
                 <ScalarProperty Name="profile_id" ColumnName="profile_id" />
                 <ScalarProperty Name="profile_empid" ColumnName="profile_empid" />
                 <ScalarProperty Name="user_username" ColumnName="user_username" />

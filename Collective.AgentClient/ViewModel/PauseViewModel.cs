@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows;
+using Collective.Library;
 using Collective.Model;
 using GalaSoft.MvvmLight;
 using Collective.AgentClient.Model;
@@ -350,6 +351,7 @@ namespace Collective.AgentClient.ViewModel
         public RelayCommand PauseCommand { get; set; }
 
         public RelayCommand LogoutCommand { get; set; }
+        public RelayCommand CanCloseCommand { get; set; }
 
         public RelayCommand<Window> ResumeCommand { get; set; }
 
@@ -379,6 +381,8 @@ namespace Collective.AgentClient.ViewModel
             PauseCommand = new RelayCommand(Pause,CanPause);
             ResumeCommand = new RelayCommand<Window>(Resume);
             LogoutCommand = new RelayCommand(Logout);
+            CanCloseCommand = new RelayCommand(CanClose);
+                
         }
 
         private void Pause()
@@ -417,11 +421,12 @@ namespace Collective.AgentClient.ViewModel
                         return;
                     }
                 PauseId = resumeBreak;
-                
+                  
             });
             MainViewModel.Globals.IsPaused = false;
-            //CloseAction();
-            //OnRequesteClose(this, new EventArgs());
+            GlobalVariables.GlobalsLib.CanClose = true;
+            CloseAction();
+            GlobalVariables.GlobalsLib.CanClose = false;            
             
 
         }
@@ -455,6 +460,13 @@ namespace Collective.AgentClient.ViewModel
                     Pauses = new ObservableCollection<PausesModel>(lista);
                     
                 });
+        }
+
+        private void CanClose()
+        {
+            GlobalVariables.GlobalsLib.CanClose = true;
+            CloseAction();
+            GlobalVariables.GlobalsLib.CanClose = false;
         }
 
         

@@ -3,10 +3,11 @@ using System.Windows;
 using System.Windows.Media;
 using Collective.AgentClient.Messages;
 using Collective.AgentClient.Model;
+using Collective.Library;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Collective.Library;
+
 
 namespace Collective.AgentClient.ViewModel
 {
@@ -188,29 +189,37 @@ namespace Collective.AgentClient.ViewModel
 
         private void Login(Window window)
         {
-            bool ok = false;
-            
-            _dataService.Login(Username, Password,
-                (agent, error) =>
-                {
-                    if (error != null)
-                    {
-                        MessageBox.Show(error.Message);
-                        return;
-                    }
-                    ok = true;
-                    Messenger.Default.Send(new LoginMessage { Agent = agent });
-                    Cleanup();
-                    //window.Close();
-                    CloseAction();
-                    
-                                      
-                });
-            if (ok == true)
+            try
             {
-                Library.StartExplorer.StartWindows();
-                OnRequesteClose(this, new EventArgs());
-                
+                bool ok = false;
+
+                _dataService.Login(Username, Password,
+                    (agent, error) =>
+                    {
+                        if (error != null)
+                        {
+                            MessageBox.Show(error.Message);
+                            return;
+                        }
+                        ok = true;
+                        Messenger.Default.Send(new LoginMessage { Agent = agent });
+                        Cleanup();
+                        //window.Close();
+                        GlobalVariables.GlobalsLib.CanClose = true;
+                        CloseAction();
+                        GlobalVariables.GlobalsLib.CanClose = false;
+
+                    });
+                if (ok == true)
+                {
+                    Library.StartExplorer.StartWindows();
+                    OnRequesteClose(this, new EventArgs());
+
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message + "\n" + exception.InnerException.Message);
             }
             
         }

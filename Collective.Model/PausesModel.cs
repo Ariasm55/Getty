@@ -306,6 +306,7 @@ namespace Collective.Model
                    {
                        GlobalVariables.GlobalsLib.CheckLogin = false;
                        GlobalVariables.GlobalsLib.RecordIdLogout = checklogin.rec_id;
+                       GlobalVariables.GlobalsLib.CanClose = true;
                        return checklogin.rec_id;
                    }
                }

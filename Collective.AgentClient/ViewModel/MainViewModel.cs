@@ -803,12 +803,20 @@ namespace Collective.AgentClient.ViewModel
         {
             try
             {
-                System.Diagnostics.Process.Start(_selectedNews.Link);
+                if (_selectedNews.Link == null)
+                {
+                    MessageBox.Show("There is no Link for this News");
+                }
+                else
+                {
+                    System.Diagnostics.Process.Start(_selectedNews.Link);
+                }
+                
             }
             catch (Exception exception)
             {
                 
-                throw new Exception(exception.Message);
+                MessageBox.Show(exception.Message);
             }
         }
         private void RegisterCommand()
@@ -823,6 +831,7 @@ namespace Collective.AgentClient.ViewModel
         {
             var vm = new LoginViewModel(_dataService);
             var login = new LoginView {DataContext = vm};
+            if (vm.CloseAction == null) vm.CloseAction = login.Close;
             vm.OnRequesteClose += (s, e) => login.Close();
             login.ShowDialog();
         }
@@ -888,9 +897,10 @@ namespace Collective.AgentClient.ViewModel
                 vm.UserName = Agent.Name;
                 //var pause = new PauseView();
                 var pause = new PauseView {DataContext = vm};
-                pause.ShowDialog();
+                if (vm.CloseAction == null) vm.CloseAction = pause.Close;
                 vm.OnRequesteClose += (s, e) => pause.Close();
                 pause.ShowDialog();
+                
             }
             else
             {

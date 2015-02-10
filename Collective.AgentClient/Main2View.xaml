@@ -16,7 +16,7 @@
         VerticalAlignment="Center" FontFamily="Century Gothic" FontSize="10"
         ResizeMode="CanMinimize"  WindowStartupLocation="CenterScreen"
         AllowsTransparency="True"
-        WindowStyle="None" Background="Transparent">
+        WindowStyle="None" Background="Transparent" Closing="Window_Closing">
 
 
 
@@ -114,7 +114,7 @@
                             </StackPanel>
                         </Label>
                         <Label  HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="2" Width="200"
-						   FontFamily="flat-ui-pro-icons" FontSize="10" FontWeight="SemiBold">
+						   FontFamily="flat-ui-pro-icons" FontSize="10" FontWeight="SemiBold" VerticalContentAlignment="Center">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Label Content="{Binding Agent.Profile.Position}" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
                             </StackPanel>
@@ -179,7 +179,7 @@
                                     
                                         <StackPanel Width="250" Height="250">
                                             <ContentControl>
-                                                <Image Source="{Binding PictureLocation}"  Width="250" Height="250" Stretch="Fill">
+                                                <Image Source="{Binding PictureLocation}"  Width="250" Height="250" Stretch="UniformToFill">
                                                 <i:Interaction.Triggers>
                                                     <i:EventTrigger EventName="MouseRightButtonDown">
                                                         <custom:EventToCommand Command="{Binding Main.OpenNews, Source={StaticResource Locator}}"/>
@@ -204,42 +204,35 @@
                                VerticalAlignment="Top" Height="237.833" Width="536.334"/>-->
                     </Grid>
                     <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" Background="LightGray" Cursor="SizeNS"/>
-                    <Grid x:Name="GridInfo" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch" Background="White">
+                    <Grid x:Name="GridInfo" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch" Background="White" Margin="0,1.5,0,-1.5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+					    </Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="30"/>
+						</Grid.RowDefinitions>
                                                
-                        <telerik:RadGridView x:Name="Mesages" Grid.Column="0" HorizontalAlignment="Left" Margin="5,3,3,3" VerticalAlignment="Stretch" 
+                        <telerik:RadGridView x:Name="Mesages" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="5,3,3,3" VerticalAlignment="Stretch" 
                                          ShowGroupPanel="False"  AutoGenerateColumns="False" IsReadOnly="True" 
                                          ItemsSource="{Binding Messages, UpdateSourceTrigger=PropertyChanged}"
-                                         SelectedItem="{Binding SelectedMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsFilteringAllowed="False" d:IsHidden="True">
+                                         SelectedItem="{Binding SelectedMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsFilteringAllowed="False">
                         	<telerik:StyleManager.Theme>
                         		<telerik:Office_BlueTheme/>
                         	</telerik:StyleManager.Theme>
                               <telerik:RadGridView.Columns>
                                 <telerik:GridViewDataColumn Header="From" Width="1*" DataMemberBinding="{Binding UserName.UserName}">
-									<i:Interaction.Triggers>
-                                <i:EventTrigger EventName="MouseRightButtonDown">
-                                	<custom:EventToCommand Command="{Binding ShowMsgCommand}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
+									
 							</telerik:GridViewDataColumn>
                                 <telerik:GridViewDataColumn Header="Subject" Width="3*" DataMemberBinding="{Binding MessageTitle}">
-                                    <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="MouseRightButtonDown">
-                                	<custom:EventToCommand Command="{Binding ShowMsgCommand}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
+                                    
 							</telerik:GridViewDataColumn>
                                 <telerik:GridViewDataColumn Header="Date" Width="1*" DataMemberBinding="{Binding TimeStamp}">
-									<i:Interaction.Triggers>
-                                <i:EventTrigger EventName="MouseRightButtonDown">
-                                	<custom:EventToCommand Command="{Binding ShowMsgCommand}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
+									
 							</telerik:GridViewDataColumn>
                             </telerik:RadGridView.Columns>
                         </telerik:RadGridView>
+						<Button Grid.Column="0" Grid.Row="1" Content="Read Message" Command="{Binding ShowMsgCommand}" Width="90" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" />
                     </Grid>
                 </Grid>
                 <Grid Grid.Column="2" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch"
@@ -272,7 +265,7 @@
                     </Grid>
                     <Grid x:Name="GridDerDown" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="200" Background="Transparent">
                     <ListView ItemsSource="{Binding Weekly}" HorizontalAlignment="Left" 
-                              VerticalAlignment="Stretch" Width="201" Background="Transparent">
+                              VerticalAlignment="Stretch" Width="201" Background="Transparent" BorderThickness="0">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <Grid Width="155" Margin="5">
@@ -292,7 +285,8 @@
                 </Grid>
                <!-- <telerik:RadFluidContentControl Content="RadFluidContentControl" Grid.Column="1" HorizontalAlignment="Left" Height="300" Margin="33,290,0,0" State="Normal" VerticalAlignment="Top" Width="300"/> -->
             </Grid>
-            <Label Content="Today's Activities" VerticalAlignment="Top" FontFamily="Ebrima" FontWeight="Bold" Margin="823.808,121,97.808,0" Grid.RowSpan="2" HorizontalAlignment="Center"/>
+            <Label Content="Today's Activities" VerticalAlignment="Top" FontFamily="Ebrima" FontWeight="Bold" Margin="823.808,121,97.808,0"
+                   Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Center"/>
 
         </Grid>
 

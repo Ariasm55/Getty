@@ -29,5 +29,8 @@ namespace Collective.Data
         public string profile_department { get; set; }
         public string profile_position { get; set; }
         public string profile_picture { get; set; }
+        public string profile_sss_no { get; set; }
+        public string profile_tin_no { get; set; }
+        public System.DateTime date_hired { get; set; }
     }
 }

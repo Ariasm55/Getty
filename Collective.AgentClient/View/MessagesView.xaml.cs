@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Data.Metadata.Edm;
+using System.Windows;
+using Collective.AgentClient.ViewModel;
 
 namespace Collective.AgentClient.View
 {
@@ -15,9 +17,16 @@ namespace Collective.AgentClient.View
             InitializeComponent();
         }
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var agent = MainViewModel.Globals.AgentGlobal;
+            Collective.Model.RecipientModel.ReadMsg((long)MsgID.Content, agent);
+            e.Cancel = false;
+        }
+
         private void RadButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }
