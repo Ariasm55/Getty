@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation">
+    <Style TargetType="telerik:RadGridView">
+        <Setter Property="telerik:StyleManager.Theme" Value="Office_Blue"/>
+    </Style>
+    <Style TargetType="telerik:RadButton">
+        <Setter Property="telerik:StyleManager.Theme" Value="Office_Blue"/>
+    </Style>
+</ResourceDictionary>

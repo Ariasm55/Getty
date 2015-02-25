@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Windows.Forms;
 using GalaSoft.MvvmLight;
 using Collective.Data;
 
@@ -136,113 +137,163 @@ namespace Collective.Model
                     var hash = Library.Crypt.Md5(password);
 
                     if (user.user_password != hash) throw new Exception("Incorrect password");
-                            #region LINQ Statement
+                                         
 
-                    var agent =  (from r in _context.tbl_agents
-                                  where r.agent == user.user_username    
-                                   join c in _context.tbl_campaigns on
-                                        r.campaign_id equals c.campaign_id
-                                    join t in _context.tbl_teams on
-                                         r.team_id equals t.team_id
+                    var open = (from r in _context.tbl_agents
+                        where r.agent == user.user_username &&
+                              r.archived == 0
+                        select r).FirstOrDefault();
+
+                    if (open == null)
+                    {
+                        throw new Exception("You cant Login you dont have a Campaign or a Team Assiged");
+                    }
+                    else
+                    {
+                                         #region LINQ Statement
+                        var agent = (from r in _context.tbl_agents
+                                     where r.agent == user.user_username &&
+                                           r.archived == 0
+                                     join c in _context.tbl_campaigns on
+                                          r.campaign_id equals c.campaign_id
+                                     join t in _context.tbl_teams on
+                                          r.team_id equals t.team_id
                                      join p in _context.tbl_profiles on
                                         r.agent equals p.user_username
-                                    
-                    #endregion
-                            #region Agent
-                                  select new AgentModel
-                        {
-                            AgentId = r.agent_id,
-                            Archived = r.archived,
-                            AssignedToTeam = r.assignedtoteam,
-                            AssignedToTeamDate = r.assignedtoteamdate,
-                            DateArchived = r.date_archived,
-                            DateAssign = r.date_assigned,
-                            DateCreated = r.datecreated,
-                            Name = r.agent,
-                                #endregion Agent
-                            #region Campaign
-                            Campaign = new CampaignModel
-                            {
-                                CampaignId = c.campaign_id,
-                                ActiveTemp = c.active_temp,
-                                AgentTemp = c.campaign_agents_temp,
-                                Archived = c.archived,
-                                DateArchived = c.date_archived,
-                                Contingency = c.campaign_contingency,
-                                DateCreated = c.campaign_datecreated,
-                                GracePeriod = c.campaign_graceperiod,
-                                Location = c.campaign_location,
-                                ManagerTemp = c.campaign_manager_temp,
-                                Map = c.campaign_map,
-                                Name = c.campaign_name,
-                                OvertimeRate = c.ot_rate,
-                                Rate = c.campaign_rate,
-                                Seats = c.campaign_seats,
-                                Status = c.campaign_status,
-                                ThisSite = c.this_site,
-                                TimeStamp = c.campaign_timestamp,
-                                UserName = c.user_username
-                           },
+                                     orderby r.agent_id ascending
+
                             #endregion
-                            #region Team
-                            Team = new TeamModel
-                            {
-                                TeamId = t.team_id,
-                                Archived = t.archived,
-                                DateArchived = t.date_archived,
-                                DateCreated = t.date_created,
-                                TeamManager = t.team_manager,
-                                TeamLeader = t.team_leader,
-                                TeamName = t.team_name,
-                                ThisSite = t.this_site
-                            },
-                            #endregion
-                            #region Profile
-                            Profile = new ProfileModel
-                            {
-                                ProfileID = p.profile_id,
-                                EmployeeID = p.profile_empid,
-                                Address= p.profile_address,
-                                Birthday = p.profile_birthday,
-                                CivilStatus=p.profile_civilstatus,
-                                FristName=p.profile_fname,
-                                MName=p.profile_mname,
-                                LastName=p.profile_lname,
-                                Gender=p.profile_gender,
-                                ContactNumber=p.profile_contactnumber,
-                                Department=p.profile_department,
-                                Nationality=p.profile_nationality,
-                                Position=p.profile_position,
-                                UserName=p.user_username,
-                                ProfilePicture = p.profile_picture
-                                
-                            }
-                            #endregion
-                            //TO Obtain the Schedule of the Agent in that Day
-                           // #region ScheduleAgent
-                            //TeamAgent = new TeamScheduleAgent
-                            //{
-                            //    Agent = sc.agent,
-                            //    TeamID = sc.team_id,
-                            //    TeamLabel = sc.team_label,
-                            //    DateAssigned = sc.date_assigned,
-                            //    DateArchived = sc.date_archived
-                            //}
-                            //    #endregion
+                                         #region Agent
+                                     select new AgentModel
+                                     {
+                                         AgentId = r.agent_id,
+                                         Archived = r.archived,
+                                         AssignedToTeam = r.assignedtoteam,
+                                         AssignedToTeamDate = r.assignedtoteamdate,
+                                         DateArchived = r.date_archived,
+                                         DateAssign = r.date_assigned,
+                                         DateCreated = r.datecreated,
+                                         Name = r.agent,
+                                         ThisSite = r.this_site,
+                                     #endregion Agent
+                                         #region Campaign
+                                         Campaign = new CampaignModel
+                                         {
+                                             CampaignId = c.campaign_id,
+                                             ActiveTemp = c.active_temp,
+                                             AgentTemp = c.campaign_agents_temp,
+                                             Archived = c.archived,
+                                             DateArchived = c.date_archived,
+                                             Contingency = c.campaign_contingency,
+                                             DateCreated = c.campaign_datecreated,
+                                             GracePeriod = c.campaign_graceperiod,
+                                             Location = c.campaign_location,
+                                             ManagerTemp = c.campaign_manager_temp,
+                                             Map = c.campaign_map,
+                                             Name = c.campaign_name,
+                                             OvertimeRate = c.ot_rate,
+                                             Rate = c.campaign_rate,
+                                             Seats = c.campaign_seats,
+                                             Status = c.campaign_status,
+                                             ThisSite = c.this_site,
+                                             TimeStamp = c.campaign_timestamp,
+                                             UserName = c.user_username
+                                         },
+                                         #endregion
+                                         #region Team
+                                         Team = new TeamModel
+                                         {
+                                             TeamId = t.team_id,
+                                             Archived = t.archived,
+                                             DateArchived = t.date_archived,
+                                             DateCreated = t.date_created,
+                                             TeamManager = t.team_manager,
+                                             TeamLeader = t.team_leader,
+                                             TeamName = t.team_name,
+                                             ThisSite = t.this_site
+                                         },
+                                         #endregion
+                                         #region Profile
+                                         Profile = new ProfileModel
+                                         {
+                                             ProfileID = p.profile_id,
+                                             EmployeeID = p.profile_empid,
+                                             Address = p.profile_address,
+                                             Birthday = p.profile_birthday,
+                                             CivilStatus = p.profile_civilstatus,
+                                             FristName = p.profile_fname,
+                                             MName = p.profile_mname,
+                                             LastName = p.profile_lname,
+                                             Gender = p.profile_gender,
+                                             ContactNumber = p.profile_contactnumber,
+                                             Department = p.profile_department,
+                                             Nationality = p.profile_nationality,
+                                             Position = p.profile_position,
+                                             UserName = p.user_username,
+                                             ProfilePicture = p.profile_picture
+
+                                         }
+                                         #endregion
+                                         #region ScheduleAgent
+                                         //TO Obtain the Schedule of the Agent in that Day
+                                         // 
+                                         //TeamAgent = new TeamScheduleAgent
+                                         //{
+                                         //    Agent = sc.agent,
+                                         //    TeamID = sc.team_id,
+                                         //    TeamLabel = sc.team_label,
+                                         //    DateAssigned = sc.date_assigned,
+                                         //    DateArchived = sc.date_archived
+                                         //}
+                                          #endregion
 
 
 
-                        }).FirstOrDefault();
+                                     }).FirstOrDefault();
+                        return agent;
+                    }
+                              
+                    
                     
                    
                     
                      
 
-                    return agent;
+                    
                 }
             }
             catch (Exception exception)
             {
+                throw new Exception(exception.Message,exception);
+            }
+        }
+
+        public static void ChangePassword(string username, string newpassword, string oldpassword)
+        {
+            try
+            {
+                using (_context = new CollectiveEntities2())
+                {
+                    var user = (from p in _context.tbl_users
+                        where p.user_username == username
+                        select p).FirstOrDefault();
+                    var hashold = Library.Crypt.Md5(oldpassword);
+                    if (user != null && user.user_password == hashold)
+                    {
+                        var hashnew = Library.Crypt.Md5(newpassword);
+                        user.user_password = hashnew;
+                        _context.SaveChanges();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Incorrect Old Password.");
+                    }
+                    
+                }
+            }
+            catch (Exception exception)
+            {
+                
                 throw new Exception(exception.Message,exception);
             }
         }

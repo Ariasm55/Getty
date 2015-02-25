@@ -33,6 +33,5 @@ namespace Collective.Data
         public System.DateTime date_archived { get; set; }
         public string this_site { get; set; }
         public Nullable<decimal> ot_rate { get; set; }
-        public Nullable<decimal> time_max { get; set; }
     }
 }

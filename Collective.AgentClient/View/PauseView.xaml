@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.ignore.com"
         mc:Ignorable="d ignore" WindowStyle="None" ResizeMode="NoResize" 
-        SizeToContent="WidthAndHeight" Topmost="True" WindowStartupLocation="CenterScreen" Width="244.8" Background="#4C84C340" AllowsTransparency="True" Closing="Window_Closing">
-    <!--DataContext="{Binding PauseViewModel, Source={StaticResource Locator}}"-->
+        SizeToContent="WidthAndHeight" Topmost="{Binding TopMost}" WindowStartupLocation="CenterScreen" Width="244.8" Background="#4C84C340" AllowsTransparency="True" Closing="Window_Closing">
+    <!--DataContext="{Binding Pause, Source={StaticResource Locator}}">-->
 
 
     <Grid x:Name="Pause" VerticalAlignment="Top" Margin="5">

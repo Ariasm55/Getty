@@ -4,8 +4,6 @@
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:ignore="http://www.ignore.com"
-		xmlns:system="clr-namespace:System;assembly=mscorlib"
-		xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:custom="http://www.galasoft.ch/mvvmlight"
         x:Class="Collective.AgentClient.Main2View"
@@ -51,7 +49,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Height="auto" Margin="50,43,0,0" Orientation="Horizontal" HorizontalAlignment="Left" Width="auto">
+                <StackPanel Grid.Row="0" Height="auto" Margin="50,43,0,0" Orientation="Horizontal" HorizontalAlignment="Left" Width="Auto">
                     <telerik:RadButton Height="80" Width="151" FontSize="21" BorderBrush="Black" BorderThickness="2" FontFamily="flat-ui-pro-icons" AllowDrop="True" Background="#FFF9F6F4" Visibility="Collapsed">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="Images/MainView/Help.png" Width="41" Stretch="Fill" Height="46"/>
@@ -76,6 +74,12 @@
                         <StackPanel Orientation="Horizontal">
                             <Image Source="Images/MainView/Pause.png" Width="41" Stretch="Fill" Height="46"/>
                             <Label Content="Pause" VerticalContentAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:RadButton>
+                    <telerik:RadButton Height="80" Width="225"  FontSize="21" Command="{Binding AccountSettingsCommand}" BorderBrush="Black" Background="#FFF9F6F4" BorderThickness="2" FontFamily="flat-ui-pro-icons">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="Images/MainView/Account.png" Width="45" Stretch="Fill" Height="46"/>
+                            <Label Content="Account Settings" VerticalContentAlignment="Center"/>
                         </StackPanel>
                     </telerik:RadButton>
 
@@ -140,7 +144,7 @@
                     </Grid>
                     <StackPanel x:Name="Toasty" Margin="0" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
 					<ListBox Grid.Row="1" ItemsSource="{Binding Toasty}"  HorizontalAlignment="Left" 
-                              VerticalAlignment="Stretch" Width="201" Margin="0,2,-1,-2.4" Background="Transparent" BorderThickness="0" IsHitTestVisible="False">
+                              VerticalAlignment="Stretch" Width="201" Margin="0,2,-1,-2.4" Background="Transparent" BorderThickness="0">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Width="155" Margin="5">
@@ -212,11 +216,11 @@
 							<RowDefinition Height="*"/>
 							<RowDefinition Height="30"/>
 						</Grid.RowDefinitions>
-                                               
+                               
                         <telerik:RadGridView x:Name="Mesages" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="5,3,3,3" VerticalAlignment="Stretch" 
                                          ShowGroupPanel="False"  AutoGenerateColumns="False" IsReadOnly="True" 
                                          ItemsSource="{Binding Messages, UpdateSourceTrigger=PropertyChanged}"
-                                         SelectedItem="{Binding SelectedMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsFilteringAllowed="False">
+                                         SelectedItem="{Binding SelectedMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsFilteringAllowed="False" CanUserInsertRows="False">
                         	<telerik:StyleManager.Theme>
                         		<telerik:Office_BlueTheme/>
                         	</telerik:StyleManager.Theme>
@@ -227,7 +231,7 @@
                                 <telerik:GridViewDataColumn Header="Subject" Width="3*" DataMemberBinding="{Binding MessageTitle}">
                                     
 							</telerik:GridViewDataColumn>
-                                <telerik:GridViewDataColumn Header="Date" Width="1*" DataMemberBinding="{Binding TimeStamp}">
+                                <telerik:GridViewDataColumn UniqueName="DATE" Header="Date" Width="1*" DataMemberBinding="{Binding TimeStamp}">
 									
 							</telerik:GridViewDataColumn>
                             </telerik:RadGridView.Columns>

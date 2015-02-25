@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        xmlns:ignore="http://www.ignore.com"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-		xmlns:Custom="http://www.galasoft.ch/mvvmlight"  
+		xmlns:custom="http://www.galasoft.ch/mvvmlight"  
         x:Class="Collective.AgentClient.View.LoginView"
         mc:Ignorable="d ignore" d:DesignWidth="300"
         Title="Getty Login" Width="300" Height="179" ResizeMode="NoResize"
-        Icon="/Launcher;component/g_red.ico" WindowStartupLocation="CenterScreen" Topmost="True" WindowStyle="None" BorderThickness="5.5" BorderBrush="#FF27276E" OpacityMask="Black" AllowsTransparency="True" Background="#FFFCFCFC" Closing="Window_Closing"
+        Icon="/Launcher;component/g_red.ico" WindowStartupLocation="CenterScreen" WindowStyle="None" BorderThickness="5.5" BorderBrush="#FF27276E" OpacityMask="Black" AllowsTransparency="True" Background="#FFFCFCFC" Closing="Window_Closing"
     >
     <Window.Resources>
         <ResourceDictionary>
@@ -56,11 +56,11 @@
 			</TextBox>
                       
 		</Grid>
-		<StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
-			<telerik:RadButton Margin="5" Width="100" Content="Forgot password" Command="{Binding ForgetPasswordCommand}"
-				CommandParameter="{Binding ElementName=LoginView}" Visibility="Hidden"/>
-			<telerik:RadButton Margin="5" Width="100" Content="Login" Command="{Binding LoginCommand}" 
-				CommandParameter="{Binding ElementName=LoginView}"/>
+		<StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,10,0">
+            <telerik:RadButton Margin="5,5,10,5" Width="100" Content="Forgot password" Command="{Binding ForgetPasswordCommand}"
+				CommandParameter="{Binding ElementName=LoginView}"  HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+            <telerik:RadButton Margin="5" Width="100" Content="Login" Command="{Binding LoginCommand}" 
+				CommandParameter="{Binding ElementName=LoginView}" VerticalAlignment="Center" Height="23"/>
             
 		</StackPanel>
 	</Grid>

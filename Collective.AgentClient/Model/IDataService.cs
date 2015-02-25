@@ -45,5 +45,9 @@ namespace Collective.AgentClient.Model
 
         void Toasty(string username, Action<List<ToastModel>, Exception> callback);
 
+        void GetForgetpasswordQuestions(Action<List<ForgotPasswordModel>, Exception> callback);
+
+        void ChangePassword(string agent, string newpassword, string oldpassword, Action<long, Exception> callback);
+
     }
 }

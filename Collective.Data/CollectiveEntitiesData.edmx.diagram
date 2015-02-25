@@ -18,6 +18,7 @@
         <EntityTypeShape EntityType="gettyModel.tbl_teamschedule" Width="1.5" PointX="2.25" PointY="1.125" IsExpanded="false" />
         <EntityTypeShape EntityType="gettyModel.tbl_user" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="false" />
         <EntityTypeShape EntityType="gettyModel.tbl_toast" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="gettyModel.tbl_info_respa" Width="1.5" PointX="6.75" PointY="1.125" IsExpanded="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -22,9 +22,10 @@ namespace Collective.AgentClient.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<LoginViewModel>();
-            //SimpleIoc.Default.Register<PauseViewModel>();
+            SimpleIoc.Default.Register<PauseViewModel>();
             SimpleIoc.Default.Register<PayrollAdvisorModel>();
             SimpleIoc.Default.Register<MessageViewModel>();
+            SimpleIoc.Default.Register<AccountSettingsViewModel>();
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
@@ -38,6 +39,25 @@ namespace Collective.AgentClient.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
+        public PauseViewModel Pause
+        {
+            get { return ServiceLocator.Current.GetInstance<PauseViewModel>(); }
+        }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public AccountSettingsViewModel AccountSetting
+        {
+            get { return ServiceLocator.Current.GetInstance<AccountSettingsViewModel>(); }
+        }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+
         public LoginViewModel Login
         {
             get { return ServiceLocator.Current.GetInstance<LoginViewModel>(); }

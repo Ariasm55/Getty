@@ -3,6 +3,7 @@ using Collective.AgentClient.ViewModel;
 using Collective.Library;
 using Microsoft.Win32;
 using MessageBox = System.Windows.MessageBox;
+using Collective.Library;
 
 namespace Collective.AgentClient
 {
@@ -16,8 +17,18 @@ namespace Collective.AgentClient
         /// </summary>
         public Main2View()
         {
-            InitializeComponent();
-            SystemEvents.SessionSwitch += OnSessionSwitch;
+            var open = Library.ChechIfOpen.IsiitAlive();
+            if (open == true)
+            {
+                InitializeComponent();
+                SystemEvents.SessionSwitch += OnSessionSwitch;
+            }
+            else
+            {
+                MessageBox.Show("There is a Getty Application Already Open.");
+                GlobalVariables.GlobalsLib.CanClose = false;
+                Application.Current.Shutdown();
+            }
         }
 
         protected  void Dispose(bool disposing)

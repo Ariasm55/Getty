@@ -147,5 +147,15 @@ namespace Collective.AgentClient.Model
         {
             throw new NotImplementedException();
         }
+
+        public void GetForgetpasswordQuestions(Action<List<ForgotPasswordModel>, Exception> callback)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ChangePassword(string agent, string newpassword, string oldpassword, Action<long, Exception> callback)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

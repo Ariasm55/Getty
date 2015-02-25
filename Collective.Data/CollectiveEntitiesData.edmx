@@ -44,7 +44,15 @@
           <Property Name="date_archived" Type="date" Nullable="false" />
           <Property Name="this_site" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="ot_rate" Type="decimal" Precision="12" Scale="4" />
-          <Property Name="time_max" Type="decimal" Precision="12" Scale="4" />
+        </EntityType>
+        <EntityType Name="tbl_info_respas">
+          <Key>
+            <PropertyRef Name="r_id" />
+          </Key>
+          <Property Name="r_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="uint" Nullable="false" />
+          <Property Name="question" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="answer" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_messages">
           <Key>
@@ -100,8 +108,8 @@
           <Property Name="profile_address" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="profile_department" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="profile_position" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="profile_sss_no" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="profile_tin_no" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="profile_sss_no" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="profile_tin_no" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="date_hired" Type="date" Nullable="false" />
           <Property Name="profile_picture" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
@@ -224,6 +232,7 @@
         <EntityContainer Name="gettyModelStoreContainer">
           <EntitySet Name="tbl_agents" EntityType="Self.tbl_agents" Schema="getty" store:Type="Tables" />
           <EntitySet Name="tbl_campaigns" EntityType="Self.tbl_campaigns" Schema="getty" store:Type="Tables" />
+          <EntitySet Name="tbl_info_respas" EntityType="Self.tbl_info_respas" Schema="getty" store:Type="Tables" />
           <EntitySet Name="tbl_messages" EntityType="Self.tbl_messages" Schema="getty" store:Type="Tables" />
           <EntitySet Name="tbl_news" EntityType="Self.tbl_news" Schema="getty" store:Type="Tables" />
           <EntitySet Name="tbl_pauses" EntityType="Self.tbl_pauses" Schema="getty" store:Type="Tables" />
@@ -279,7 +288,6 @@
           <Property Name="date_archived" Type="DateTime" Nullable="false" />
           <Property Name="this_site" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ot_rate" Type="Decimal" />
-          <Property Name="time_max" Type="Decimal" />
         </EntityType>
         <EntityType Name="tbl_message">
           <Key>
@@ -458,6 +466,7 @@
           <EntitySet Name="tbl_teamschedules" EntityType="gettyModel.tbl_teamschedule" />
           <EntitySet Name="tbl_users" EntityType="gettyModel.tbl_user" />
           <EntitySet Name="tbl_toasts" EntityType="gettyModel.tbl_toast" />
+          <EntitySet Name="tbl_info_respas" EntityType="gettyModel.tbl_info_respa" />
         </EntityContainer>
         <EntityType Name="tbl_toast">
           <Key>
@@ -470,6 +479,15 @@
           <Property Name="toast_read" Type="Boolean" Nullable="false" />
           <Property Name="toast_read_date" Type="DateTime" Nullable="false" />
           <Property Name="toast_type" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_info_respa">
+          <Key>
+            <PropertyRef Name="r_id" />
+          </Key>
+          <Property Name="r_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int64" Nullable="false" />
+          <Property Name="question" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="answer" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -497,7 +515,6 @@
           <EntitySetMapping Name="tbl_campaigns">
             <EntityTypeMapping TypeName="gettyModel.tbl_campaign">
               <MappingFragment StoreEntitySet="tbl_campaigns">
-                <ScalarProperty Name="time_max" ColumnName="time_max" />
                 <ScalarProperty Name="campaign_id" ColumnName="campaign_id" />
                 <ScalarProperty Name="campaign_name" ColumnName="campaign_name" />
                 <ScalarProperty Name="campaign_manager_temp" ColumnName="campaign_manager_temp" />
@@ -703,6 +720,16 @@
                 <ScalarProperty Name="toast_datetime" ColumnName="toast_datetime" />
                 <ScalarProperty Name="toast_username" ColumnName="toast_username" />
                 <ScalarProperty Name="toast_id" ColumnName="toast_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_info_respas">
+            <EntityTypeMapping TypeName="gettyModel.tbl_info_respa">
+              <MappingFragment StoreEntitySet="tbl_info_respas">
+                <ScalarProperty Name="answer" ColumnName="answer" />
+                <ScalarProperty Name="question" ColumnName="question" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="r_id" ColumnName="r_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

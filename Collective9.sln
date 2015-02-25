@@ -1,0 +1,78 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collective.Model", "Collective.Model\Collective.Model.csproj", "{E17BB94F-EB80-4FE0-AB6D-CDEBF20BF902}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collective.Data", "Collective.Data\Collective.Data.csproj", "{B0545C0F-40B1-4F6D-9629-D9CC93EF00E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collective.Library", "Collective.Library\Collective.Library.csproj", "{4E638056-4117-4334-AD53-4206ACDA3E2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collective.AgentClient", "Collective.AgentClient\Collective.AgentClient.csproj", "{0D0AF328-C93A-4B7A-9005-89446773D844}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CD_ROM|Any CPU = CD_ROM|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		DVD-5|Any CPU = DVD-5|Any CPU
+		Release|Any CPU = Release|Any CPU
+		SingleImage|Any CPU = SingleImage|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E17BB94F-EB80-4FE0-AB6D-CDEBF20BF902}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{E17BB94F-EB80-4FE0-AB6D-CDEBF20BF902}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{E17BB94F-EB80-4FE0-AB6D-CDEBF20BF902}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E17BB94F-EB80-4FE0-AB6D-CDEBF20BF902}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E17BB94F-EB80-4FE0-AB6D-CDEBF20BF902}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{E17BB94F-EB80-4FE0-AB6D-CDEBF20BF902}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{E17BB94F-EB80-4FE0-AB6D-CDEBF20BF902}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E17BB94F-EB80-4FE0-AB6D-CDEBF20BF902}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E17BB94F-EB80-4FE0-AB6D-CDEBF20BF902}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{E17BB94F-EB80-4FE0-AB6D-CDEBF20BF902}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{B0545C0F-40B1-4F6D-9629-D9CC93EF00E3}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{B0545C0F-40B1-4F6D-9629-D9CC93EF00E3}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{B0545C0F-40B1-4F6D-9629-D9CC93EF00E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0545C0F-40B1-4F6D-9629-D9CC93EF00E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0545C0F-40B1-4F6D-9629-D9CC93EF00E3}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0545C0F-40B1-4F6D-9629-D9CC93EF00E3}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{B0545C0F-40B1-4F6D-9629-D9CC93EF00E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0545C0F-40B1-4F6D-9629-D9CC93EF00E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0545C0F-40B1-4F6D-9629-D9CC93EF00E3}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{B0545C0F-40B1-4F6D-9629-D9CC93EF00E3}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{4E638056-4117-4334-AD53-4206ACDA3E2A}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{4E638056-4117-4334-AD53-4206ACDA3E2A}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{4E638056-4117-4334-AD53-4206ACDA3E2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E638056-4117-4334-AD53-4206ACDA3E2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E638056-4117-4334-AD53-4206ACDA3E2A}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E638056-4117-4334-AD53-4206ACDA3E2A}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{4E638056-4117-4334-AD53-4206ACDA3E2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E638056-4117-4334-AD53-4206ACDA3E2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E638056-4117-4334-AD53-4206ACDA3E2A}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{4E638056-4117-4334-AD53-4206ACDA3E2A}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{0D0AF328-C93A-4B7A-9005-89446773D844}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{0D0AF328-C93A-4B7A-9005-89446773D844}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{0D0AF328-C93A-4B7A-9005-89446773D844}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D0AF328-C93A-4B7A-9005-89446773D844}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D0AF328-C93A-4B7A-9005-89446773D844}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D0AF328-C93A-4B7A-9005-89446773D844}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{0D0AF328-C93A-4B7A-9005-89446773D844}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D0AF328-C93A-4B7A-9005-89446773D844}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D0AF328-C93A-4B7A-9005-89446773D844}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{0D0AF328-C93A-4B7A-9005-89446773D844}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(VaultVsipSolution-v1) = preSolution
+		VaultHost = http://devsrvr.collective.lan/VaultService
+		VaultRepositoryID = 2
+		VaultRepositoryGUID = a646beb2-6be2-48ea-8e62-1a15b231e8ad
+		ProjectCount = 5
+		ProjectRelativeDiskPath1 = Collective.Model\Collective.Model.csproj
+		ProjectRelativeDiskPath2 = Collective.Data\Collective.Data.csproj
+		ProjectRelativeDiskPath3 = Collective.Library\Collective.Library.csproj
+		ProjectRelativeDiskPath4 = Collective.AgentClient\Collective.AgentClient.csproj
+		ProjectRelativeDiskPath5 = GettyApp\GettyApp.isproj
+	EndGlobalSection
+EndGlobal

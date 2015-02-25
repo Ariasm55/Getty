@@ -712,6 +712,12 @@ namespace Collective.AgentClient.ViewModel
         }
         #endregion
 
+       
+
+        #endregion
+
+
+        #region Globals
         public static class Globals
         {
             public static int GlobalInt { get; set; }
@@ -725,16 +731,14 @@ namespace Collective.AgentClient.ViewModel
 
             public static long LoginRecord { get; set; }
 
-            
+
         }
-
-
-
-
         #endregion
+
 
         #region Commands
         public RelayCommand PauseLogoutCommand { get; set; }
+        public RelayCommand AccountSettingsCommand { get; set; }
         public RelayCommand PayrollAdvisorCommand { get; set; }
         public RelayCommand ShowMsgCommand { get; set; }
         public RelayCommand OpenNews { get; set; }
@@ -791,6 +795,8 @@ namespace Collective.AgentClient.ViewModel
                // MessageBox.Show("1 Minute has passed loading new Data!");
                 GetweeklySchedule();
                 LoadLog();
+                GetMsg();
+                GetNewsfeed();
             }
         }
         
@@ -822,6 +828,7 @@ namespace Collective.AgentClient.ViewModel
         private void RegisterCommand()
         {
             PauseLogoutCommand = new RelayCommand(PauseLogout);
+            AccountSettingsCommand = new RelayCommand(AcccountSettingsopen);
             PayrollAdvisorCommand = new RelayCommand(PayrollAdvisor);
             ShowMsgCommand = new RelayCommand(OpenMsg);
             OpenNews = new RelayCommand(OpenLinks);
@@ -901,6 +908,37 @@ namespace Collective.AgentClient.ViewModel
                 vm.OnRequesteClose += (s, e) => pause.Close();
                 pause.ShowDialog();
                 
+            }
+            else
+            {
+                MessageBox.Show("Error: No Agent Login");
+            }
+        }
+
+        private void AcccountSettingsopen()
+        {
+            if (Agent != null)
+            {
+                //var vm = new PauseViewModel(_dataService);
+                //var pause = new PauseView {DataContext = vm};
+                //vm = IsInDesignModeStatic
+                //   ? new PauseViewModel(new DesignDataService())
+                //    : new PauseViewModel(new DataService());
+                //vm.CampaignId = Agent.Campaign.CampaignId;
+                //vm.UserName = Agent.Name;
+
+                AccountSettingsViewModel vm;
+                vm = IsInDesignModeStatic
+                    ? new AccountSettingsViewModel(new DesignDataService())
+                    : new AccountSettingsViewModel(new DataService());
+
+                vm.Agent = Agent.Profile.UserName;
+                
+                var accountSettings = new AccountSettings { DataContext = vm };
+                if (vm.CloseAction == null) vm.CloseAction = accountSettings.Close;
+                vm.OnRequesteClose += (s, e) => accountSettings.Close();
+                accountSettings.ShowDialog();
+
             }
             else
             {

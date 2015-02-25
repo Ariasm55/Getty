@@ -376,7 +376,7 @@ namespace Collective.Model
                     var Result = new List<MessageModel>();
                     var lista = (from r in _context.tbl_messages
                                  where r.messages_sendto == username
-                                 orderby r.message_datecreated ascending
+                                 orderby r.message_id ascending 
                                 select r);
 
                     foreach (var log in lista)

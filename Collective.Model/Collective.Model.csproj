@@ -11,10 +11,10 @@
     <AssemblyName>Collective.Model</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+    <SccProjectName>Collective.Model</SccProjectName>
+    <SccLocalPath>2~a646beb2-6be2-48ea-8e62-1a15b231e8ad</SccLocalPath>
+    <SccAuxPath>http://devsrvr.collective.lan/VaultService</SccAuxPath>
+    <SccProvider>SourceGear Vault Visual Studio 2005 Client:{7BE9CE03-56BF-4682-9C06-78C68B134B30}</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -54,6 +54,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.0.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -68,6 +69,7 @@
   <ItemGroup>
     <Compile Include="AgentModel.cs" />
     <Compile Include="CampaignModel.cs" />
+    <Compile Include="ForgotPasswordModel.cs" />
     <Compile Include="MessageModel.cs" />
     <Compile Include="NewsModel.cs" />
     <Compile Include="PausesModel.cs" />

@@ -47,7 +47,7 @@ namespace Collective.AgentClient.Model
                 }
                 else
                 {
-                    callback(null, new Exception("No Data was obtained from the DB."));    
+                    callback(null, new Exception("You cant Login you dont have a Campaign or a Team Assiged"));    
                 }
                 
             }
@@ -263,6 +263,34 @@ namespace Collective.AgentClient.Model
             {
                 
                 callback(null,exception);
+            }
+        }
+
+        public void GetForgetpasswordQuestions(Action<List<ForgotPasswordModel>, Exception> callback)
+        {
+            try
+            {
+                var list = ForgotPasswordModel.GetQuestion();
+                callback(list, null);
+            }
+            catch (Exception exception)
+            {
+                
+                callback(null,exception);
+            }
+        }
+
+
+        public void ChangePassword(string agent, string newpassword,  string oldpassword, Action<long, Exception>callback )
+        {
+            try
+            {
+                UserModel.ChangePassword(agent, newpassword,oldpassword);
+            }
+            catch (Exception exception)
+            {
+
+                callback(0, exception);
             }
         }
     }

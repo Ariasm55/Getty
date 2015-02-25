@@ -14,6 +14,17 @@ EndProject
 Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "GettyApp", "GettyApp\GettyApp.isproj", "{5CC70102-2864-4CC8-BB12-3532F2805BB3}"
 EndProject
 Global
+	GlobalSection(VaultVsipSolution-v1) = preSolution
+		VaultHost = http://devsrvr.collective.lan/VaultService
+		VaultRepositoryID = 2
+		VaultRepositoryGUID = a646beb2-6be2-48ea-8e62-1a15b231e8ad
+		ProjectCount = 5
+		ProjectRelativeDiskPath1 = Collective.Model\Collective.Model.csproj
+		ProjectRelativeDiskPath2 = Collective.Data\Collective.Data.csproj
+		ProjectRelativeDiskPath3 = Collective.Library\Collective.Library.csproj
+		ProjectRelativeDiskPath4 = Collective.AgentClient\Collective.AgentClient.csproj
+		ProjectRelativeDiskPath5 = GettyApp\GettyApp.isproj
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
 		Debug|Any CPU = Debug|Any CPU

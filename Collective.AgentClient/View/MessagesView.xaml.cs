@@ -20,7 +20,7 @@ namespace Collective.AgentClient.View
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             var agent = MainViewModel.Globals.AgentGlobal;
-            Collective.Model.RecipientModel.ReadMsg((long)MsgID.Content, agent);
+            Collective.Model.RecipientModel.ReadMsg((long)Msgid.Content, agent);
             e.Cancel = false;
         }
 

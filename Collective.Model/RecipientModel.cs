@@ -147,6 +147,7 @@ namespace Collective.Model
                         join user in _context.tbl_users
                             on m.user_id equals user.user_id
                         where r.user_username == username
+                        orderby r.messages_id descending 
                         select new MessageModel
                         {
                             MessageTitle = m.message_title,

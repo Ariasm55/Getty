@@ -348,6 +348,38 @@ namespace Collective.AgentClient.ViewModel
         }
         #endregion
 
+        #region TopMost
+        /// <summary>
+        /// The <see cref="TopMost" /> property's name.
+        /// </summary>
+        public const string TopMostPropertyName = "TopMost";
+
+        private bool _myProperty = true;
+
+        /// <summary>
+        /// Sets and gets the TopMost property.
+        /// Changes to that property's value raise the PropertyChanged event. 
+        /// </summary>
+        public bool TopMost
+        {
+            get
+            {
+                return _myProperty;
+            }
+
+            set
+            {
+                if (_myProperty == value)
+                {
+                    return;
+                }
+
+                _myProperty = value;
+                RaisePropertyChanged(TopMostPropertyName);
+            }
+        }
+        #endregion
+
         public RelayCommand PauseCommand { get; set; }
 
         public RelayCommand LogoutCommand { get; set; }
@@ -399,6 +431,16 @@ namespace Collective.AgentClient.ViewModel
                     {
                         MessageBox.Show(error.Message);
                         return;
+                    }
+
+                    if (SelectedPause.Reason == "Short Break" || SelectedPause.Reason == "Bath Break" ||
+                        SelectedPause.Reason == "Lunch Break")
+                    {
+                        TopMost = true;
+                    }
+                    else
+                    {
+                        TopMost = false;
                     }
                     PauseId = pauseId;
                 });
