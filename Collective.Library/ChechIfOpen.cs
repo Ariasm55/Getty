@@ -2,25 +2,26 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Net;
 
 namespace Collective.Library
 {
     public class ChechIfOpen
     {
-        public static bool IsiitAlive()
+        
+        public static void IsiitAlive()
         {
-            var pname = Process.GetProcessesByName("Launcher");
-
-            switch (pname.Length)
-            {
-                case 0:
-                    return true;
-                default:
-                    return false;
-            }
+            
+            
         }
-    }
+            
+     }
 }
+

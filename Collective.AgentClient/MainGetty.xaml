@@ -1,0 +1,220 @@
+﻿<Window xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:ignore="http://www.ignore.com"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:custom="http://www.galasoft.ch/mvvmlight"
+        xmlns:ec="http://schemas.microsoft.com/expression/2010/controls" xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+        x:Class="Collective.AgentClient.MainGetty"
+		mc:Ignorable="d ignore"
+        d:DesignHeight="768" d:DesignWidth="1024" Height="700" Width="1024"
+		Foreground="Transparent" Title="{Binding Agent.Campaign.Name}"  
+        Topmost="False" WindowState="Normal" HorizontalAlignment="Center"
+        VerticalAlignment="Center" FontFamily="Century Gothic" FontSize="10"
+        ResizeMode="CanMinimize"  WindowStartupLocation="CenterScreen"
+		Background="Transparent" Closing="Window_Closing" AllowsTransparency="True" 
+		WindowStyle="None">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Skins/MainSkin.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+
+    </Window.Resources>
+    <Window.DataContext>
+        <Binding Path="Main" Source="{StaticResource Locator}"/>
+    </Window.DataContext>
+
+    <Border x:Name="WindowBorder" BorderThickness="5" BorderBrush="DarkBlue" CornerRadius="20">
+        <Border.Background>
+            <ImageBrush ImageSource="pack://siteoforigin:,,,/Images/Summer OUT.jpeg"/>
+        </Border.Background>
+
+        <Grid x:Name="MainGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid x:Name="Menu" Grid.Row="0" Margin="0,-2,0,2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+            </Grid>
+            <Grid x:Name="GridGeneral" Grid.Row="1" Margin="50,30,50,30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid x:Name="GridIzq" Grid.Column="0" Grid.Row="1" Background="Transparent" 
+					HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="200" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2.99*"/>
+                        <RowDefinition Height="3*"/>
+                    </Grid.RowDefinitions>
+                    <Grid x:Name="GridPhotoInfo" Grid.Row="0" Width="190" Background="#B2F9F6F4" Margin="5,47,5,10.4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="{Binding Agent.Profile.ProfilePicture}" Margin="0,10,0,0" Stretch="UniformToFill" Width="100" Height="100" 
+							Clip="M99.5,50 C99.5,77.338095 77.338095,99.5 50,99.5 C22.661905,99.5 0.5,77.338095 0.5,50 C0.5,22.661905 22.661905,0.5 50,0.5 C77.338095,0.5 99.5,22.661905 99.5,50 z"/>
+                        <Ellipse x:Name="Halo" Grid.Row="0" Fill="Transparent" Height="110"  Stroke="#FF1C5EEA" VerticalAlignment="Center" Width="110" Margin="0,12,0,0"/>
+                        <Label x:Name="WelcomeAgentName" HorizontalAlignment="Center" VerticalAlignment="Top" 
+							Grid.Row="1" FontFamily="flat-ui-pro-icons" FontSize="10" FontWeight="SemiBold" Width="200">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                
+                                <Label Margin="5,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="Images/GreenBall.png" Width="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <Label Content="{Binding Agent.Profile.FristName}" Margin="-8,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                        <Label Content="{Binding Agent.Profile.LastName}" Margin="-8,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                    </StackPanel>
+                                    </Label>
+                                
+                            </StackPanel>
+                        </Label>
+
+
+                        <Label Grid.Row="2" FontFamily="flat-ui-pro-icons" FontSize="10" FontWeight="SemiBold" Width="200"
+                               Content="{Binding Agent.Profile.Position}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" />
+                            
+                        <telerik:RadButton Grid.Row="3" Height="36" Width="110" Command="{Binding PauseLogoutCommand}"
+                                           Background="#00000000" BorderThickness="0" BorderBrush="Transparent"
+                                           HorizontalAlignment="Left" HorizontalContentAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Images\Time-icon.png" Width="32"/>
+                                <Label Content="Pause"/>
+                            </StackPanel>
+                        </telerik:RadButton>
+                        <telerik:RadButton Grid.Row="4" Height="36" Width="110" Command="{Binding LogoutCommand}"
+                                           Background="#00000000" BorderThickness="0" BorderBrush="Transparent" 
+                                           HorizontalAlignment="Left" HorizontalContentAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Images/logout-icon.png" Width="32"/>
+                                <Label Content="Logout"/>
+                            </StackPanel>
+                        </telerik:RadButton>
+                        
+                    </Grid>
+                    <StackPanel x:Name="Toasty" Margin="0" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                    <ListBox Grid.Row="1" ItemsSource="{Binding Toasty}"
+						SelectedItem="{Binding SelectedToast, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+						HorizontalAlignment="Left" 
+						VerticalAlignment="Stretch" Width="201" Margin="0,2,-1,-2.4" Background="Transparent" BorderThickness="0">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Width="155" Margin="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding Message}" TextAlignment="Left" FontFamily="Segoe UI" FontSize="9"/>
+
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+                <telerik:RadTabControl Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch"
+					VerticalAlignment="Stretch" Width="Auto" HeaderBackground="Transparent">
+                    <telerik:RadTabItem  Height="37.91" Width="100">
+                        <telerik:RadTabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Images/Calendar.png"/>
+                                <Label Content="Schedule" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+                        </telerik:RadTabItem.Header>
+                        <Grid >
+                            
+
+                        </Grid>
+                    </telerik:RadTabItem>
+                    <telerik:RadTabItem Header="Payroll Assistance" Height="37.91" Width="100">
+                        <Grid DataContext="{Binding PayrollAdvisorModel, Source={StaticResource Locator}}" Background="Transparent">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+
+                                <telerik:RadDatePicker Margin="5" Width="90" SelectedDate="{Binding InitialDate, Mode=TwoWay}"/>
+                                <telerik:RadDatePicker Margin="5" Width="90" SelectedDate="{Binding FinalDate, Mode=TwoWay}"/>
+                                <telerik:RadButton Margin="15,5,5,5" Width="82" Content="Refresh" Command="{Binding RefreshCommand}"/>
+                            </StackPanel>
+
+                            <telerik:RadGridView Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True"
+								ItemsSource="{Binding LogList}">
+                                <telerik:RadGridView.Columns>
+                                    <telerik:GridViewDataColumn Width="0.5*" Header="Date"/>
+                                    <!--DataMemberBinding="{Binding InitialDate, StringFormat=d}-->
+                                    <!--<telerik:GridViewDataColumn Width="2*" Header="Username" DataMemberBinding="{Binding User}"/>-->
+                                    <telerik:GridViewDataColumn Width="0.5*" Header="Log Reason" DataMemberBinding="{Binding Reason}"/>
+                                    <!--<telerik:GridViewDataColumn Width="1*" Header="Start" DataMemberBinding="{Binding InitialTime}"/>
+                <telerik:GridViewDataColumn Width="1*" Header="End" DataMemberBinding="{Binding FinalTime}"/>-->
+                                    <telerik:GridViewDataColumn Width="0.5*" Header="Total Time" DataMemberBinding="{Binding Time, StringFormat=hh\\:mm\\:ss}"/>
+                                    <!--,StringFormat=hh\\:mm\\:ss}"/>-->
+                                    <!--<telerik:GridViewDataColumn Width="2*" Header="Status" DataMemberBinding="{Binding Status}"/>-->
+                                </telerik:RadGridView.Columns>
+                            </telerik:RadGridView>
+                        </Grid>
+                    </telerik:RadTabItem>
+                    <telerik:RadTabItem Height="37.91" Width="Auto">
+                        <telerik:RadTabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Images/Mainview/TIMEOFF.png" Width="32"/>
+                                <Label Content="Time Off Request" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+                        </telerik:RadTabItem.Header>
+                        <Grid Background="Transparent"/>
+                    </telerik:RadTabItem>
+                    <telerik:RadTabItem Header="Today's Activities" Height="37.91" Width="100">
+                        <Grid Background="Transparent">
+                        <Grid x:Name="GridDerUp" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="200">
+                            <ListBox ItemsSource="{Binding LogList}"  HorizontalAlignment="Left" 
+                              VerticalAlignment="Stretch" Width="201" Margin="0,2,-1,-2.4" Background="Transparent" BorderThickness="0" IsHitTestVisible="False">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Width="155" Margin="5">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*" TextBlock.FontFamily="Segoe UI"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" Text="{Binding LogReason}" TextAlignment="Left" FontFamily="Segoe UI" FontSize="9"/>
+                                            <TextBlock Grid.Column="1" Text="{Binding InitialTime, StringFormat=hh\\:mm}" TextAlignment="Center" FontFamily="Segoe UI" FontSize="9"/>
+                                            <TextBlock Grid.Column="2" Text="{Binding FinalTime, StringFormat=hh\\:mm}" TextAlignment="Center" FontFamily="Segoe UI" FontSize="9"/>
+                                            <TextBlock Grid.Column="3" Text="{Binding TimeSpan, StringFormat=hh\\:mm\\:ss}" TextAlignment="Right" FontFamily="Segoe UI" FontSize="9"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Grid>
+                        </Grid>
+
+
+
+
+                    </telerik:RadTabItem>
+
+                </telerik:RadTabControl>
+               
+            </Grid>
+
+        </Grid>
+
+    </Border>
+</Window>

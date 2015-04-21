@@ -13,11 +13,8 @@
         Topmost="False" WindowState="Normal" HorizontalAlignment="Center"
         VerticalAlignment="Center" FontFamily="Century Gothic" FontSize="10"
         ResizeMode="CanMinimize"  WindowStartupLocation="CenterScreen"
-        AllowsTransparency="True"
-        WindowStyle="None" Background="Transparent" Closing="Window_Closing">
-
-
-
+		Background="Transparent" Closing="Window_Closing" AllowsTransparency="True" 
+		WindowStyle="None">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -32,7 +29,7 @@
 
     <Border Name="WindowBorder" BorderThickness="5" BorderBrush="DarkBlue" CornerRadius="20">
         <Border.Background>
-            <LinearGradientBrush EndPoint="1,1" Opacity="0.8" ColorInterpolationMode="ScRgbLinearInterpolation">
+            <LinearGradientBrush EndPoint="1,1" Opacity="100" ColorInterpolationMode="ScRgbLinearInterpolation">
                 <GradientStop Color="#FF82C440" Offset="0.98"/>
                 <GradientStop Color="#FF1F499F"/>
             </LinearGradientBrush>
@@ -62,27 +59,33 @@
                             <Label  Padding="0" Content="Time Off Request" VerticalContentAlignment="Center"/>
                         </StackPanel>
                     </telerik:RadButton>
-                    <telerik:RadButton Height="80" Width="243" FontSize="21" BorderBrush="Black"
-                                   Background="#FFF9F6F4" BorderThickness="2" FontFamily="flat-ui-pro-icons"
-                                   Command="{Binding PayrollAdvisorCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="/Images/MainView/Dollar.png" Width="41" Stretch="Fill" Height="46"/>
-                            <Label Padding="0" Content="Payroll Assistance" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </telerik:RadButton>
-                    <telerik:RadButton Height="80" Width="173"  FontSize="21" Command="{Binding PauseLogoutCommand}" BorderBrush="Black" Background="#FFF9F6F4" BorderThickness="2" FontFamily="flat-ui-pro-icons">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="Images/MainView/Pause.png" Width="41" Stretch="Fill" Height="46"/>
-                            <Label Content="Pause" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </telerik:RadButton>
-                    <telerik:RadButton Height="80" Width="225"  FontSize="21" Command="{Binding AccountSettingsCommand}" BorderBrush="Black" Background="#FFF9F6F4" BorderThickness="2" FontFamily="flat-ui-pro-icons">
+                    <telerik:RadButton Height="80" Width="Auto"  FontSize="21" Command="{Binding AccountSettingsCommand}" BorderBrush="Black" Background="#FFF9F6F4" BorderThickness="2" FontFamily="flat-ui-pro-icons">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="Images/MainView/Account.png" Width="45" Stretch="Fill" Height="46"/>
                             <Label Content="Account Settings" VerticalContentAlignment="Center"/>
                         </StackPanel>
                     </telerik:RadButton>
-
+                    <telerik:RadButton Height="80" Width="auto" FontSize="21" BorderBrush="Black"
+                                   Background="#FFF9F6F4" BorderThickness="2" FontFamily="flat-ui-pro-icons"
+                                   Command="{Binding PayrollAdvisorCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Images/MainView/dollar.png" Width="41" Stretch="Fill" Height="46"/>
+                            <Label Padding="0" Content="Payroll Assistance" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:RadButton>
+                    
+                    <telerik:RadButton Height="80" Width="auto"  FontSize="21" Command="{Binding PauseLogoutCommand}" BorderBrush="Black" Background="#FFF9F6F4" BorderThickness="2" FontFamily="flat-ui-pro-icons">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="Images/MainView/Pause.png" Width="41" Stretch="Fill" Height="46"/>
+                            <Label Content="Pause" VerticalContentAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:RadButton>
+                    <telerik:RadButton Height="80" Width="142"  FontSize="21" Command="{Binding LogoutCommand}" BorderBrush="Black" Background="#FFF9F6F4" BorderThickness="2" FontFamily="flat-ui-pro-icons">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="Images/MainView/Logout.png" Width="45" Stretch="Fill" Height="46"/>
+                            <Label Content="Logout" VerticalContentAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:RadButton>
 
                 </StackPanel>
             </Grid>
@@ -143,16 +146,20 @@
 
                     </Grid>
                     <StackPanel x:Name="Toasty" Margin="0" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
-					<ListBox Grid.Row="1" ItemsSource="{Binding Toasty}"  HorizontalAlignment="Left" 
+					<ListBox Grid.Row="1" ItemsSource="{Binding Toasty}"
+                             SelectedItem="{Binding SelectedToast, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged }"
+                             HorizontalAlignment="Left" 
                               VerticalAlignment="Stretch" Width="201" Margin="0,2,-1,-2.4" Background="Transparent" BorderThickness="0">
-                            <ListBox.ItemTemplate>
+						<ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Width="155" Margin="5">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{Binding Message}" TextAlignment="Left" FontFamily="Segoe UI" FontSize="9"/>
-                                        </Grid>
+                                        <TextBlock Grid.Column="0" Text="{Binding Message}" TextAlignment="Left" FontFamily="Segoe UI" FontSize="9">
+                                           </TextBlock>
+                                    
+                                </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
@@ -256,7 +263,7 @@
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*" TextBlock.FontFamily="Segoe UI"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Grid.Column="0" Text="{Binding LogReason}" TextAlignment="Left" FontFamily="Segoe UI" FontSize="9"/>
                                         <TextBlock Grid.Column="1" Text="{Binding InitialTime, StringFormat=hh\\:mm}" TextAlignment="Center" FontFamily="Segoe UI" FontSize="9"/>

@@ -1,6 +1,5 @@
 ﻿using System;
 using Collective.AgentClient.Model;
-using Collective.Library;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 

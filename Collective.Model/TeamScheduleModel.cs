@@ -1024,14 +1024,18 @@ namespace Collective.Model
                     var weekly = (from p in _context.tbl_teamschedules
                         join tsa in _context.tbl_teamscheduleagents on
                             p.team_label equals tsa.team_label
-                                  where tsa.agent == agent && p.teamschedule_datebegin >= startOfWeek && p.teamschedule_datebegin <= endofweek
+                                  where tsa.agent == agent &&
+                                  p.teamschedule_datebegin >= startOfWeek &&
+                                  p.teamschedule_datebegin <= endofweek &&
+                                  p.archived == 0 && tsa.archived == 0
+
                         select p);
                     foreach (var record in weekly)
                     {
                         var timeIn = DateTime.Today.Add(record.teamschedule_timefrom);
                         var timeOut = DateTime.Today.Add(record.teamschedule_timeto);
-                        var hola = DateTime.Now.Date.DayOfWeek.ToString();
-                        if (record.team_days == hola)
+                        var today = DateTime.Now.Date.DayOfWeek.ToString();
+                        if (record.team_days == today)
                         {
                             record.team_days = "TODAY";
                         }

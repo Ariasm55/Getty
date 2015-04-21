@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using Collective.AgentClient.Messages;
-using Collective.AgentClient.View;
-using Collective.Model;
-using GalaSoft.MvvmLight;
 using Collective.AgentClient.Model;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
-using Collective.AgentClient.View;
 using Collective.Library;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 
 namespace Collective.AgentClient.ViewModel
 {

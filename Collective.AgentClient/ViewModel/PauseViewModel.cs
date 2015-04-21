@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows;
+using Collective.AgentClient.Model;
 using Collective.Library;
 using Collective.Model;
 using GalaSoft.MvvmLight;
-using Collective.AgentClient.Model;
 using GalaSoft.MvvmLight.Command;
 
 namespace Collective.AgentClient.ViewModel
@@ -392,6 +392,7 @@ namespace Collective.AgentClient.ViewModel
 
         #region Construtor
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PauseViewModel(IDataService dataService)
         {
             _dataService = dataService;
@@ -475,7 +476,7 @@ namespace Collective.AgentClient.ViewModel
 
         private void Logout()
         {
-            var logoutId = Library.GlobalVariables.GlobalsLib.RecordIdLogout;
+            var logoutId = GlobalVariables.GlobalsLib.RecordIdLogout;
             _dataService.Logout(UserName,logoutId,
                 (logout2,error) =>
             {

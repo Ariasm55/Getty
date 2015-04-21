@@ -25,6 +25,18 @@ namespace Collective.AgentClient.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10.54.0.76")]
+        public string ConnectionTest {
+            get {
+                return ((string)(this["ConnectionTest"]));
+            }
+            set {
+                this["ConnectionTest"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Honduras")]
         public string ThisSite {
             get {
@@ -37,13 +49,25 @@ namespace Collective.AgentClient.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10.54.0.76")]
-        public string ConnectionTest {
+        [global::System.Configuration.DefaultSettingValueAttribute("\\\\10.54.0.44\\CSData\\Getty\\App\\Getty.manifest")]
+        public string RemoteManifest {
             get {
-                return ((string)(this["ConnectionTest"]));
+                return ((string)(this["RemoteManifest"]));
             }
             set {
-                this["ConnectionTest"] = value;
+                this["RemoteManifest"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoCheckForUpdates {
+            get {
+                return ((bool)(this["AutoCheckForUpdates"]));
+            }
+            set {
+                this["AutoCheckForUpdates"] = value;
             }
         }
     }

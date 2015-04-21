@@ -157,5 +157,10 @@ namespace Collective.AgentClient.Model
         {
             throw new NotImplementedException();
         }
+
+        public void Cleartoast(long toastid, Action<Exception> callback)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

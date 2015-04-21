@@ -268,8 +268,8 @@ namespace Collective.Model
         {
             try
             {
-                DateTime startOfWeek = DateTime.Today.AddDays(-1 * (int)(DateTime.Today.DayOfWeek));
-                DateTime endofweek = startOfWeek.AddDays(7);
+                var startOfWeek = DateTime.Today.AddDays(-1 * (int)(DateTime.Today.DayOfWeek));
+                var endofweek = startOfWeek.AddDays(7);
                 var today1 = DateTime.Today.Date;
                 using (_context =new CollectiveEntities2())
                 {
@@ -293,7 +293,7 @@ namespace Collective.Model
                                           && p.toast_type == 1
                                           && p.toast_type == 2
                                     select p.toast_type).Count();
-                                if (checklate >= 2)
+                                if (checklate <= 2)
                                 {
                                     var toast1 = new tbl_toast
                                     {
@@ -308,7 +308,7 @@ namespace Collective.Model
                                     _context.tbl_toasts.Add(toast1);
                                     _context.SaveChanges();
                                 }
-                                else if (checklate <= 3)
+                                else if (checklate >= 3)
                                 {
                                     var toast1 = new tbl_toast
                                     {
@@ -380,6 +380,33 @@ namespace Collective.Model
                 
                 throw new Exception(exception.Message);
             } 
+        }
+
+        public static void ClearToast(long toastId)
+        {
+            try
+            {
+                using (_context = new CollectiveEntities2())
+                {
+                    var updatetoast = (from p in _context.tbl_toasts
+                        where p.toast_id == toastId
+                        select p).FirstOrDefault();
+                    if (updatetoast != null)
+                    {
+                        updatetoast.toast_read = true;
+                        updatetoast.toast_read_date = DateTime.Today;
+                        _context.SaveChanges();
+                    }
+
+                    _context.Database.Connection.Close();
+                    _context.Dispose();
+                }
+            }
+            catch (Exception exception)
+            {
+                
+                throw new Exception(exception.Message);
+            }
         }
 
         #endregion

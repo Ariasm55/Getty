@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using Collective.AgentClient.Messages;
+using Collective.AgentClient.Model;
 using Collective.AgentClient.View;
+using Collective.Library;
 using Collective.Model;
 using GalaSoft.MvvmLight;
-using Collective.AgentClient.Model;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -742,6 +745,8 @@ namespace Collective.AgentClient.ViewModel
         public RelayCommand PayrollAdvisorCommand { get; set; }
         public RelayCommand ShowMsgCommand { get; set; }
         public RelayCommand OpenNews { get; set; }
+        public RelayCommand LogoutCommand { get; set; }
+        public RelayCommand Cleartoast { get; set; }
         #endregion
 
         #region Constructor
@@ -776,10 +781,14 @@ namespace Collective.AgentClient.ViewModel
             {
                 //LoadLog();
             }
-            var dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            var dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += dispatcherTimer_Tick;
-            dispatcherTimer.Interval = new TimeSpan(0,0,0,45);
+            dispatcherTimer.Interval = new TimeSpan(0,0,3,15);
             dispatcherTimer.Start();
+            var dispatcherTimer2 = new DispatcherTimer();
+            dispatcherTimer2.Tick += dispatcherTimer_Tick2;
+            dispatcherTimer2.Interval = new TimeSpan(0, 0, 0, 3);
+            dispatcherTimer2.Start();
             Globals.AgentGlobal = Agent.Name;
             Globals.CampidGlobal = Agent.Campaign.CampaignId;
 
@@ -792,12 +801,21 @@ namespace Collective.AgentClient.ViewModel
         {
             if (Globals.GlobalInt == 1)
             {
-               // MessageBox.Show("1 Minute has passed loading new Data!");
                 GetweeklySchedule();
                 LoadLog();
                 GetMsg();
                 GetNewsfeed();
+                UserModel.Kill();
             }
+        }
+
+        private void dispatcherTimer_Tick2(object sender, EventArgs e)
+        {
+            if (Globals.GlobalInt == 1)
+            {
+                
+            }
+            
         }
         
 
@@ -815,7 +833,7 @@ namespace Collective.AgentClient.ViewModel
                 }
                 else
                 {
-                    System.Diagnostics.Process.Start(_selectedNews.Link);
+                    Process.Start(_selectedNews.Link);
                 }
                 
             }
@@ -832,6 +850,8 @@ namespace Collective.AgentClient.ViewModel
             PayrollAdvisorCommand = new RelayCommand(PayrollAdvisor);
             ShowMsgCommand = new RelayCommand(OpenMsg);
             OpenNews = new RelayCommand(OpenLinks);
+            LogoutCommand = new RelayCommand(Logout);
+            Cleartoast = new RelayCommand(Cleartoasty);
         }
         
         private void Login()
@@ -948,7 +968,7 @@ namespace Collective.AgentClient.ViewModel
 
         private void GetSchedule()
         {
-            var check = Library.GlobalVariables.GlobalsLib.CheckLogin;
+            var check = GlobalVariables.GlobalsLib.CheckLogin;
              _dataService.GetSchedule(Agent.Name,DateTime.Now,check,
                  (response, error) =>
                  {
@@ -1020,6 +1040,18 @@ namespace Collective.AgentClient.ViewModel
 
         }
 
+        private void Cleartoasty()
+        {
+            _dataService.Cleartoast(SelectedToast.ToastId,
+                error =>
+                {
+                    if (error != null)
+                    {
+                        MessageBox.Show("Cant clear Toast");
+                    }
+                });
+        }
+
         private void GetMsg()
         {
             _dataService.GetMessages(Agent.Name,
@@ -1049,6 +1081,21 @@ namespace Collective.AgentClient.ViewModel
                 });
         }
 
+        private void Logout()
+        {
+            var logoutId = GlobalVariables.GlobalsLib.RecordIdLogout;
+            _dataService.Logout(Agent.Name, logoutId,
+                (logout2, error) =>
+                {
+                    if (error != null)
+                    {
+                        MessageBox.Show(error.Message);
+
+                    }
+                });
+            MessageBox.Show("Thank you for coming to work Today!");
+            Environment.Exit(0);
+        }
 
        /* private List<RecordLogModel> Lista()
         {

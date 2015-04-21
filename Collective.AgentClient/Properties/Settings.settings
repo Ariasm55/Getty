@@ -2,11 +2,17 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Collective.AgentClient.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
+    <Setting Name="ConnectionTest" Type="System.String" Scope="User">
+      <Value Profile="(Default)">10.54.0.76</Value>
+    </Setting>
     <Setting Name="ThisSite" Type="System.String" Scope="User">
       <Value Profile="(Default)">Honduras</Value>
     </Setting>
-    <Setting Name="ConnectionTest" Type="System.String" Scope="User">
-      <Value Profile="(Default)">10.54.0.76</Value>
+    <Setting Name="RemoteManifest" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\\10.54.0.44\CSData\Getty\App\Getty.manifest</Value>
+    </Setting>
+    <Setting Name="AutoCheckForUpdates" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

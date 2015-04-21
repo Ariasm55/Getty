@@ -240,8 +240,13 @@ namespace Collective.Model
                         });
                         
                     }
+                    
+                    _context.Database.Connection.Close();
+                    _context.Database.Connection.Dispose();
+                    
                     return result;
                 }
+                
             }
             catch (Exception exception)
             {

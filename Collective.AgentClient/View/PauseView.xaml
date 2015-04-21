@@ -4,8 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.ignore.com"
-        mc:Ignorable="d ignore" WindowStyle="None" ResizeMode="NoResize" 
-        SizeToContent="WidthAndHeight" Topmost="{Binding TopMost}" WindowStartupLocation="CenterScreen" Width="244.8" Background="#4C84C340" AllowsTransparency="True" Closing="Window_Closing">
+        mc:Ignorable="d ignore" ResizeMode="NoResize" 
+        SizeToContent="WidthAndHeight" Topmost="{Binding TopMost}" WindowStartupLocation="CenterScreen" Width="244.8" Closing="Window_Closing" AllowsTransparency="True" WindowStyle="None" BorderThickness="5">
+    <Window.BorderBrush>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF54B6D4" Offset="0"/>
+            <GradientStop Color="#FF68C453" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.BorderBrush>
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+            <GradientStop Color="#CC72B346"/>
+            <GradientStop Color="#CC86ADD8" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
     <!--DataContext="{Binding Pause, Source={StaticResource Locator}}">-->
 
 
@@ -15,13 +27,14 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Content="Please Select Pause" FontWeight="DemiBold" FontSize="16" Margin="0,0,0,0"/>
+        <Label Grid.Row="0" Content="Please Select Pause" FontWeight="DemiBold" FontSize="16" Margin="0,0,0,0" Visibility="{Binding PauseVisibility}"/>
+        <Label Grid.Row="0" Content="You are Currently In Pause:" FontWeight="DemiBold" FontSize="16" Margin="0,0,0,0" Visibility="{Binding ResumeVisibility}" Foreground="#FFF90404"/>
         <telerik:RadComboBox Grid.Row="1" ItemsSource="{Binding Path=Pauses}" Margin="0,20,0,20" Width="200"
                              SelectedItem="{Binding Path=SelectedPause,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              DisplayMemberPath="Reason" SelectedValuePath="PauseId" IsEnabled="{Binding Path=ComboEnable}"/>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,10">
-            <telerik:RadButton Width="50" Content="Logout"  Command="{Binding LogoutCommand}" Visibility="{Binding LogoutVisibility}" Height="22.4"/>
-            <telerik:RadButton Width="50" Content="Pause" Margin="5" Command="{Binding PauseCommand}" Visibility="{Binding PauseVisibility}"/>
+            <telerik:RadButton Width="50" Content="Logout"  Command="{Binding LogoutCommand}" Height="22.4" Visibility="Collapsed"/>
+           <telerik:RadButton Width="50" Content="Pause" Margin="5" Command="{Binding PauseCommand}" Visibility="{Binding PauseVisibility}"/>
             <telerik:RadButton Width="50" Content="Resume" Margin="5" Command="{Binding ResumeCommand}" Visibility="{Binding ResumeVisibility}"/>
             <telerik:RadButton Width="50" Content="Close" Margin="5" Command="{Binding CanCloseCommand}" Visibility="{Binding PauseVisibility}"/>
         </StackPanel>

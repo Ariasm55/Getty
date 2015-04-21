@@ -15,15 +15,15 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <SccProjectName>Collective.AgentClient</SccProjectName>
-    <SccLocalPath>2~a646beb2-6be2-48ea-8e62-1a15b231e8ad</SccLocalPath>
-    <SccAuxPath>http://devsrvr.collective.lan/VaultService</SccAuxPath>
+    <SccLocalPath>9~aaefbb21-4327-4a1c-87eb-87fba50ee148</SccLocalPath>
+    <SccAuxPath>http://codes.mine.nu/VaultService</SccAuxPath>
     <SccProvider>SourceGear Vault Visual Studio 2005 Client:{7BE9CE03-56BF-4682-9C06-78C68B134B30}</SccProvider>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <ExpressionBlendVersion>12.0.51020.0</ExpressionBlendVersion>
-    <PublishUrl>C:\Users\Juan Angel Arias\Desktop\GETTY\HN\</PublishUrl>
+    <PublishUrl>\\10.54.0.44\CSdata\Getty\App\Updates\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <InstallFrom>Unc</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
@@ -32,12 +32,15 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>Getty</ProductName>
     <PublisherName>Collective Solution International</PublisherName>
-    <ApplicationRevision>6</ApplicationRevision>
-    <ApplicationVersion>2.0.1.%2a</ApplicationVersion>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>2.0.8.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperComponentsUrl>file://10.54.0.44/it/AGENTS%2520TOOLS/Netframework/NetFramework%25204.5.1/NET%2520Framwork%25204-5-1-x86-x64-AllOS-ENU.exe</BootstrapperComponentsUrl>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -49,6 +52,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -74,6 +78,15 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Honduras|AnyCPU'">
+    <OutputPath>bin\Honduras\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Cavite|AnyCPU'">
+    <OutputPath>bin\Cavite\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Quezon|AnyCPU'">
+    <OutputPath>bin\Quezon\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
@@ -97,6 +110,8 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceProcess" />
@@ -153,6 +168,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="MainGetty.xaml.cs">
+      <DependentUpon>MainGetty.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Main2View.xaml.cs">
       <DependentUpon>Main2View.xaml</DependentUpon>
     </Compile>
@@ -161,6 +180,14 @@
     <Compile Include="Model\DataItem.cs" />
     <Compile Include="Model\DataService.cs" />
     <Compile Include="Model\IDataService.cs" />
+    <Compile Include="SingleInstance.cs" />
+    <Compile Include="Updater\UpdateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Updater\UpdateForm.designer.cs">
+      <DependentUpon>UpdateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Updater\Updater.cs" />
     <Compile Include="ViewModel\AccountSettingsViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -189,20 +216,16 @@
     <Compile Include="View\ProfileView.xaml.cs">
       <DependentUpon>ProfileView.xaml</DependentUpon>
     </Compile>
+    <Page Include="MainGetty.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Main2View.xaml">
       <SubType>Form</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Skins\MainSkin.xaml">
@@ -256,7 +279,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Updater\UpdateForm.resx">
+      <DependentUpon>UpdateForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Collective.AgentClient_TemporaryKey.pfx" />
+    <None Include="Design\projectGuides.guides" />
+    <None Include="Images\Summer OUT.jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -309,11 +339,6 @@
     <Resource Include="Images\Logo.JPG" />
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.5.1">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.5.1 %28x86 and x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
@@ -326,39 +351,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\GreenLight.jpg" />
-    <Resource Include="Images\RedLight.jpg" />
-    <Resource Include="Images\YellowLight.jpg" />
+    <Resource Include="Images\news-icon2.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Jarias.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Collective.png" />
     <Resource Include="Images\getty.png" />
-    <Resource Include="Images\Network.png" />
-    <Resource Include="Images\news.jpg" />
-    <Resource Include="Images\Schedule.png" />
-    <Resource Include="Images\TIME.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\images.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\JArias.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Mainview\calendar.png" />
     <Resource Include="Images\Mainview\schedule.png" />
-    <Resource Include="Images\Mainview\Team.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Mainview\IMG1.jpg" />
-    <Resource Include="Images\Mainview\IMG2.jpg" />
-    <Resource Include="Images\Mainview\IMG3.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Mainview\Avengers.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Mainview\Pause.png" />
@@ -368,19 +367,29 @@
     <Resource Include="Images\Mainview\TIMEOFF.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Mainview\dollar.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Mainview\News.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Jain.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Mainview\getty logo.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Mainview\Account.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\getty logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Mainview\Logout.png" />
+    <Resource Include="Images\news-icon.png" />
+    <Resource Include="Images\Time-icon.png" />
+    <Resource Include="Images\logout-icon.png" />
+    <Resource Include="Images\GreenBall.png" />
+    <Resource Include="Images\Calendar.png" />
+    <Resource Include="Images\Mainview\dollar.png" />
+    <Resource Include="Images\Summerlogin.jpg" />
+    <Resource Include="Images\Logo.fw.png" />
+    <Resource Include="Images\CS-MAIN-LOGO1.fw.png" />
+    <Resource Include="Images\Login.jpg" />
+    <Content Include="Updater.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Expression\Blend\.NETFramework\v4.5\Microsoft.Expression.Blend.WPF.targets" />

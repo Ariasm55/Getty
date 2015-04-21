@@ -293,5 +293,18 @@ namespace Collective.AgentClient.Model
                 callback(0, exception);
             }
         }
+
+        public void Cleartoast(long toastid, Action<Exception> callback)
+        {
+            try
+            {
+                ToastModel.ClearToast(toastid);
+            }
+            catch (Exception exception)
+            {
+                callback(new Exception(exception.Message));
+                
+            }
+        }
     }
 }

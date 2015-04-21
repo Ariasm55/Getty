@@ -143,6 +143,8 @@ namespace Collective.Model
 
                        });
                    }
+                   _context.Database.Connection.Close();
+                   _context.Database.Connection.Dispose();
                    return retorno;
                }
            }
@@ -153,32 +155,7 @@ namespace Collective.Model
            }
        }
 
-       public static long Logout(long id, RecordLogModel log)
-       {
-           try
-           {
-               using (_context = new CollectiveEntities2())
-               {
-                   var lista = from r in _context.tbl_record_logs
-                               where r.rec_id == id
-                               select r;
-                   foreach (var rec in lista)
-                   {
-                       rec.dt_stamp_end = DateTime.Today;
-                       rec.log_reason = "Logout";
-
-                   }
-                   _context.SaveChanges();
-
-               }
-           }
-           catch (Exception exception)
-           {
-
-               throw new Exception(exception.Message);
-           }
-           return 0;
-       }
+      
 
        public static long InsertPause(string username, string pausename, long camp)
        {
@@ -186,7 +163,7 @@ namespace Collective.Model
            {
                using (_context = new CollectiveEntities2())
                {
-
+                   var site = Properties.Settings.Default.ThisSite;
                    var login = new tbl_record_log
                    {
                        dt_stamp = DateTime.Now,
@@ -196,11 +173,14 @@ namespace Collective.Model
                        ip = NetworkIp.LocalIPAddress(),
                        status = "pause",
                        dt_stamp_day = DateTime.Now.DayOfWeek.ToString(),
-                       this_site = "Honduras",
+                       this_site = site,
                        log_reason = pausename
                    };
                    _context.tbl_record_logs.Add(login);
                    _context.SaveChanges();
+                   _context.Database.Connection.Close();
+                   _context.Database.Connection.Dispose();
+                   
                    return login.rec_id;
                }
            }
@@ -225,6 +205,8 @@ namespace Collective.Model
                        rec.dt_stamp_end = DateTime.Now;
                    }
                    _context.SaveChanges();
+                   _context.Database.Connection.Close();
+                   _context.Database.Connection.Dispose();
 
                }
            }
@@ -355,7 +337,7 @@ namespace Collective.Model
            {
                using (_context = new CollectiveEntities2())
                {
-
+                   var site = Properties.Settings.Default.ThisSite;
                    var login = new tbl_record_log
                    {
                        dt_stamp = DateTime.Now,
@@ -365,11 +347,13 @@ namespace Collective.Model
                        ip = NetworkIp.LocalIPAddress(),
                        status = "paused",
                        dt_stamp_day = DateTime.Now.DayOfWeek.ToString(),
-                       this_site = "Honduras",
+                       this_site = site,
                        log_reason = "Automatic Pause"
                    };
                    _context.tbl_record_logs.Add(login);
                    _context.SaveChanges();
+                   _context.Database.Connection.Close();
+                   _context.Database.Connection.Dispose();
                    return login.rec_id;
                }
            }

@@ -12,8 +12,8 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>Collective.Data</SccProjectName>
-    <SccLocalPath>2~a646beb2-6be2-48ea-8e62-1a15b231e8ad</SccLocalPath>
-    <SccAuxPath>http://devsrvr.collective.lan/VaultService</SccAuxPath>
+    <SccLocalPath>9~aaefbb21-4327-4a1c-87eb-87fba50ee148</SccLocalPath>
+    <SccAuxPath>http://codes.mine.nu/VaultService</SccAuxPath>
     <SccProvider>SourceGear Vault Visual Studio 2005 Client:{7BE9CE03-56BF-4682-9C06-78C68B134B30}</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -32,6 +32,15 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Honduras|AnyCPU'">
+    <OutputPath>bin\Honduras\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Cavite|AnyCPU'">
+    <OutputPath>bin\Cavite\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Quezon|AnyCPU'">
+    <OutputPath>bin\Quezon\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
@@ -110,7 +119,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="CollectiveEntitiesData.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CollectiveEntitiesData.Designer.cs</LastGenOutput>

@@ -7,9 +7,9 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 		xmlns:custom="http://www.galasoft.ch/mvvmlight"  
         x:Class="Collective.AgentClient.View.LoginView"
-        mc:Ignorable="d ignore" d:DesignWidth="300"
-        Title="Getty Login" Width="300" Height="179" ResizeMode="NoResize"
-        Icon="/Launcher;component/g_red.ico" WindowStartupLocation="CenterScreen" WindowStyle="None" BorderThickness="5.5" BorderBrush="#FF27276E" OpacityMask="Black" AllowsTransparency="True" Background="#FFFCFCFC" Closing="Window_Closing"
+        mc:Ignorable="d ignore" d:DesignWidth="300" d:DesignHeight="200"
+        Title="Getty Login" Width="300" Height="200" ResizeMode="NoResize"
+        Icon="/Launcher;component/Images/Login.jpg" WindowStartupLocation="CenterScreen" WindowStyle="None" BorderThickness="5.5" BorderBrush="#FF27276E" OpacityMask="Black" AllowsTransparency="True" Closing="Window_Closing"
     >
     <Window.Resources>
         <ResourceDictionary>
@@ -18,50 +18,67 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-	<Window.DataContext>
-		<Binding Path="Login" Source="{StaticResource Locator}"/>
-	</Window.DataContext>
-	<Grid Background="Transparent">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="60"/>
-			<RowDefinition Height="2"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
-		<Image Grid.Row="0" Height="50" Source="/Launcher;component/Images/Logo.JPG" HorizontalAlignment="Left" RenderTransformOrigin="2.105,0.56" Margin="0"/>
-		<Label Grid.Row="1" Margin="5" Content="{Binding Connected}" FontWeight="DemiBold"
+    <Window.Background>
+        <ImageBrush ImageSource="/Launcher;component/Images/Login.jpg"/>
+    </Window.Background>
+    <Window.DataContext>
+        <Binding Path="Login" Source="{StaticResource Locator}"/>
+    </Window.DataContext>
+    <Grid Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="2"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Image Source="/Launcher;component/Images/CS-MAIN-LOGO1.fw.png" Width="100" Height="50" Margin="0,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.IsSharedSizeScope="True" Visibility="Hidden"/>
+            <Image Source="/Launcher;component/Images/getty logo.png" Width="100" Height="50" Margin="80,0,0,0" HorizontalAlignment="Right"/>
+        </StackPanel>
+        <Label Grid.Row="1" Margin="5" Content="{Binding Connected}" FontWeight="DemiBold"
 			Foreground="{Binding ConnectedColor}"/>
-		<Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="Auto"/>
-			</Grid.ColumnDefinitions>
-			<Label Grid.Row="0" Grid.Column="0" Margin="5" HorizontalAlignment="Left" Content="User name: "/>
-			<Label Grid.Row="1" Grid.Column="0" Margin="5" HorizontalAlignment="Left" Content="Password: "/>
-			<TextBox Grid.Row="0" Grid.Column="1" Margin="5" Width="150" 
+        <Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Margin="5" HorizontalAlignment="Left" Content="User name: "/>
+            <Label Grid.Row="1" Grid.Column="0" Margin="5" HorizontalAlignment="Left" Content="Password: "/>
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Width="150" 
 				Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
-
-			<TextBox Grid.Row="1" Grid.Column="1" Margin="5" Width="150"
+            <PasswordBox PasswordChanged="PasswordBoxpass_OnPasswordChanged" x:Name="PasswordBoxpass"
+                         Margin="5" Width="150" Grid.Row="1" Grid.Column="1">
+                <PasswordBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding LoginCommand}"/>
+                </PasswordBox.InputBindings>
+            </PasswordBox>
+            <!--<TextBox Grid.Row="1" Grid.Column="1" Margin="5" Width="150"
 				Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-				Foreground="Transparent">
-				<TextBox.InputBindings>
+				Foreground="Transparent">-->
+            <!--<TextBox.InputBindings>
                      <KeyBinding Key="Enter" Command="{Binding LoginCommand}"/>
      
   </TextBox.InputBindings>
 				
-			</TextBox>
-                      
-		</Grid>
-		<StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,10,0">
+			</TextBox>-->
+
+        </Grid>
+        <StackPanel Grid.Row="3" Margin="0,0,10,0" UseLayoutRounding="True" HorizontalAlignment="Right" Orientation="Horizontal">
             <telerik:RadButton Margin="5,5,10,5" Width="100" Content="Forgot password" Command="{Binding ForgetPasswordCommand}"
-				CommandParameter="{Binding ElementName=LoginView}"  HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+				CommandParameter="{Binding ElementName=LoginView}"  HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Hidden"/>
             <telerik:RadButton Margin="5" Width="100" Content="Login" Command="{Binding LoginCommand}" 
-				CommandParameter="{Binding ElementName=LoginView}" VerticalAlignment="Center" Height="23"/>
-            
-		</StackPanel>
-	</Grid>
+				CommandParameter="{Binding ElementName=LoginView}" VerticalAlignment="Center" Height="23" Click="RadButton_Click"/>
+
+        </StackPanel>
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Label Content="Version:"  FontSize="10" Height="22"/>
+            <Label Content="{Binding AppVersion}"  Foreground="Red" BorderThickness="0" FontSize="10" Height="22" FontWeight="Black" FontStretch="SemiExpanded"/>
+        </StackPanel>
+    </Grid>
+
 </Window>

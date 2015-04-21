@@ -1,7 +1,8 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System.Diagnostics.CodeAnalysis;
+using Collective.AgentClient.Model;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
-using Collective.AgentClient.Model;
 
 namespace Collective.AgentClient.ViewModel
 {
@@ -28,7 +29,7 @@ namespace Collective.AgentClient.ViewModel
             SimpleIoc.Default.Register<AccountSettingsViewModel>();
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        [SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
         public MainViewModel Main
@@ -36,25 +37,25 @@ namespace Collective.AgentClient.ViewModel
             get { return ServiceLocator.Current.GetInstance<MainViewModel>(); }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        [SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
         public PauseViewModel Pause
         {
             get { return ServiceLocator.Current.GetInstance<PauseViewModel>(); }
         }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        [SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        [SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
         public AccountSettingsViewModel AccountSetting
         {
             get { return ServiceLocator.Current.GetInstance<AccountSettingsViewModel>(); }
         }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        [SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
 
@@ -63,14 +64,14 @@ namespace Collective.AgentClient.ViewModel
             get { return ServiceLocator.Current.GetInstance<LoginViewModel>(); }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        [SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
         //public PauseViewModel PauseViewModel
         //{
         //    get { return ServiceLocator.Current.GetInstance<PauseViewModel>(); }
         //}
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        [SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
         public PayrollAdvisorModel PayrollAdvisorModel
@@ -78,7 +79,7 @@ namespace Collective.AgentClient.ViewModel
             get { return ServiceLocator.Current.GetInstance<PayrollAdvisorModel>(); }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        [SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
         public MessageViewModel MessageViewModel

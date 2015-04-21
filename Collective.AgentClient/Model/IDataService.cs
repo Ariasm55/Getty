@@ -48,6 +48,6 @@ namespace Collective.AgentClient.Model
         void GetForgetpasswordQuestions(Action<List<ForgotPasswordModel>, Exception> callback);
 
         void ChangePassword(string agent, string newpassword, string oldpassword, Action<long, Exception> callback);
-
+        void Cleartoast(long toastid, Action<Exception>callback );
     }
 }

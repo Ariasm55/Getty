@@ -1,6 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Automation;
+using System.Windows.Controls;
 using System.Windows.Forms;
+using Collective.AgentClient.ViewModel;
 using Collective.Library;
 
 namespace Collective.AgentClient.View
@@ -20,6 +22,7 @@ namespace Collective.AgentClient.View
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            
             switch (GlobalVariables.GlobalsLib.CanClose)
             {
                 case false:
@@ -30,6 +33,17 @@ namespace Collective.AgentClient.View
                     GlobalVariables.GlobalsLib.CanClose = false;
                     break;
             }
+        }
+
+        private void RadButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void PasswordBoxpass_OnPasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext != null)
+            { ((dynamic)this.DataContext).Password = ((PasswordBox)sender).Password; }
         }
     }
 }
