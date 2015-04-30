@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -9,7 +10,7 @@ using Collective.AgentClient.Updater;
 using Collective.AgentClient.ViewModel;
 using Collective.Library;
 using Microsoft.Win32;
-using MessageBox = System.Windows.MessageBox;
+//using EventArgs = System.EventArgs;
 
 
 namespace Collective.AgentClient
@@ -20,26 +21,33 @@ namespace Collective.AgentClient
     public partial class MainGetty
     {
 
+
         /// <summary>
         /// Initializes a new instance of the Main2View class.
         /// </summary>
+        /// 
+        /// private Matrix.Xmpp.Client.XmppClient xmppClient;
+        //WinAPI-Declaration for SendMessage
+
 
         public MainGetty()
         {
+
             var processName = Process.GetCurrentProcess().ProcessName;
             var processes = Process.GetProcessesByName(processName).Count();
             if (processes == 1)
             {
-                
+
                 if (Settings.Default.AutoCheckForUpdates)
                 {
                     ThreadPool.QueueUserWorkItem(w => Updater.Updater.CheckForUpdate(ShowUpdateDialog));
-                    
+
                 }
+
+                InitializeComponent();
+                SystemEvents.SessionSwitch += OnSessionSwitch;
                 
-                    InitializeComponent();
-                    SystemEvents.SessionSwitch += OnSessionSwitch;
-                
+
             }
             else
             {
@@ -49,7 +57,7 @@ namespace Collective.AgentClient
 
         }
 
-        
+
         private void ShowUpdateDialog(Version appVersion, Version newVersion, XDocument doc)
         {
             try
@@ -80,16 +88,16 @@ namespace Collective.AgentClient
         }
 
 
-        protected  void Dispose(bool disposing)
+        protected void Dispose(bool disposing)
         {
             if (disposing)
             {
                 SystemEvents.SessionSwitch -= OnSessionSwitch;
             }
-    
+
         }
 
-       
+
 
 
         private void OnSessionSwitch(object sender, SessionSwitchEventArgs e)
@@ -99,10 +107,10 @@ namespace Collective.AgentClient
                 if (MainViewModel.Globals.IsPaused == false)
                 {
                     MainViewModel.Globals.GlobalInt = 0;
-                    
+
                     MainViewModel.UserlockPause();
                 }
-                
+
                 MainViewModel.Globals.GlobalInt = 0;
             }
             else if (e.Reason == SessionSwitchReason.SessionUnlock)
@@ -114,23 +122,23 @@ namespace Collective.AgentClient
                     const string message = "You left your Computer and did not Set a Pause";
                     const string caption = "No Pause Alert";
                     MessageBox.Show(message, caption, MessageBoxButton.OK);
-                    
+
                 }
             }
 
             else if (e.Reason == SessionSwitchReason.SessionLogoff)
             {
                 MessageBox.Show("LOGOFF");
-                
+
             }
             else if (e.Reason == SessionSwitchReason.RemoteConnect)
             {
                 MessageBox.Show("REMOTECONTROL");
             }
 
-          }
+        }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object sender, CancelEventArgs e)
         {
             switch (GlobalVariables.GlobalsLib.CanClose)
             {
@@ -143,7 +151,8 @@ namespace Collective.AgentClient
                     break;
             }
         }
+
     }
-		
-		
-    }
+
+
+}

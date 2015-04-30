@@ -178,7 +178,12 @@
                                 <Label Content="Time Off Request" VerticalContentAlignment="Center"/>
                             </StackPanel>
                         </telerik:RadTabItem.Header>
-                        <Grid Background="Transparent"/>
+                        <Grid Background="Transparent">
+                            <RichTextBox x:Name="RichTextBox1" IsEnabled="False" Width="650" Height="auto"/>
+
+
+
+                        </Grid>
                     </telerik:RadTabItem>
                     <telerik:RadTabItem Header="Today's Activities" Height="37.91" Width="100">
                         <Grid Background="Transparent">

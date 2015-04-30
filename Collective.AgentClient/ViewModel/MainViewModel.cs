@@ -14,6 +14,7 @@ using Collective.Model;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using MiniClient;
 
 namespace Collective.AgentClient.ViewModel
 {
@@ -22,7 +23,7 @@ namespace Collective.AgentClient.ViewModel
         #region Properties
 
         private static IDataService _dataService;
-
+        
         #region Title
 
         /// <summary>
@@ -715,7 +716,9 @@ namespace Collective.AgentClient.ViewModel
         }
         #endregion
 
-       
+
+
+
 
         #endregion
 
@@ -767,11 +770,16 @@ namespace Collective.AgentClient.ViewModel
                     LoadToasty();
                     GetNewsfeed();
                     Globals.GlobalInt = 1;
+                    GlobalVariables.GlobalsLib.Usernamechat = Agent.Profile.UserName;
+                    Chat(GlobalVariables.GlobalsLib.Usernamechat);
+                    //LeaveRequestModel.SendRequest();
+                    
 
 
                 });
 
             RegisterCommand();
+            
 
             if (!IsInDesignMode)
             {
@@ -795,6 +803,7 @@ namespace Collective.AgentClient.ViewModel
 
         }
 
+        
         //public string AgentGlobal { get; set; }
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
@@ -805,7 +814,8 @@ namespace Collective.AgentClient.ViewModel
                 LoadLog();
                 GetMsg();
                 GetNewsfeed();
-                UserModel.Kill();
+                
+                
             }
         }
 
@@ -1097,6 +1107,18 @@ namespace Collective.AgentClient.ViewModel
             Environment.Exit(0);
         }
 
+        private void Chat(string agentChatLogin)
+        {
+            var chating = new FrmMain(agentChatLogin,true);
+            chating.Close();
+            var chating2 = new FrmMain(agentChatLogin, false);
+            
+            
+            //chating.Hide();
+            
+            //MiniClient.FrmMain.cmdConnect_Click();
+        }
+
        /* private List<RecordLogModel> Lista()
         {
            /* var logs = new List<RecordLogModel>();
@@ -1152,9 +1174,7 @@ namespace Collective.AgentClient.ViewModel
         }
 
         
-
         #endregion
-
         #region public
 
         public static long UserlockPause()
@@ -1195,4 +1215,6 @@ namespace Collective.AgentClient.ViewModel
 
         public int CampidGlobal { get; set; }
     }
+
+
 }
