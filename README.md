@@ -10,7 +10,7 @@ Jonell Bonecillo,
 Juan Angel Arias
 
 Project Manager:
-Jose Ma. Angelo Villaroman
+Jose Ma. Angelo Villaroman.
 
 
 Copyright 2015 Collective Solution International.
