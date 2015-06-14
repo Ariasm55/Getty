@@ -716,7 +716,7 @@ namespace Collective.AgentClient.ViewModel
         }
         #endregion
 
-
+        
 
 
 
@@ -736,6 +736,7 @@ namespace Collective.AgentClient.ViewModel
             public static bool Checklate { get; set; }
 
             public static long LoginRecord { get; set; }
+            
 
 
         }
@@ -771,14 +772,16 @@ namespace Collective.AgentClient.ViewModel
                     GetNewsfeed();
                     Globals.GlobalInt = 1;
                     GlobalVariables.GlobalsLib.Usernamechat = Agent.Profile.UserName;
-                    Chat(GlobalVariables.GlobalsLib.Usernamechat);
+                    //Chat(GlobalVariables.GlobalsLib.Usernamechat);
                     //LeaveRequestModel.SendRequest();
+                    
                     
 
 
                 });
 
             RegisterCommand();
+            
             
 
             if (!IsInDesignMode)
@@ -789,14 +792,11 @@ namespace Collective.AgentClient.ViewModel
             {
                 //LoadLog();
             }
-            var dispatcherTimer = new DispatcherTimer();
-            dispatcherTimer.Tick += dispatcherTimer_Tick;
-            dispatcherTimer.Interval = new TimeSpan(0,0,3,15);
-            dispatcherTimer.Start();
-            var dispatcherTimer2 = new DispatcherTimer();
-            dispatcherTimer2.Tick += dispatcherTimer_Tick2;
-            dispatcherTimer2.Interval = new TimeSpan(0, 0, 0, 3);
-            dispatcherTimer2.Start();
+            var timrz = new DispatcherTimer();
+            timrz.Tick += dispatcherTimer_Tick;
+            timrz.Interval = new TimeSpan(0, 0, 3, 15);
+            timrz.Start();
+
             Globals.AgentGlobal = Agent.Name;
             Globals.CampidGlobal = Agent.Campaign.CampaignId;
 
@@ -810,23 +810,17 @@ namespace Collective.AgentClient.ViewModel
         {
             if (Globals.GlobalInt == 1)
             {
+                HistoryFile.UpdateDb();
                 GetweeklySchedule();
                 LoadLog();
                 GetMsg();
                 GetNewsfeed();
                 
                 
+                
             }
         }
 
-        private void dispatcherTimer_Tick2(object sender, EventArgs e)
-        {
-            if (Globals.GlobalInt == 1)
-            {
-                
-            }
-            
-        }
         
 
         #endregion
@@ -937,6 +931,8 @@ namespace Collective.AgentClient.ViewModel
                 if (vm.CloseAction == null) vm.CloseAction = pause.Close;
                 vm.OnRequesteClose += (s, e) => pause.Close();
                 pause.ShowDialog();
+                
+                
                 
             }
             else
@@ -1093,6 +1089,7 @@ namespace Collective.AgentClient.ViewModel
 
         private void Logout()
         {
+            Globals.GlobalInt = 0;
             var logoutId = GlobalVariables.GlobalsLib.RecordIdLogout;
             _dataService.Logout(Agent.Name, logoutId,
                 (logout2, error) =>
@@ -1175,6 +1172,8 @@ namespace Collective.AgentClient.ViewModel
 
         
         #endregion
+
+
         #region public
 
         public static long UserlockPause()
@@ -1190,14 +1189,14 @@ namespace Collective.AgentClient.ViewModel
                         MessageBox.Show(error.Message);
                         return;
                     }
-                    Globals.Recordpause=pause ;
+                    GlobalVariables.GlobalsLib.RecordIdPause=pause ;
                 });
-            return Globals.Recordpause;
+            return GlobalVariables.GlobalsLib.RecordIdPause;
         }
         
         public static void UserlockUnPause()
         {
-            long recordid = Globals.Recordpause;
+            var recordid = GlobalVariables.GlobalsLib.RecordIdPause;
             _dataService.Resume(recordid,
                 (resumeBreak, error) =>
                 {
@@ -1213,7 +1212,7 @@ namespace Collective.AgentClient.ViewModel
         }
         #endregion
 
-        public int CampidGlobal { get; set; }
+        
     }
 
 

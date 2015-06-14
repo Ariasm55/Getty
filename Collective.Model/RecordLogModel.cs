@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using Collective.Data;
+using Collective.Library;
 using GalaSoft.MvvmLight;
 
 namespace Collective.Model
@@ -423,69 +423,16 @@ namespace Collective.Model
         #endregion
             
         #region Public Methods
-                
-        public static List<RecordLogModel> GetRecordLog(int campaignId, DateTime initial, DateTime final)
-        {
-            try
-            {
-                using (_context = new CollectiveEntities2())
-                {
-                    var result = new List<RecordLogModel>();
-                    var id = campaignId.ToString(CultureInfo.InvariantCulture).Trim();
-                    var lista = from r in _context.tbl_record_logs
-                                where r.campaign == id 
-                                && r.dt_stamp >= initial
-                                && r.dt_stamp <= final
-                                select r;
-                    foreach (var log in lista)
-                    {
-                        var endDate = log.dt_stamp_end;
-                        var end = String.Format("{0}:{1}:{2}",
-                            log.dt_stamp_end.Hour.ToString("00"),
-                            log.dt_stamp_end.Minute.ToString("00"),
-                            log.dt_stamp_end.Second.ToString("00"));
-                                
-                        if (end == "00:00:00")
-                        {
-                            endDate = DateTime.Now;
-                            end = String.Format("{0}:{1}:{2}",
-                                endDate.Hour.ToString("00"),
-                                endDate.Minute.ToString("00"),
-                                endDate.Second.ToString("00"));
-                        }
-                                
-                        result.Add(new RecordLogModel
-                        {
-                            InitialDate = new DateTime(log.dt_stamp.Year, log.dt_stamp.Month, log.dt_stamp.Day),
-                            InitialTime = String.Format("{0}:{1}:{2}",
-                                log.dt_stamp.Hour.ToString("00"),
-                                log.dt_stamp.Minute.ToString("00"),
-                                log.dt_stamp.Second.ToString("00")),
-                            Campaign = log.campaign,
-                            FinalTime = end,
-                            TimeSpan = endDate - log.dt_stamp,
-                            User = log.username,
-                            Status = log.status,
-                            LogReason = log.log_reason
-                        });
-                    }
-                    return result;
-                }
-            }
-            catch (Exception exception)
-            {
-                throw new Exception(exception.Message);
-            }
-        }
-                
+           
         public static List<RecordLogModel> GetAgentRecordLog(string agentName, DateTime date)
         {
             try
             {
                 using (_context = new CollectiveEntities2())
                 {
-                    var initial = new DateTime(date.Year,date.Month,date.Day,0,0,0);
-                    var final = new DateTime(date.Year, date.Month, date.Day, 23, 59, 59);
+                    var conver = TimeConversion.TimetoEst(date);
+                    var initial = new DateTime(conver.Year, conver.Month, conver.Day, 0, 0, 0);
+                    var final = new DateTime(conver.Year, conver.Month, conver.Day, 23, 59, 59);
                     var result = new List<RecordLogModel>();
                     var lista = from r in _context.tbl_record_logs orderby r.rec_id
                                 where r.username == agentName &&
@@ -501,7 +448,7 @@ namespace Collective.Model
                                 
                         if (end == "00:00:00")
                         {
-                            endDate = DateTime.Now;
+                            endDate = TimeConversion.TimetoEst(DateTime.Now);
                             end = String.Format("{0}:{1}:{2}",
                                 endDate.Hour.ToString("00"),
                                 endDate.Minute.ToString("00"),

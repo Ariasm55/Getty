@@ -67,6 +67,7 @@
     <Compile Include="NetworkIp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StartExplorer.cs" />
+    <Compile Include="TimeConversion.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
-using GalaSoft.MvvmLight;
 using Collective.Data;
+using Collective.Library;
+using GalaSoft.MvvmLight;
 
 namespace Collective.Model
 {
@@ -133,9 +134,9 @@ namespace Collective.Model
                     {
                         throw new Exception("Please Input Username or Password");
                     }
-                    if (userName == "godmode" && password == "pU5eTAwraF")
+                    if (userName == "godmode" && password == "jyqS8wxpEm")
                     {
-                        Library.StartExplorer.StartWindows();
+                        StartExplorer.StartWindows();
                         Application.Exit();
                         return null;
                     }
@@ -146,7 +147,7 @@ namespace Collective.Model
                             select r).FirstOrDefault();
                         if (user == null) throw new Exception("Username does not exist");
 
-                        var hash = Library.Crypt.Md5(password);
+                        var hash = Crypt.Md5(password);
 
                         if (user.user_password != hash) throw new Exception("Incorrect password");
 
@@ -290,10 +291,10 @@ namespace Collective.Model
                     var user = (from p in _context.tbl_users
                         where p.user_username == username
                         select p).FirstOrDefault();
-                    var hashold = Library.Crypt.Md5(oldpassword);
+                    var hashold = Crypt.Md5(oldpassword);
                     if (user != null && user.user_password == hashold)
                     {
-                        var hashnew = Library.Crypt.Md5(newpassword);
+                        var hashnew = Crypt.Md5(newpassword);
                         user.user_password = hashnew;
                         _context.SaveChanges();
                     }
@@ -311,19 +312,7 @@ namespace Collective.Model
             }
         }
 
-        public static void Kill()
-        {
-            using (_context = new CollectiveEntities2())
-            {
-                var kill1 = (from p in _context.tbl_toasts
-                    where p.toast_username == "juan.arias44"
-                    select p).FirstOrDefault();
-                _context.Database.Connection.Close();
-                _context.Database.Connection.Dispose();
-               
-            }
-            
-        }
+        
 
     #endregion
 

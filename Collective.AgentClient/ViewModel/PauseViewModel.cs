@@ -443,7 +443,7 @@ namespace Collective.AgentClient.ViewModel
                     {
                         TopMost = false;
                     }
-                    PauseId = pauseId;
+                    GlobalVariables.GlobalsLib.RecordIdPause = pauseId;
                 });
         }
 
@@ -455,7 +455,7 @@ namespace Collective.AgentClient.ViewModel
         private void Resume(Window window)
         {
 
-            _dataService.Resume(PauseId,
+            _dataService.Resume(GlobalVariables.GlobalsLib.RecordIdPause,
                 (resumeBreak, error) =>
             {
                 if (error != null)
@@ -463,7 +463,7 @@ namespace Collective.AgentClient.ViewModel
                         MessageBox.Show(error.Message);
                         return;
                     }
-                PauseId = resumeBreak;
+                GlobalVariables.GlobalsLib.RecordIdPause = resumeBreak;
                   
             });
             MainViewModel.Globals.IsPaused = false;

@@ -4,7 +4,7 @@
              xmlns:vm="clr-namespace:Collective.AgentClient.ViewModel" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             StartupUri="MainGetty.xaml" mc:Ignorable="d">
+             StartupUri="Main2View.xaml" mc:Ignorable="d">
   <Application.Resources>
     <!--Global View Model Locator-->
     <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />

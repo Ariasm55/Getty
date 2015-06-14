@@ -12,16 +12,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collective.AgentClient", "Collective.AgentClient\Collective.AgentClient.csproj", "{0D0AF328-C93A-4B7A-9005-89446773D844}"
 EndProject
 Global
-	GlobalSection(VaultVsipSolution-v1) = preSolution
-		VaultHost = http://codes.mine.nu/VaultService
-		VaultRepositoryID = 9
-		VaultRepositoryGUID = aaefbb21-4327-4a1c-87eb-87fba50ee148
-		ProjectCount = 4
-		ProjectRelativeDiskPath1 = Collective.AgentClient\Collective.AgentClient.csproj
-		ProjectRelativeDiskPath2 = Collective.Library\Collective.Library.csproj
-		ProjectRelativeDiskPath3 = Collective.Data\Collective.Data.csproj
-		ProjectRelativeDiskPath4 = Collective.Model\Collective.Model.csproj
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Cavite|Any CPU = Cavite|Any CPU
 		Cavite|Mixed Platforms = Cavite|Mixed Platforms
@@ -212,5 +202,15 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(VaultVsipSolution-v1) = preSolution
+		VaultHost = http://codes.mine.nu/VaultService
+		VaultRepositoryID = 9
+		VaultRepositoryGUID = aaefbb21-4327-4a1c-87eb-87fba50ee148
+		ProjectCount = 4
+		ProjectRelativeDiskPath1 = Collective.AgentClient\Collective.AgentClient.csproj
+		ProjectRelativeDiskPath2 = Collective.Library\Collective.Library.csproj
+		ProjectRelativeDiskPath3 = Collective.Data\Collective.Data.csproj
+		ProjectRelativeDiskPath4 = Collective.Model\Collective.Model.csproj
 	EndGlobalSection
 EndGlobal

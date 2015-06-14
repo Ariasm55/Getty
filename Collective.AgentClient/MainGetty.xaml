@@ -138,8 +138,27 @@
                             </StackPanel>
                         </telerik:RadTabItem.Header>
                         <Grid >
-                            
-
+                            <ListView ItemsSource="{Binding Weekly}" HorizontalAlignment="Center" 
+                              VerticalAlignment="Center" Width="400" Background="Transparent"
+                                      BorderThickness="0" VerticalContentAlignment="Center"
+                                      HorizontalContentAlignment="Center">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Width="300" Margin="5">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" Text="{Binding TeamDays}" TextAlignment="Left"/>
+                                            <TextBlock Grid.Column="1" Text="{Binding TimeIn, StringFormat=hh\\:mm}" TextAlignment="Right" FontFamily="Segoe UI"/>
+                                            <TextBlock Grid.Column="2" Text="{Binding TimeOff, StringFormat=hh\\:mm}" TextAlignment="Right"/>
+                                            <TextBlock Grid.Column="3" Text="{Binding Camp}" TextAlignment="Right" FontFamily="Segoe UI"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
                         </Grid>
                     </telerik:RadTabItem>
                     <telerik:RadTabItem Header="Payroll Assistance" Height="37.91" Width="100">
@@ -187,12 +206,13 @@
                     </telerik:RadTabItem>
                     <telerik:RadTabItem Header="Today's Activities" Height="37.91" Width="100">
                         <Grid Background="Transparent">
-                        <Grid x:Name="GridDerUp" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="200">
+                        <Grid x:Name="GridDerUp" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="500">
                             <ListBox ItemsSource="{Binding LogList}"  HorizontalAlignment="Left" 
-                              VerticalAlignment="Stretch" Width="201" Margin="0,2,-1,-2.4" Background="Transparent" BorderThickness="0" IsHitTestVisible="False">
+                              VerticalAlignment="Stretch" Width="500" Margin="0,2,-1,-2.4"
+                                     Background="Transparent" BorderThickness="0" IsHitTestVisible="False">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <Grid Width="155" Margin="5">
+                                        <Grid Width="200" Margin="5">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="*"/>

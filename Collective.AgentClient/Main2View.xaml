@@ -156,8 +156,7 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{Binding Message}" TextAlignment="Left" FontFamily="Segoe UI" FontSize="9">
-                                           </TextBlock>
+                                        <TextBlock Grid.Column="0" Text="{Binding Message}" TextAlignment="Left" FontFamily="Segoe UI" FontSize="7"/>
                                     
                                 </Grid>
                                 </DataTemplate>
@@ -255,20 +254,20 @@
                     </Grid.RowDefinitions>
                     <Grid x:Name="GridDerUp" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="200">
                         <ListBox ItemsSource="{Binding LogList}"  HorizontalAlignment="Left" 
-                              VerticalAlignment="Stretch" Width="201" Margin="0,2,-1,-2.4" Background="Transparent" BorderThickness="0" IsHitTestVisible="False">
+                              VerticalAlignment="Stretch" Width="201" Margin="0,2,-1,-2.4" Background="Transparent" BorderThickness="0">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Width="155" Margin="5">
+                                    <Grid Width="160" Margin="5">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*" TextBlock.FontFamily="Segoe UI"/>
+                                            <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{Binding LogReason}" TextAlignment="Left" FontFamily="Segoe UI" FontSize="9"/>
-                                        <TextBlock Grid.Column="1" Text="{Binding InitialTime, StringFormat=hh\\:mm}" TextAlignment="Center" FontFamily="Segoe UI" FontSize="9"/>
-                                        <TextBlock Grid.Column="2" Text="{Binding FinalTime, StringFormat=hh\\:mm}" TextAlignment="Center" FontFamily="Segoe UI" FontSize="9"/>
-                                        <TextBlock Grid.Column="3" Text="{Binding TimeSpan, StringFormat=hh\\:mm\\:ss}" TextAlignment="Right" FontFamily="Segoe UI" FontSize="9"/>
+                                        <TextBlock Grid.Column="0" Text="{Binding LogReason}" TextAlignment="Left" FontFamily="Segoe UI" FontSize="5.8"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding InitialTime, StringFormat=hh\\:mm}" TextAlignment="Center" FontFamily="Segoe UI" FontSize="6"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding FinalTime, StringFormat=hh\\:mm}" TextAlignment="Center" FontFamily="Segoe UI" FontSize="6"/>
+                                        <TextBlock Grid.Column="3" Text="{Binding TimeSpan, StringFormat=hh\\:mm}"  TextAlignment="Center" FontFamily="Segoe UI" FontSize="6"/>
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
@@ -279,15 +278,15 @@
                               VerticalAlignment="Stretch" Width="201" Background="Transparent" BorderThickness="0">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Grid Width="155" Margin="5">
+                                <Grid Width="155" Margin="5" TextBlock.FontFamily="Segoe UI">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" Text="{Binding TeamDays}" TextAlignment="Left"/>
-                                        <TextBlock Grid.Column="1" Text="{Binding TimeIn, StringFormat=hh\\:mm}" TextAlignment="Right" FontFamily="Segoe UI"/>
-                                        <TextBlock Grid.Column="2" Text="{Binding TimeOff, StringFormat=hh\\:mm}" TextAlignment="Right"/>
+                                    <TextBlock Grid.Column="0" Text="{Binding TeamDays}" TextAlignment="Left" FontSize="10"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding TimeIn, StringFormat=hh\\:mm}" TextAlignment="Right" FontFamily="Segoe UI" FontSize="10"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding TimeOff, StringFormat=hh\\:mm}" TextAlignment="Right" FontFamily="Segoe UI" FontSize="10"/>
                                     </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>

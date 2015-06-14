@@ -82,6 +82,7 @@
     <Compile Include="AgentModel.cs" />
     <Compile Include="CampaignModel.cs" />
     <Compile Include="ForgotPasswordModel.cs" />
+    <Compile Include="HistoryFile.cs" />
     <Compile Include="LeaveReuqestModel.cs" />
     <Compile Include="MessageModel.cs" />
     <Compile Include="NewsModel.cs" />

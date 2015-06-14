@@ -1,8 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Collective.Data;
 using GalaSoft.MvvmLight;
-using System;
-
 
 namespace Collective.Model 
 {

@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using Collective.Data;
 using GalaSoft.MvvmLight;
-using System;
-using System.Linq;
-
 
 namespace Collective.Model
 {
@@ -1024,14 +1023,15 @@ namespace Collective.Model
                     var weekly = (from p in _context.tbl_teamschedules
                         join tsa in _context.tbl_teamscheduleagents on
                             p.team_label equals tsa.team_label
-                                  where tsa.agent == agent &&
-                                  p.teamschedule_datebegin >= startOfWeek &&
-                                  p.teamschedule_datebegin <= endofweek &&
-                                  p.archived == 0 && tsa.archived == 0
+                        where tsa.agent == agent &&
+                              p.teamschedule_datebegin >= startOfWeek &&
+                              p.teamschedule_datebegin <= endofweek &&
+                              p.archived == 0 && tsa.archived == 0
 
                         select p);
                     foreach (var record in weekly)
                     {
+                        
                         var timeIn = DateTime.Today.Add(record.teamschedule_timefrom);
                         var timeOut = DateTime.Today.Add(record.teamschedule_timeto);
                         var today = DateTime.Now.Date.DayOfWeek.ToString();
@@ -1057,6 +1057,58 @@ namespace Collective.Model
                 throw new Exception(exception.Message);
             }
             
+        }
+
+        public static List<TeamScheduleModel> GetWeeklyScheduletestingList(string agent, DateTime datetoday)
+        {
+            try
+            {
+                using (_context = new CollectiveEntities2())
+                {
+                    DateTime startOfWeek = DateTime.Today.AddDays(-1 * (int)(DateTime.Today.DayOfWeek));
+                    DateTime endofweek = startOfWeek.AddDays(7);
+                    var result = new List<TeamScheduleModel>();
+                    var weekly = (from p in _context.tbl_teamschedules
+                                  join tsa in _context.tbl_teamscheduleagents on
+                                      p.team_label equals tsa.team_label
+                                  where tsa.agent == agent &&
+                                        p.teamschedule_datebegin >= startOfWeek &&
+                                        p.teamschedule_datebegin <= endofweek &&
+                                        p.archived == 0 && tsa.archived == 0
+
+                                  group p by p.team_label into g
+                                  select new TeamScheduleModel
+                                  {
+                                      TeamLabel = g.Key
+                                  });
+                    foreach (var record in weekly)
+                    {
+                        
+                        var timeIn = DateTime.Today.Add(record.TeamScheduleTimeFrom);
+                        var timeOut = DateTime.Today.Add(record.TeamscheduleTimeto);
+                        var today = DateTime.Now.Date.DayOfWeek.ToString();
+                        if (record.TeamDays == today)
+                        {
+                            record.TeamDays = "TODAY";
+                        }
+                        result.Add(new TeamScheduleModel
+                        {
+                            TimeIn = timeIn,
+                            TimeOff = timeOut,
+                            DateAssigned = record._dateassigned,
+                            TeamDays = record.TeamDays
+                        });
+
+                    }
+                    return result;
+                }
+            }
+            catch (Exception exception)
+            {
+
+                throw new Exception(exception.Message);
+            }
+
         } 
 		 
 	    #endregion

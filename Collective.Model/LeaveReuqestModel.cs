@@ -4,7 +4,6 @@ using System.Net;
 using System.Windows.Forms;
 using RestSharp;
 
-
 namespace Collective.Model
 {
    public class LeaveRequestModel

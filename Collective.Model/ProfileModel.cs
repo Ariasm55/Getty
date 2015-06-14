@@ -1,6 +1,5 @@
 ﻿using System;
 using GalaSoft.MvvmLight;
-using Collective.Data;
 
 namespace Collective.Model
 {

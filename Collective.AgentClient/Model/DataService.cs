@@ -122,7 +122,7 @@ namespace Collective.AgentClient.Model
             catch (Exception exception)
             {
                 callback(0, exception);
-                throw;
+                
             } 
         }
         public void GetData(Action<DataItem, Exception> callback)
@@ -144,7 +144,7 @@ namespace Collective.AgentClient.Model
             catch (Exception exception)
             {
                 callback(0, exception);
-                throw;
+                
             }
         }
 
