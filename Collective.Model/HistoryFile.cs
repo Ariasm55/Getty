@@ -41,8 +41,10 @@ namespace Collective.Model
             var month = conver.Month;
             var year = conver.Year;
             var fileName = day + "_" + month + "_" + year + "_" + login.username + ".csv";
-            Variables.FileName = fileName;
-            var file = new StreamWriter(fileName, true);
+            var fileName2 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), fileName);
+            Variables.FileName = fileName2;
+            var file = new StreamWriter(fileName2, true);
+            
             file.Close();
         }
 
@@ -53,8 +55,11 @@ namespace Collective.Model
             var month = conver.Month;
             var year = conver.Year;
             var fileName = day + "_" + month + "_" + year + "_" + login.username + ".csv";
-            Variables.FileName = fileName;
-            var file = new StreamWriter(fileName, true);
+            var fileName2 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), fileName);
+           
+                
+            Variables.FileName = fileName2;
+            var file = new StreamWriter(fileName2, true);
 
             
 
