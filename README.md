@@ -3,10 +3,7 @@ Getty
 
 
 Programmed by CSI IT Team:
-Crisanto Atienza,
-Raphael Alcid,
-Jeriel Formento,
-Jonell Bonecillo,
+
 Juan Angel Arias
 
 Project Manager:
